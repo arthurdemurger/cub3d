@@ -3,15 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
+#    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/11 15:27:37 by gponcele         ###   ########.fr        #
+#    Updated: 2023/01/12 17:58:11 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Colors
-
 BLACK		= $(shell tput -Txterm setaf 0)
 RED			= $(shell tput -Txterm setaf 1)
 GREEN		= $(shell tput -Txterm setaf 2)
@@ -23,33 +22,31 @@ WHITE		= $(shell tput -Txterm setaf 7)
 RESET		= $(shell tput -Txterm sgr0)
 
 # Name of the executable
-
 NAME						=	cub3d
 
 # Files
+SRC							=	src/error.c \
+								src/free.c \
+								src/main.c \
+								src/parse.c \
+								src/gnl/get_next_line.c \
+								src/gnl/get_next_line_utils.c
 
-SRC							=	src/main.c \
-								src/parse.c
 
-LIBFT						=	./libft/libft.a
+LIBFT						=	./src/libft/libft.a
 
-LIBFT_LINUX					=	
-
-INC							=	-I./inc/.
+INC							=	-I ./inc/.
 
 OBJS						=	$(SRC:.c=.o)
 
 # Flags
-
 CFLAGS						=	-Wall -Wextra -Werror
 
 RM							=	rm -rf
 
 CC							=	gcc
 
-
 # Rules
-
 all: 		libft $(NAME)
 
 %o:				%c
@@ -59,16 +56,16 @@ linux:
 					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) -lreadline -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
-$(NAME): $(OBJS)
+$(NAME): libft $(OBJS)
 					@$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
 libft:
-					@make -C ./libft
+					@make -C ./src/libft
 
 clean:
 					@$(RM) $(OBJS)
-					@make clean -C ./libft
+					@make clean -C ./src/libft
 					@echo "$(PURPLE)********* Objects removed. $(RESET)"
 
 fclean: clean
@@ -76,6 +73,6 @@ fclean: clean
 			@$(RM) $(LIBFT)
 			@echo "$(LIGHTPURPLE)********* Executable removed. $(RESET)"
 
-re: libft fclean all
+re: fclean all
 
 .PHONY: all clean fclean re libft

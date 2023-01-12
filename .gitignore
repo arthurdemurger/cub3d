@@ -3,5 +3,5 @@ test
 a.out
 cub3d
 .vscode
-subjects/
 .DS_Store
+*.cub
