@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/12 17:58:11 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/12 22:27:30 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC							=	src/error.c \
 								src/main.c \
 								src/parse.c \
 								src/gnl/get_next_line.c \
-								src/gnl/get_next_line_utils.c
+								src/gnl/get_next_line_utils.c \
+								src/utils/parse_utils.c
 
 
 LIBFT						=	./src/libft/libft.a

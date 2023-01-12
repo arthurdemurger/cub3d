@@ -6,19 +6,13 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/12 18:47:01 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/12 22:30:49 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 // static int	parse_texture(char *file)
-// {
-
-// 	return (0);
-// }
-
-// static int	parse_map(char *file)
 // {
 // 	return (0);
 // }
@@ -39,6 +33,7 @@ t_lst	*read_file(int fd)
 {
 	char	*tmp;
 	t_lst	*list;
+	t_lst	*tmp_lst;
 
 	tmp = get_next_line(fd);
 	list = NULL;
@@ -51,22 +46,31 @@ t_lst	*read_file(int fd)
 		free(tmp);
 		tmp = get_next_line(fd);
 	}
+	tmp_lst = list;
+	while (tmp_lst)
+	{
+		if (tmp_lst->next)
+			tmp_lst->next->prev = tmp_lst;
+		tmp_lst = tmp_lst->next;
+	}
 	return (list);
 }
 
-void	parse(int ac, char **av)
+void	parse(t_cub *cub, char *file)
 {
 	int		fd;
 	t_lst	*list;
 
-	if (ac != 2)
-		ft_error("Wrong number of arguments.");
-	else if (!check_extension(av[1]))
-		ft_error("Wrong file extension.");
-	fd = open(av[1], O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_error("Cannot open the file.");
 	list = read_file(fd);
+	parse_texture(cub, list);
+	// while (list)
+	// {
+	// 	printf("%s", list->content);
+	// 	list = list->next;
+	// }
 	// if (parse_texture(av[1]))
 	// 	ft_error("Wrong texture input.");
 	// else if (parse_map(av[1]))

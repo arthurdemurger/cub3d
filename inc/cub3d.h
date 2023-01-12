@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/12 18:09:01 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/12 22:38:07 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_text
 typedef struct s_cub
 {
 	char	**map;
-	t_text	textures;
+	t_text	txtr;
 }	t_cub;
 
 
@@ -64,7 +64,10 @@ typedef struct s_cub
 */
 
 /* Main */
-void			parse(int ac, char **av);
+
+/* Parse */
+void			parse(t_cub *cub, char *file);
+void			parse_texture (t_cub *cub, t_lst *lst);
 
 /* Free */
 void			free_tab(char **tab);
@@ -75,11 +78,18 @@ void			ft_error(char *s);
 /* Libft */
 void			ft_putendl_fd(char *s, int fd);
 char			*ft_strchr(char *s, char c);
+int				ft_strncmp(const char *s1, const char *s2, int n);
 int				ft_strcmp(char *s1, char *s2);
 char			*ft_strdup(char *str);
+int				ft_strlcpy(char *dest, char *src, int size);
 int				ft_strlen(char *s);
 char			*ft_strstr(char *big, char *little);
+char			*ft_strtrim(char *s1, char *set);
+char			*ft_substr(char *s, int start, int len);
 void			ft_lstadd_back(t_lst **lst, t_lst *new);
+void			ft_lstdelone(t_lst **l_lst, int i);
+t_lst			*ft_lstget(t_lst *lst, int index);
+int				ft_lstindex(t_lst **l_lst, t_lst *lst);
 t_lst			*ft_lstlast(t_lst *lst);
 t_lst			*ft_lstnew(char *content);
 
