@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:40:40 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/12 17:15:07 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:27:10 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strstr(char *big, char *little)
 
 	i = 0;
 	if (!*little)
-		return ( big);
+		return (big);
 	while (big[i])
 	{
 		j = 0;

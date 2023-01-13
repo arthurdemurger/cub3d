@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:16:19 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/12 17:19:04 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:26:47 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*get_next_line(int fd)
 	int			n;
 
 	if (BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
-		return(gnl_free(NULL));
+		return (gnl_free(NULL));
 	buf = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (gnl_free(buf));

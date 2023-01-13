@@ -6,11 +6,11 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/13 16:20:19 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:29:32 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef CUB3D_H
+#ifndef CUB3D_H
 
 # define CUB3D_H
 
@@ -33,7 +33,7 @@
 # define LEAKS system("leaks cub3d");
 
 /* Characters */
-#define MAP_CHAR "01NSEW \n"
+# define MAP_CHAR "01NSEW \n"
 
 /*
 ** Structures
@@ -62,7 +62,6 @@ typedef struct s_cub
 	t_text	txtr;
 }	t_cub;
 
-
 /*
 ** Functions
 */
@@ -75,7 +74,7 @@ int				check_extension(char *file);
 int				is_map_char(char *s);
 int				is_texture(t_cub *cub, char *s);
 void			parse(t_cub *cub, char *file);
-t_lst			*parse_texture (t_cub *cub, t_lst *lst);
+t_lst			*parse_texture(t_cub *cub, t_lst *lst);
 int				texture_done(t_cub *cub);
 
 /* Free */

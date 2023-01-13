@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/13 16:25:00 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:28:46 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ t_lst	*read_file(int fd)
 	return (list);
 }
 
-
-t_lst	*parse_texture (t_cub *cub, t_lst *lst)
+t_lst	*parse_texture(t_cub *cub, t_lst *lst)
 {
 	char	**split;
 	t_lst	*tmp;
@@ -71,7 +70,6 @@ t_lst	*parse_texture (t_cub *cub, t_lst *lst)
 int	check_map(char **map)
 {
 	(void) map;
-	// code
 	return (1);
 }
 
