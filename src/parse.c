@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/13 16:28:46 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:16:28 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**parse_map(t_lst *lst)
 	tmp = lst;
 	while (tmp)
 	{
-		if (!is_map_char(tmp->content))
+		if (!is_map_char(tmp->content) || !ft_strcmp(tmp->content, "\n"))
 			return (NULL);
 		trim = ft_strtrim(tmp->content, "\n");
 		free(tmp->content);
