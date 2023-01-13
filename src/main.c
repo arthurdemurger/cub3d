@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/13 11:58:19 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:12:26 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	init(t_cub *cub, int ac, char **av)
 
 int	main (int ac, char **av)
 {
-	t_cub	cub;
+			t_cub	cub;
 
-	init(&cub, ac, av);
-	parse(&cub, av[1]);
-
-	//free_all(cub);
+			init(&cub, ac, av);
+			parse(&cub, av[1]);
+			free_all(&cub);
+			// LEAKS
 	return (0);
 }

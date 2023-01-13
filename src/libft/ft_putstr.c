@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:13:51 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/13 14:32:51 by ademurge         ###   ########.fr       */
+/*   Created: 2023/01/13 16:19:06 by ademurge          #+#    #+#             */
+/*   Updated: 2023/01/13 16:20:03 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
-void	ft_error(char *s)
+void	ft_putstr(char *s)
 {
-	ft_putendl_fd("Error", STDERR_FILENO);
-	ft_putendl_fd(s, STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	while (s && *s)
+		write(1, s++, 1);
 }

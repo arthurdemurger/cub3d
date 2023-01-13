@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 21:39:15 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/13 14:54:27 by ademurge         ###   ########.fr       */
+/*   Created: 2023/01/13 14:34:11 by ademurge          #+#    #+#             */
+/*   Updated: 2023/01/13 14:34:47 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/cub3d.h"
 
-void	ft_lstdelone(t_lst **l_lst, int i)
+void	ft_lstclear(t_lst *lst)
 {
-	t_lst	*prev;
-	t_lst	*lst;
-	t_lst	*next;
-
-	lst = ft_lstget(*l_lst, i);
-	next = ft_lstget(*l_lst, i + 1);
-	prev = ft_lstget(*l_lst, i - 1);
-	free(lst->content);
-	lst->content = NULL;
-	free(lst);
-	if (prev && next)
-		prev->next = next;
-	else if (prev && !next)
-		prev->next = NULL;
-	else if (!prev && next)
-		lst = next;
-	else
+	if (lst->next)
+		ft_lstclear(lst->next);
+	if (lst->content)
+	{
+		free (lst->content);
+		lst->content = NULL;
+	}
+	if (lst)
+	{
+		free (lst);
 		lst = NULL;
-	(void) lst;
+	}
 }

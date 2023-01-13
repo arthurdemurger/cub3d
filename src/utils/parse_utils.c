@@ -6,11 +6,23 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 22:12:47 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/13 12:32:48 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:09:50 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
+
+int	check_extension(char *file)
+{
+	char	*ext;
+
+	if (file[0] == '.')
+		return (0);
+	ext = ft_strchr(file, '.');
+	if (!ext || ft_strcmp(ext, ".cub"))
+		return (0);
+	return (1);
+}
 
 int	texture_done(t_cub *cub)
 {
@@ -62,30 +74,13 @@ int	is_texture(t_cub *cub, char *s)
 	return (0);
 }
 
-int	parse_texture (t_cub *cub, t_lst *lst)
+int	is_map_char(char *s)
 {
-	t_lst	*tmp;
-	char	**split;
+	int	i;
 
-	tmp = lst;
-	while (!texture_done(cub) && tmp)
-	{
-		if (!ft_strcmp(tmp->content, "\n"))
-		{
-			tmp = tmp->next;
-			continue ;
-		}
-		split = ft_split_charset(tmp->content, " \n");
-		if (ft_tablen(split) != 2 || !is_texture(cub, split[0]))
-		{
-			free_tab(split, ft_tablen(split));
+	i = -1;
+	while (s && s[++i])
+		if (!ft_strchr(MAP_CHAR, s[i]))
 			return (0);
-		}
-		add_texture(cub, split);
-		free_tab(split, ft_tablen(split));
-		tmp = tmp->next;
-	}
-	if (!texture_done(cub))
-		return (0);
 	return (1);
 }
