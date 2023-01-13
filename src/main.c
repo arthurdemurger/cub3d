@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/12 22:26:51 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/13 11:58:19 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	main (int ac, char **av)
 {
 	t_cub	cub;
 
-	init(&cub, ac, av)
+	init(&cub, ac, av);
 	parse(&cub, av[1]);
+
+	//free_all(cub);
 	return (0);
 }

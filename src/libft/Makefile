@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 11:16:48 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/12 22:38:15 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/13 11:48:36 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ NAME						=	libft.a
 # Files
 
 SRC							=	ft_putendl_fd.c \
+								ft_split.c \
+								ft_split_charset.c \
 								ft_strchr.c \
 								ft_strcmp.c \
 								ft_strncmp.c \
@@ -38,6 +40,7 @@ SRC							=	ft_putendl_fd.c \
 								ft_strstr.c \
 								ft_strtrim.c \
 								ft_substr.c \
+								ft_tablen.c \
 								lst/ft_lstadd_back.c \
 								lst/ft_lstdelone.c \
 								lst/ft_lstget.c \

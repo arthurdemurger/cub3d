@@ -6,18 +6,13 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/12 22:30:49 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/13 12:33:54 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// static int	parse_texture(char *file)
-// {
-// 	return (0);
-// }
-
-static int	check_extension(char *file)
+int	check_extension(char *file)
 {
 	char	*ext;
 
@@ -65,14 +60,6 @@ void	parse(t_cub *cub, char *file)
 	if (fd < 0)
 		ft_error("Cannot open the file.");
 	list = read_file(fd);
-	parse_texture(cub, list);
-	// while (list)
-	// {
-	// 	printf("%s", list->content);
-	// 	list = list->next;
-	// }
-	// if (parse_texture(av[1]))
-	// 	ft_error("Wrong texture input.");
-	// else if (parse_map(av[1]))
-	// 	ft_error("Wrong map.");
+	if (!parse_texture(cub, list))
+		ft_error("wrong or missing information for textures");
 }
