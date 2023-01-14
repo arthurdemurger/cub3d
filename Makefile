@@ -33,6 +33,29 @@ SRC							=	src/error.c \
 								src/gnl/get_next_line_utils.c \
 								src/utils/parse_utils.c
 
+LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
+								src/libft/lst/ft_lstadd_back.c \
+								src/libft/lst/ft_lstclear.c \
+								src/libft/lst/ft_lstdelone.c \
+								src/libft/lst/ft_lstget.c \
+								src/libft/lst/ft_lstindex.c \
+								src/libft/lst/ft_lstlast.c \
+								src/libft/lst/ft_lstnew.c \
+								src/libft/lst/ft_lstput.c \
+								src/libft/lst/ft_lstsize.c \
+								src/libft/ft_putendl_fd.c \
+								src/libft/ft_putstr.c \
+								src/libft/ft_puttab.c \
+								src/libft/ft_split_charset.c \
+								src/libft/ft_split.c \
+								src/libft/ft_strchr.c \
+								src/libft/ft_strcmp.c \
+								src/libft/ft_strlcpy.c \
+								src/libft/ft_strncmp.c \
+								src/libft/ft_strstr.c \
+								src/libft/ft_strtrim.c \
+								src/libft/ft_substr.c \
+								src/libft/ft_tablen.c
 
 LIBFT						=	./src/libft/libft.a
 
@@ -47,6 +70,10 @@ RM							=	rm -rf
 
 CC							=	gcc
 
+LMLX_LINUX					=	-lmlx -lXext -lX11
+
+LMLX_MAC					=	-lmlx -framework OpenGL -framework AppKit
+
 # Rules
 all: 		libft $(NAME)
 
@@ -54,11 +81,11 @@ all: 		libft $(NAME)
 				@$(CC) ${CFLAGS} -I./includes -c $< -o ${<:.c=.o}
 
 linux:
-					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) -lreadline -o $(NAME)
+					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) $(LMLX_LINUX) -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
 $(NAME): libft $(OBJS)
-					@$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME)
+					@$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) $(LMLX_MAC) -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
 libft:

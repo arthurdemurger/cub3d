@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "../MLX/mlx.h"
 
 /*
 ** Define constants
@@ -59,6 +60,8 @@ typedef struct s_text
 typedef struct s_cub
 {
 	char	**map;
+	void	*mlx_ptr;
+	void	*win_ptr;
 	t_text	txtr;
 }	t_cub;
 
