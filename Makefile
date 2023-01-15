@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/12 22:27:30 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/15 17:26:19 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ RESET		= $(shell tput -Txterm sgr0)
 NAME						=	cub3d
 
 # Files
-SRC							=	src/error.c \
+SRC							=	src/check.c \
+								src/error.c \
 								src/free.c \
 								src/main.c \
 								src/parse.c \

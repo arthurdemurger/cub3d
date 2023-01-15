@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/13 17:16:28 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:24:26 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,6 @@ t_lst	*parse_texture(t_cub *cub, t_lst *lst)
 	return (tmp);
 }
 
-int	check_map(char **map)
-{
-	(void) map;
-	return (1);
-}
-
 char	**parse_map(t_lst *lst)
 {
 	t_lst	*tmp;
@@ -106,10 +100,10 @@ void	parse(t_cub *cub, char *file)
 	map = parse_texture(cub, list);
 	if (!map)
 		ft_error("Wrong or missing information for textures");
-	cub->map = parse_map(map);
-	if (!cub->map)
+	cub->map.map = parse_map(map);
+	if (!cub->map.map)
 		ft_error("Not a valid map.");
-	if (!check_map(cub->map))
+	if (!check_map(cub->map.map))
 		ft_error("The map must be surrounded by walls.");
 	ft_lstclear(list);
 }
