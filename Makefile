@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/15 17:26:19 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/15 17:58:43 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ CC							=	gcc
 
 LMLX_LINUX					=	-lmlx -lXext -lX11
 
-LMLX_MAC					=	-lmlx -framework OpenGL -framework AppKit
+LMLX_MAC					=	-lmlx -L ./files/mlx -framework OpenGL -framework AppKit
 
 # Rules
 all: 		libft $(NAME)

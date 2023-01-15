@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 17:54:21 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:55:11 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "../MLX/mlx.h"
+# include "../mlx/mlx.h"
 
 /*
 ** Define constants
