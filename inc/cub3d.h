@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 17:28:18 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:54:21 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "../MLX/mlx.h"
 
 /*
 ** Define constants
@@ -65,7 +66,8 @@ typedef struct s_map
 typedef struct s_cub
 {
 	t_map	map;
-
+	void	*mlx_ptr;
+	void	*win_ptr;
 	t_text	txtr;
 }	t_cub;
 
