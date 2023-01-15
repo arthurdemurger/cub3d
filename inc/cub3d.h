@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 17:55:11 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:30:08 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "../mlx/mlx.h"
+# include "../files/mlx/mlx.h"
 
 /*
 ** Define constants
@@ -95,6 +95,7 @@ void			free_all(t_cub *cub);
 void			ft_error(char *s);
 
 /* Libft */
+void			ft_bzero(void *s, int n);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putstr(char *s);
 void			ft_puttab(char **tab);
@@ -103,6 +104,7 @@ char			**ft_split_charset(char *str, char *charset);
 char			*ft_strchr(char *s, char c);
 int				ft_strncmp(const char *s1, const char *s2, int n);
 int				ft_strcmp(char *s1, char *s2);
+char			*ft_strcpy(char *dest, char *src);
 char			*ft_strdup(char *str);
 int				ft_strlcpy(char *dest, char *src, int size);
 int				ft_strlen(char *s);
@@ -117,6 +119,7 @@ void			ft_lstdelone(t_lst **l_lst, int i);
 t_lst			*ft_lstget(t_lst *lst, int index);
 int				ft_lstindex(t_lst **l_lst, t_lst *lst);
 t_lst			*ft_lstlast(t_lst *lst);
+t_lst			*ft_lstmax(t_lst *lst);
 t_lst			*ft_lstnew(char *content);
 void			ft_lstput(t_lst *lst);
 int				ft_lstsize(t_lst *lst);

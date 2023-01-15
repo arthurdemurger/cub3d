@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 17:52:14 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:04:12 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,12 @@ int	main(int ac, char **av)
 
 	init(&cub, ac, av);
 	parse(&cub, av[1]);
-	cub.mlx_ptr = mlx_init();
-	cub.win_ptr = mlx_new_window(cub.mlx_ptr, 1500, 1000, "Cub3D");
-	// ft_draw(&cub);
-	mlx_hook(cub.win_ptr, 17, 0, (void *)ft_close, &cub);
-	mlx_key_hook(cub.win_ptr, (void *)deal_key, &cub);
-	mlx_loop(cub.mlx_ptr);
-	// free_all(&cub);
+	// cub.mlx_ptr = mlx_init();
+	// cub.win_ptr = mlx_new_window(cub.mlx_ptr, 1500, 1000, "Cub3D");
+	// // ft_draw(&cub);
+	// mlx_hook(cub.win_ptr, 17, 0, (void *)ft_close, &cub);
+	// mlx_key_hook(cub.win_ptr, (void *)deal_key, &cub);
+	// mlx_loop(cub.mlx_ptr);
+	// // free_all(&cub);
 	// return (0);
 }
