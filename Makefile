@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/15 17:58:43 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/16 14:58:28 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ NAME						=	cub3d
 
 # Files
 SRC							=	src/check.c \
+								src/controls.c \
 								src/error.c \
 								src/free.c \
 								src/main.c \
@@ -85,7 +86,7 @@ linux:
 					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) $(LMLX_LINUX) -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
-$(NAME): libft $(OBJS)
+$(NAME): $(OBJS)
 					@$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) $(LMLX_MAC) -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
