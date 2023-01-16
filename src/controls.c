@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:39:34 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/16 14:53:55 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:02:53 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_close(t_cub *cub)
 {
-	free_all(cub);
+	(void) cub;
 	exit(EXIT_SUCCESS);
 }
 
@@ -63,13 +63,13 @@ D = 100
 ESC = 65307
 =================
 MAC KEYS
-W = 
-A = 
-S = 
-D = 
-< = 
-> = 
-ESC = 
+W = 13
+A = 0
+S = 1
+D = 2
+< = 123
+> = 124
+ESC = 53
 */
 
 int	deal_key(int key, t_cub *cub)
