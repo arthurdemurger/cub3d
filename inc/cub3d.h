@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/16 14:54:05 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:14:57 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ t_lst			*ft_lstmax(t_lst *lst);
 t_lst			*ft_lstnew(char *content);
 void			ft_lstput(t_lst *lst);
 int				ft_lstsize(t_lst *lst);
+char			**ft_lst_to_map(t_cub *cub, t_lst *lst);
 char			**ft_lst_to_tab(t_lst *lst);
 
 /* GNL */

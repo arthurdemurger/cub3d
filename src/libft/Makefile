@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 11:16:48 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/15 22:29:58 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/16 15:14:39 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC							=	ft_bzero.c \
 								lst/ft_lstnew.c \
 								lst/ft_lstput.c \
 								lst/ft_lstsize.c \
+								lst/ft_lst_to_map.c \
 								lst/ft_lst_to_tab.c
 
 OBJS						=	$(SRC:.c=.o)
