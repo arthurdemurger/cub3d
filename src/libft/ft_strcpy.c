@@ -6,15 +6,15 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 22:28:57 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 22:29:39 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:16:29 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-char *ft_strcpy(char *dest, char *src)
+char	*ft_strcpy(char *dest, char *src)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (src && src[i])
