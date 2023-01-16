@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:23:58 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 22:39:14 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 11:43:37 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,23 @@ static int	check_zero(char **map, int i, int j)
 	return (1);
 }
 
-// static int	check_one(char **map, int i, int j)
-// {
-// 	if ()
-// }
+static int	check_one(t_cub *cub, int i, int j)
+{
+	char	**map;
 
-int	check_map(char **map)
+	map = cub->map.map;
+	if (j > 0 && is_good_coord(map[i][j - 1]))
+		return (1);
+	if (is_good_coord(map[i][j + 1]))
+		return (1);
+	if (i < cub->map.height - 1 && is_good_coord(map[i + 1][j]))
+		return (1);
+	if (i > 0 && is_good_coord(map[i - 1][j]))
+		return (1);
+	return (0);
+}
+
+int	check_map(t_cub *cub, char **map)
 {
 	int	i;
 	int	j;
@@ -63,7 +74,7 @@ int	check_map(char **map)
 			if ((map[i][j] == '0' || ft_strchr(POS_CHAR, map[i][j]))
 				&& !check_zero(map, i, j))
 				return (0);
-			if (map[i][j] == '1' && !check_one(map, i, j))
+			if (map[i][j] == '1' && !check_one(cub, i, j))
 				return (0);
 			if (ft_strchr(POS_CHAR, map[i][j]))
 				pos++;

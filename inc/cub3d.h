@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 22:30:08 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 11:11:34 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_text
 typedef struct s_map
 {
 	char	**map;
+	int		height;
+	int		width;
 }	t_map;
 
 typedef struct s_cub
@@ -85,7 +87,7 @@ int				is_texture(t_cub *cub, char *s);
 void			parse(t_cub *cub, char *file);
 t_lst			*parse_texture(t_cub *cub, t_lst *lst);
 int				texture_done(t_cub *cub);
-int				check_map(char **map);
+int				check_map(t_cub *cub, char **map);
 
 /* Free */
 void			*free_tab(char **tab, int len);

@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/15 22:39:05 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 11:23:35 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,25 @@ t_lst	*parse_texture(t_cub *cub, t_lst *lst)
 	return (tmp);
 }
 
-char	**ft_lst_to_map(t_lst *lst)
+char	**ft_lst_to_map(t_cub *cub, t_lst *lst)
 {
 	int		i;
-	int		height;
-	int		width;
 	t_lst	*tmp;
 	char	**map;
 
 	tmp = lst;
-	height = ft_lstsize(lst);
-	width = ft_strlen(ft_lstmax(lst)->content);
-	map = malloc(sizeof(char *) * (height + 1));
+	cub->map.height = ft_lstsize(lst);
+	cub->map.width = ft_strlen(ft_lstmax(lst)->content);
+	map = malloc(sizeof(char *) * (cub->map.height + 1));
 	if (!map)
 		return (NULL);
 	i = -1;
-	while (++i < height)
+	while (++i < cub->map.height)
 	{
-		map[i] = malloc(sizeof(char) * (width + 1));
+		map[i] = malloc(sizeof(char) * (cub->map.width + 1));
 		if (!map[i])
 			return (free_tab(map, ft_tablen(map)));
-		ft_bzero(map[i], width);
+		ft_bzero(map[i], cub->map.width);
 		ft_strcpy(map[i], tmp->content);
 		tmp = tmp->next;
 	}
@@ -95,7 +93,7 @@ char	**ft_lst_to_map(t_lst *lst)
 	return (map);
 }
 
-char	**parse_map(t_lst *lst)
+char	**parse_map(t_cub *cub, t_lst *lst)
 {
 	t_lst	*tmp;
 	char	*trim;
@@ -112,7 +110,7 @@ char	**parse_map(t_lst *lst)
 		tmp->content = trim;
 		tmp = tmp->next;
 	}
-	return (ft_lst_to_map(lst));
+	return (ft_lst_to_map(cub, lst));
 }
 
 void	parse(t_cub *cub, char *file)
@@ -128,10 +126,10 @@ void	parse(t_cub *cub, char *file)
 	map = parse_texture(cub, list);
 	if (!map)
 		ft_error("Wrong or missing information for textures");
-	cub->map.map = parse_map(map);
+	cub->map.map = parse_map(cub, map);
 	if (!cub->map.map)
 		ft_error("Not a valid map.");
-	if (!check_map(cub->map.map))
+	if (!check_map(cub, cub->map.map))
 		ft_error("The map must be surrounded by walls.");
 	ft_lstclear(list);
 }

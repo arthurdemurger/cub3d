@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 22:04:12 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 11:33:02 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	main(int ac, char **av)
 
 	init(&cub, ac, av);
 	parse(&cub, av[1]);
+	ft_puttab(cub.map.map);
 	// cub.mlx_ptr = mlx_init();
 	// cub.win_ptr = mlx_new_window(cub.mlx_ptr, 1500, 1000, "Cub3D");
 	// // ft_draw(&cub);
