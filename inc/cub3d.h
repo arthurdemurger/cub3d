@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/16 11:11:34 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:54:05 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@
 /* Characters */
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "NSEW"
+
+/* Keyboard*/
+# define DESTROY_BUTTON 17
+# define ESC 53
+# define KEYPRESS 2
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define KEY_UP 126
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
 
 /*
 ** Structures
@@ -68,8 +81,8 @@ typedef struct s_map
 typedef struct s_cub
 {
 	t_map	map;
-	void	*mlx_ptr;
-	void	*win_ptr;
+	void	*mlx;
+	void	*win;
 	t_text	txtr;
 }	t_cub;
 
@@ -88,6 +101,11 @@ void			parse(t_cub *cub, char *file);
 t_lst			*parse_texture(t_cub *cub, t_lst *lst);
 int				texture_done(t_cub *cub);
 int				check_map(t_cub *cub, char **map);
+
+/* Controls */
+void			controls(t_cub *cub);
+int				deal_key(int key, t_cub *cub);
+int				ft_close(t_cub *cub);
 
 /* Free */
 void			*free_tab(char **tab, int len);
