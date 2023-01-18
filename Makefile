@@ -30,6 +30,7 @@ SRC							=	src/check.c \
 								src/free.c \
 								src/main.c \
 								src/parse.c \
+								src/DDA.c \
 								src/gnl/get_next_line.c \
 								src/gnl/get_next_line_utils.c \
 								src/utils/parse_utils.c
@@ -56,7 +57,11 @@ LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
 								src/libft/ft_strstr.c \
 								src/libft/ft_strtrim.c \
 								src/libft/ft_substr.c \
-								src/libft/ft_tablen.c
+								src/libft/ft_tablen.c \
+								src/libft/lst/ft_lst_to_map.c \
+								src/libft/ft_bzero.c \
+								src/libft/ft_strcpy.c \
+								src/libft/lst/ft_lstmax.c
 
 LIBFT						=	./src/libft/libft.a
 
@@ -82,7 +87,7 @@ all: 		libft $(NAME)
 				@$(CC) ${CFLAGS} -I./includes -c $< -o ${<:.c=.o}
 
 linux:
-					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) $(LMLX_LINUX) -o $(NAME)
+					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) $(LMLX_LINUX) -lm -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
 $(NAME): libft $(OBJS)

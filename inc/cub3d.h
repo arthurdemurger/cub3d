@@ -63,6 +63,12 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
+typedef struct s_vector
+{
+	int		x;
+	int		y;
+}	t_vector;
+
 typedef struct s_cub
 {
 	t_map	map;
@@ -76,6 +82,11 @@ typedef struct s_cub
 */
 
 /* Main */
+void			ft_draw(t_cub *cub);
+
+/* DDA */
+void 			DDA_ray0(t_cub *cub);
+void 			DDA_plane(t_cub *cub);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
