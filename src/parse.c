@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/13 17:16:28 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:14:08 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,7 @@ t_lst	*parse_texture(t_cub *cub, t_lst *lst)
 	return (tmp);
 }
 
-int	check_map(char **map)
-{
-	(void) map;
-	return (1);
-}
-
-char	**parse_map(t_lst *lst)
+char	**parse_map(t_cub *cub, t_lst *lst)
 {
 	t_lst	*tmp;
 	char	*trim;
@@ -90,7 +84,7 @@ char	**parse_map(t_lst *lst)
 		tmp->content = trim;
 		tmp = tmp->next;
 	}
-	return (ft_lst_to_tab(lst));
+	return (ft_lst_to_map(cub, lst));
 }
 
 void	parse(t_cub *cub, char *file)
@@ -105,11 +99,9 @@ void	parse(t_cub *cub, char *file)
 	list = read_file(fd);
 	map = parse_texture(cub, list);
 	if (!map)
-		ft_error("Wrong or missing information for textures");
-	cub->map = parse_map(map);
-	if (!cub->map)
-		ft_error("Not a valid map.");
-	if (!check_map(cub->map))
-		ft_error("The map must be surrounded by walls.");
+		ft_error("The textures are not valid");
+	cub->map.map = parse_map(cub, map);
+	if (!cub->map.map || !check_map(cub, cub->map.map))
+		ft_error("The map is not valid");
 	ft_lstclear(list);
 }

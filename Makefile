@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/12 22:27:30 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/16 14:58:28 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ RESET		= $(shell tput -Txterm sgr0)
 NAME						=	cub3d
 
 # Files
-SRC							=	src/error.c \
+SRC							=	src/check.c \
+								src/controls.c \
+								src/error.c \
 								src/free.c \
 								src/main.c \
 								src/parse.c \
@@ -72,7 +74,7 @@ CC							=	gcc
 
 LMLX_LINUX					=	-lmlx -lXext -lX11
 
-LMLX_MAC					=	-lmlx -framework OpenGL -framework AppKit
+LMLX_MAC					=	-lmlx -L ./files/mlx -framework OpenGL -framework AppKit
 
 # Rules
 all: 		libft $(NAME)
@@ -84,7 +86,7 @@ linux:
 					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) $(LMLX_LINUX) -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
-$(NAME): libft $(OBJS)
+$(NAME): $(OBJS)
 					@$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) $(LMLX_MAC) -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 

@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/13 16:29:32 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:14:57 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "../MLX/mlx.h"
+# include "../files/mlx/mlx.h"
 
 /*
 ** Define constants
@@ -35,6 +35,20 @@
 
 /* Characters */
 # define MAP_CHAR "01NSEW \n"
+# define POS_CHAR "NSEW"
+
+/* Keyboard*/
+# define DESTROY_BUTTON 17
+# define ESC 53
+# define KEYPRESS 2
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define KEY_UP 126
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
 
 /*
 ** Structures
@@ -57,11 +71,18 @@ typedef struct s_text
 	char	*c;
 }	t_text;
 
-typedef struct s_cub
+typedef struct s_map
 {
 	char	**map;
-	void	*mlx_ptr;
-	void	*win_ptr;
+	int		height;
+	int		width;
+}	t_map;
+
+typedef struct s_cub
+{
+	t_map	map;
+	void	*mlx;
+	void	*win;
 	t_text	txtr;
 }	t_cub;
 
@@ -79,6 +100,12 @@ int				is_texture(t_cub *cub, char *s);
 void			parse(t_cub *cub, char *file);
 t_lst			*parse_texture(t_cub *cub, t_lst *lst);
 int				texture_done(t_cub *cub);
+int				check_map(t_cub *cub, char **map);
+
+/* Controls */
+void			controls(t_cub *cub);
+int				deal_key(int key, t_cub *cub);
+int				ft_close(t_cub *cub);
 
 /* Free */
 void			*free_tab(char **tab, int len);
@@ -88,6 +115,7 @@ void			free_all(t_cub *cub);
 void			ft_error(char *s);
 
 /* Libft */
+void			ft_bzero(void *s, int n);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putstr(char *s);
 void			ft_puttab(char **tab);
@@ -96,6 +124,7 @@ char			**ft_split_charset(char *str, char *charset);
 char			*ft_strchr(char *s, char c);
 int				ft_strncmp(const char *s1, const char *s2, int n);
 int				ft_strcmp(char *s1, char *s2);
+char			*ft_strcpy(char *dest, char *src);
 char			*ft_strdup(char *str);
 int				ft_strlcpy(char *dest, char *src, int size);
 int				ft_strlen(char *s);
@@ -110,9 +139,11 @@ void			ft_lstdelone(t_lst **l_lst, int i);
 t_lst			*ft_lstget(t_lst *lst, int index);
 int				ft_lstindex(t_lst **l_lst, t_lst *lst);
 t_lst			*ft_lstlast(t_lst *lst);
+t_lst			*ft_lstmax(t_lst *lst);
 t_lst			*ft_lstnew(char *content);
 void			ft_lstput(t_lst *lst);
 int				ft_lstsize(t_lst *lst);
+char			**ft_lst_to_map(t_cub *cub, t_lst *lst);
 char			**ft_lst_to_tab(t_lst *lst);
 
 /* GNL */

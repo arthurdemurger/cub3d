@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:33:04 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 17:41:48 by ademurge         ###   ########.fr       */
+/*   Created: 2023/01/15 22:28:57 by ademurge          #+#    #+#             */
+/*   Updated: 2023/01/16 15:16:29 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-char	*ft_strchr(char *s, char c)
+char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
-	i = -1;
-	if (!c)
-		return (NULL);
-	while (s[++i])
-		if (s[i] == c)
-			return (&s[i]);
-	if (s[i] == c)
-		return (&s[i]);
-	return (NULL);
+	i = 0;
+	while (src && src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

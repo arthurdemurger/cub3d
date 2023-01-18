@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmax.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:33:04 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 17:41:48 by ademurge         ###   ########.fr       */
+/*   Created: 2023/01/15 22:10:43 by ademurge          #+#    #+#             */
+/*   Updated: 2023/01/15 22:33:13 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "../../../inc/cub3d.h"
 
-char	*ft_strchr(char *s, char c)
+t_lst	*ft_lstmax(t_lst *lst)
 {
-	int	i;
+	t_lst	*max;
+	t_lst	*tmp;
+	int		max_len;
 
-	i = -1;
-	if (!c)
-		return (NULL);
-	while (s[++i])
-		if (s[i] == c)
-			return (&s[i]);
-	if (s[i] == c)
-		return (&s[i]);
-	return (NULL);
+	max = lst;
+	tmp = lst;
+	max_len = ft_strlen(max->content);
+	while (tmp)
+	{
+		if (max_len < ft_strlen(tmp->content))
+		{
+			max = tmp;
+			max_len = ft_strlen(max->content);
+		}
+		tmp = tmp->next;
+	}
+	return (max);
 }

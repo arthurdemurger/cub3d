@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/13 16:28:20 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:00:38 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,79 +24,8 @@ void	init(t_cub *cub, int ac, char **av)
 	cub->txtr.no = NULL;
 	cub->txtr.so = NULL;
 	cub->txtr.we = NULL;
-}
-
-void	ft_close(int signal, t_cub *cub)
-{
-	(void)signal;
-	(void)cub;
-	exit (0);
-}
-
-int	is_input_linux(int key)
-{
-	if (key == 122)
-		return (1);
-	else if (key == 113)
-		return (1);
-	else if (key == 115)
-		return (1);
-	else if (key == 100)
-		return (1);
-	else if (key == 65361)
-		return (1);
-	else if (key == 65363)
-		return (1);
-	return (0);
-}
-
-int	is_input_mac(int key)
-{
-	if (key == 126)
-		return (1);
-	else if (key == 123)
-		return (1);
-	else if (key == 125)
-		return (1);
-	else if (key == 124)
-		return (1);
-	else if (key == 0)
-		return (1);
-	else if (key == 2)
-		return (1);
-	return (0);
-}
-
-/*
-LINUX KEYS
-Z = 122
-Q = 113
-S = 115
-D = 100
-< = 65361
-> = 65363
-ESC = 65307
-=================
-MAC KEYS
-W = 126
-A = 123
-S = 125
-D = 124
-< = 0
-> = 2
-ESC = 53
-*/
-
-void	deal_key(int key, t_cub *cub)
-{
-	if (key == 65307 || key == 53)
-	{
-		free_all(cub);
-		exit (0);
-	}
-	else if (is_input_linux(key) || is_input_mac(key))
-		printf("Valid key\n");
-		// ft_move(key, cub);
+	cub->mlx = mlx_init();
+	cub->win = mlx_new_window(cub->mlx, 1920, 1080, "Cub3D");
 }
 
 int	main(int ac, char **av)
@@ -105,12 +34,7 @@ int	main(int ac, char **av)
 
 	init(&cub, ac, av);
 	parse(&cub, av[1]);
-	cub.mlx_ptr = mlx_init();
-	cub.win_ptr = mlx_new_window(cub.mlx_ptr, 1500, 1000, "Cub3D");
-	// ft_draw(&cub);
-	mlx_hook(cub.win_ptr, 17, 0, (void *)ft_close, &cub);
-	mlx_key_hook(cub.win_ptr, (void *)deal_key, &cub);
-	mlx_loop(cub.mlx_ptr);
-	// free_all(&cub);
-	// return (0);
+	controls(&cub);
+	free_all(&cub);
+	return (0);
 }
