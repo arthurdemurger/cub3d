@@ -133,7 +133,7 @@ void create_window_data(t_cub *cub)
     data = NULL;
     cub->win_data = mlx_new_window(cub->mlx, 300, 95, "Cub3D - Data");
     mlx_string_put(cub->mlx, cub->win_data, 10, 15, 0xFFFFFF, "Player position :");
-    mlx_string_put(cub->mlx, cub->win_data, 10, 40, 0xFFFFFF, "Dir position :");
+    mlx_string_put(cub->mlx, cub->win_data, 10, 40, 0xFFFFFF, "Dir last position :");
     mlx_string_put(cub->mlx, cub->win_data, 10, 65, 0xFFFFFF, "Ray0 length :");
     mlx_string_put(cub->mlx, cub->win_data, 10, 90, 0xFFFFFF, "Wall encountered :");
     data = ft_strjoin(ft_itoa(cub->plr->x), " - ");
