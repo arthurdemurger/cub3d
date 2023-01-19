@@ -114,6 +114,7 @@ clean:
 
 fclean: clean
 			@$(RM) $(NAME)
+			@$(RM) $(NAME_TEST)
 			@$(RM) $(LIBFT)
 			@echo "$(LIGHTPURPLE)********* Executable removed. $(RESET)"
 
