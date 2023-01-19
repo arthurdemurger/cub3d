@@ -24,6 +24,8 @@ RESET		= $(shell tput -Txterm sgr0)
 # Name of the executable
 NAME						=	cub3d
 
+NAME_TEST					=	cub3d_test
+
 # Files
 SRC							=	src/check.c \
 								src/error.c \
@@ -33,7 +35,10 @@ SRC							=	src/check.c \
 								src/DDA.c \
 								src/gnl/get_next_line.c \
 								src/gnl/get_next_line_utils.c \
-								src/utils/parse_utils.c
+								src/utils/parse_utils.c \
+								src/tests/tests.c
+
+SRC_TEST					=	src/tests/tests.c
 
 LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
 								src/libft/lst/ft_lstadd_back.c \
@@ -58,7 +63,6 @@ LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
 								src/libft/ft_strtrim.c \
 								src/libft/ft_substr.c \
 								src/libft/ft_tablen.c \
-								src/libft/lst/ft_lst_to_map.c \
 								src/libft/ft_bzero.c \
 								src/libft/ft_strcpy.c \
 								src/libft/lst/ft_lstmax.c
@@ -66,6 +70,8 @@ LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
 LIBFT						=	./src/libft/libft.a
 
 INC							=	-I ./inc/.
+
+INC_TEST					=	-I ./inc/test/.
 
 OBJS						=	$(SRC:.c=.o)
 
@@ -86,9 +92,13 @@ all: 		libft $(NAME)
 %o:				%c
 				@$(CC) ${CFLAGS} -I./includes -c $< -o ${<:.c=.o}
 
+test:
+				@$(CC) $(CFLAGS) $(INC_TEST) $(SRC_TEST) $(LMLX_LINUX) -lm -o $(NAME_TEST)
+				@echo "$(GREEN)********** Compiled. $(RESET)"
+
 linux:
-					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) $(LMLX_LINUX) -lm -o $(NAME)
-					@echo "$(GREEN)********** Compiled. $(RESET)"
+				@$(CC) $(CFLAGS) $(INC) $(SRC_LINUX) $(LMLX_LINUX) -lm -o $(NAME)
+				@echo "$(GREEN)********** Compiled. $(RESET)"
 
 $(NAME): libft $(OBJS)
 					@$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) $(LMLX_MAC) -o $(NAME)

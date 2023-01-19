@@ -36,6 +36,7 @@
 /* Characters */
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "NSEW"
+# define SIZE 64
 
 /*
 ** Structures
@@ -50,12 +51,12 @@ typedef struct s_lst
 
 typedef struct s_text
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*f;
-	char	*c;
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
+	int		*f;
+	int		*c;
 }	t_text;
 
 typedef struct s_map
@@ -71,10 +72,11 @@ typedef struct s_vector
 
 typedef struct s_cub
 {
-	t_map	map;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_text	txtr;
+	t_map		map;
+	void		*mlx;
+	void		*win;
+	t_vector	*hero;
+	t_text		txtr;
 }	t_cub;
 
 /*
@@ -83,6 +85,9 @@ typedef struct s_cub
 
 /* Main */
 void			ft_draw(t_cub *cub);
+
+/* Tests */
+void    		test(t_cub *cub);
 
 /* DDA */
 void 			DDA_ray0(t_cub *cub);
