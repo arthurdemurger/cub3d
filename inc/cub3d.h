@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 16:06:08 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:58:30 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,23 +119,23 @@ typedef struct s_cub
 /* Main */
 
 /* Create Window */
-void 			create_window_main(t_cub *cub);
+void			create_window_main(t_cub *cub);
 void			draw_square(t_cub *cub, int x, int y, int color);
-void    		grid(t_cub *cub);
+void			grid(t_cub *cub);
 void			fill_squares(t_cub *cub);
 void			create_window_data(t_cub *cub);
 
 /* Update */
-void 			update_data(t_cub *cub, int line, char *data);
+void			update_data(t_cub *cub, int line, char *data);
 
 /* Move */
-void    		move(t_cub *cub, int key);
+void			move(t_cub *cub, int key);
 
 /* Rotate */
 void			rotate(t_cub *cub, int key);
 
 /* DDA */
-void 			dda_ray0(t_cub *cub, int x, int y);
+void			dda_ray0(t_cub *cub, int x, int y);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
@@ -168,6 +168,7 @@ int				ft_strncmp(const char *s1, const char *s2, int n);
 int				ft_strcmp(char *s1, char *s2);
 char			*ft_strcpy(char *dest, char *src);
 char			*ft_strdup(char *str);
+char			*ft_strjoin(char *s1, char *s2);
 int				ft_strlcpy(char *dest, char *src, int size);
 int				ft_strlen(char *s);
 char			*ft_strstr(char *big, char *little);

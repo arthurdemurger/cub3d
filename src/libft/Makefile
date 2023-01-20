@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
+#    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 11:16:48 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/20 15:57:53 by gponcele         ###   ########.fr        #
+#    Updated: 2023/01/20 16:45:30 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC							=	ft_bzero.c \
 								ft_strcpy.c \
 								ft_strncmp.c \
 								ft_strdup.c \
+								ft_strjoin.c \
 								ft_strlcpy.c \
 								ft_strlen.c \
 								ft_strstr.c \
