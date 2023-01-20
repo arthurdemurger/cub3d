@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 14:04:22 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:11:42 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	init(t_cub *cub, int ac, char **av)
 void	ft_close(int keycode, t_cub *cub)
 {
 	(void) keycode;
-	free_all(cub);
+	(void)cub;
+	// free_all(cub);
 	exit (0);
 }
 
@@ -89,15 +90,23 @@ ESC =
 
 void deal_key(int key, t_cub *cub)
 {
-    if (key == 53)
+	if (key == ESC)
     {
         mlx_destroy_window(cub->mlx, cub->win_main);
         // mlx_destroy_window(cub->mlx, cub->win_data);
         free (cub->mlx);
         exit(0);
     }
-    if (key == 13 || key == 0 || key == 1 || key == 2)
+    if (key == W || key == A || key == S || key == D)
         move(cub, key);
+	else if (key == KEY_LEFT || key == KEY_RIGHT)
+		rotate(cub, key);
+}
+
+void	click(int button, int x, int y, t_cub *cub)
+{
+	if (button == 1)
+		dda_ray0(cub, x, y);
 }
 
 int	main(int ac, char **av)
@@ -108,10 +117,12 @@ int	main(int ac, char **av)
 	parse(&cub, av[1]);
 	// printf("x : %d | y : %d | pixel_x : %d | pixel_y : %d | angle : %d\n", cub.plr.x, cub.plr.y, cub.plr.real_x, cub.plr.real_y, cub.angle);
 	create_window_main(&cub);
+	create_window_data(&cub);
 	//ft_puttab(cub.map.map);
 	// ft_draw(&cub);
 	mlx_hook(cub.win_main, 17, 0, (void *)ft_close, &cub);
 	mlx_key_hook(cub.win_main, (void *)deal_key, &cub);
+	mlx_mouse_hook(cub.win_main, (void *)click, &cub);
 	mlx_loop(cub.mlx);
 	// free_all(&cub);
 	// return (0);

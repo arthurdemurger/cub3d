@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 13:46:07 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:55:35 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,18 @@ void create_window_main(t_cub *cub)
 	fill_squares(cub);
     grid(cub);
 	draw_square(cub, cub->plr.real_x, cub->plr.real_y, RED);
+}
+void	create_window_data(t_cub *cub)
+{
+	char	*data;
+
+	(void)data;
+	cub->win_data = mlx_new_window(cub->mlx, 400, 165, "Cub3D - Data");
+    mlx_string_put(cub->mlx, cub->win_data, 10, 15, WHITE, "Player position :");
+    mlx_string_put(cub->mlx, cub->win_data, 10, 40, WHITE, "Dir last position :");
+    mlx_string_put(cub->mlx, cub->win_data, 10, 65, WHITE, "Ray0 length :");
+    mlx_string_put(cub->mlx, cub->win_data, 10, 90, WHITE, "Wall encountered :");
+	mlx_string_put(cub->mlx, cub->win_data, 10, 115, WHITE, "Wall_face displayed :");
+	mlx_string_put(cub->mlx, cub->win_data, 10, 140, WHITE, "Angle :");
+	update_data(cub, 6, ft_itoa(cub->angle));
 }

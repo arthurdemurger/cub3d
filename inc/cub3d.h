@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 14:00:19 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:06:08 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@
 */
 
 /* Colors */
-# define WHITE 0xFFFFFF
-# define RED 0xD72A2A
 # define BLUE 0x1D5DCB
 # define BLACK 0x000000
+# define GREEN 0x32CD32
+# define RED 0xD72A2A
+# define WHITE 0xFFFFFF
 
 /* Debug */
 # define ICI printf("ici\n");
@@ -45,6 +46,19 @@
 # define SIZE 32
 # define SIDE 3
 
+/* Keyboard*/
+# define DESTROY_BUTTON 17
+# define ESC 53
+# define KEYPRESS 2
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define KEY_UP 126
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
+
 /*
 ** Structures
 */
@@ -55,6 +69,12 @@ typedef struct s_lst
 	struct s_lst	*next;
 	struct s_lst	*prev;
 }	t_lst;
+
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}	t_pos;
 
 typedef struct s_text
 {
@@ -103,9 +123,19 @@ void 			create_window_main(t_cub *cub);
 void			draw_square(t_cub *cub, int x, int y, int color);
 void    		grid(t_cub *cub);
 void			fill_squares(t_cub *cub);
+void			create_window_data(t_cub *cub);
+
+/* Update */
+void 			update_data(t_cub *cub, int line, char *data);
 
 /* Move */
 void    		move(t_cub *cub, int key);
+
+/* Rotate */
+void			rotate(t_cub *cub, int key);
+
+/* DDA */
+void 			dda_ray0(t_cub *cub, int x, int y);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
@@ -126,6 +156,7 @@ void			ft_error(char *s);
 
 /* Libft */
 void			ft_bzero(void *s, int n);
+char			*ft_itoa(int n);
 void			*ft_memset(void *s, int c, size_t n);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putstr(char *s);

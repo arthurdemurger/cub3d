@@ -6,7 +6,7 @@
 #    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/20 14:01:05 by gponcele         ###   ########.fr        #
+#    Updated: 2023/01/20 16:06:22 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,14 @@ NAME						=	cub3d
 
 # Files
 SRC							=	src/check.c \
+								src/dda.c \
 								src/error.c \
 								src/free.c \
 								src/main.c \
 								src/moves.c \
 								src/parse.c \
+								src/update_data.c \
+								src/rotate.c \
 								src/create_windows.c \
 								src/gnl/get_next_line.c \
 								src/gnl/get_next_line_utils.c \
@@ -75,7 +78,7 @@ CC							=	gcc
 
 LMLX_LINUX					=	-lmlx -lXext -lX11
 
-LMLX_MAC					=	-lmlx -L ./files/mlx -framework OpenGL -framework AppKit
+LMLX_MAC					=	-lmlx -framework OpenGL -framework AppKit
 
 # Rules
 all: 		libft $(NAME)
