@@ -82,6 +82,25 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
+void    grid(t_cub *cub)
+{
+    int x;
+    int y;
+
+    y = 0;
+    while (x < (SIZE * 20) || y < (SIZE * 20))
+    {
+        x = 0;
+        while (x < (SIZE * 20))
+        {
+            if ((y > 0 && ((x % SIZE) == 0)) || (y % SIZE) == 0)
+                mlx_pixel_put(cub->mlx, cub->win_main, x, y, 0x000000);
+            x++;
+        }
+        y++;
+    }
+}
+
 void create_window_main(t_cub *cub)
 {
     int x;
@@ -99,18 +118,35 @@ void create_window_main(t_cub *cub)
         }
         y++;
     }
-    y = 0;
-    while (x < (SIZE * 20) || y < (SIZE * 20))
+    grid(cub);
+}
+
+void    move(t_cub *cub, int key)
+{
+    int x_copy;
+    int y_copy;
+
+    grid(cub);
+    y_copy = cub->plr->realy - 5;
+    while (x_copy < (cub->plr->realx + 5) || y_copy < (cub->plr->realy + 5))
     {
-        x = 0;
-        while (x < (SIZE * 20))
+        x_copy = cub->plr->realx - 5;
+        while (x_copy < (cub->plr->realx + 5))
         {
-            if ((y > 0 && ((x % SIZE) == 0)) || (y % SIZE) == 0)
-                mlx_pixel_put(cub->mlx, cub->win_main, x, y, 0x000000);
-            x++;
+            mlx_pixel_put(cub->mlx, cub->win_main, x_copy, y_copy, 0xFFFFFF);
+            x_copy++;
         }
-        y++;
+        y_copy++;
     }
+    if (key == 122)
+        cub->plr->realy -= 3;
+    else if (key == 113)
+        cub->plr->realx -= 3;
+    else if (key == 115)
+        cub->plr->realy += 3;
+    else if (key == 100)
+        cub->plr->realx += 3;
+    draw_spot(cub, cub->plr->realx, cub->plr->realy);
 }
 
 void deal_key(int key, t_cub *cub)
@@ -124,6 +160,8 @@ void deal_key(int key, t_cub *cub)
         free (cub->dir);
         exit(0);
     }
+    if (key == 122 || key == 113 || key == 115 || key == 100)
+        move(cub, key);
 }
 
 void create_window_data(t_cub *cub)
@@ -208,6 +246,24 @@ void update_data(t_cub *cub, int line, char *data)
     }
 }
 
+void    draw_spot(t_cub *cub, int x, int y)
+{
+    int x_copy;
+    int y_copy;
+
+    y_copy = y - 5;
+    while (x_copy < (x + 5) || y_copy < (y + 5))
+    {
+        x_copy = x - 5;
+        while (x_copy < (x + 5))
+        {
+            mlx_pixel_put(cub->mlx, cub->win_main, x_copy, y_copy, 0xD72A2A);
+            x_copy++;
+        }
+        y_copy++;
+    }
+}
+
 void initial_data(t_cub *cub)
 {
     cub->plr = malloc(sizeof(t_vector) * 1);
@@ -220,6 +276,9 @@ void initial_data(t_cub *cub)
     }
     cub->plr->x = 7;
     cub->plr->y = 10;
+    cub->plr->realx = (cub->plr->x * SIZE) + 16;
+    cub->plr->realy = (cub->plr->y * SIZE) + 16;
+    draw_spot(cub, cub->plr->realx, cub->plr->realy);
 }
 
 void    set_wall(int button, int x, int y, t_cub *cub)
@@ -227,7 +286,6 @@ void    set_wall(int button, int x, int y, t_cub *cub)
     int x_copy;
     int y_copy;
 
-    (void)cub;
     while ((x % 32) != 0)
         x--;
     while ((y % 32) != 0)

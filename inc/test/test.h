@@ -90,5 +90,6 @@ static int	            ft_strlen_int(int n);
 char	                *ft_strjoin(char const *s1, char const *s2);
 size_t	                ft_strlen(const char *s);
 void                    set_wall(int button, int x, int y, t_cub *cub);
+void                    draw_spot(t_cub *cub, int x, int y);
 
 #endif
