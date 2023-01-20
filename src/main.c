@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 17:03:09 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:07:09 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,14 @@ ESC =
 void deal_key(int key, t_cub *cub)
 {
 	if (key == ESC)
-    {
-        mlx_destroy_window(cub->mlx, cub->win_main);
-        // mlx_destroy_window(cub->mlx, cub->win_data);
-        free (cub->mlx);
-        exit(0);
-    }
-    if (key == W || key == A || key == S || key == D)
-        move(cub, key);
+	{
+		mlx_destroy_window(cub->mlx, cub->win_main);
+		// mlx_destroy_window(cub->mlx, cub->win_data);
+		free (cub->mlx);
+		exit(0);
+	}
+	if (key == W || key == A || key == S || key == D)
+		move(cub, key);
 	else if (key == KEY_LEFT || key == KEY_RIGHT)
 		rotate(cub, key);
 }

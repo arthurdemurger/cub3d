@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:23:58 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 17:02:06 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:05:15 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_good_coord(char c)
 	return (0);
 }
 
-static int	check_zero(char **map, int i, int j)
+int	check_zero(char **map, int i, int j)
 {
 	if (i == 0 || !map[i + 1] || j == 0 || !map[i][j + 1])
 		return (0);
@@ -69,7 +69,7 @@ static int	check_one(t_cub *cub, int i, int j)
 		return (1);
 	if (is_good_coord(map[i][j + 1]))
 		return (1);
-	if (i < cub->map.height - 1 && is_good_coord(map[i + 1][j]))
+	if (i < cub->map.h - 1 && is_good_coord(map[i + 1][j]))
 		return (1);
 	if (i > 0 && is_good_coord(map[i - 1][j]))
 		return (1);
@@ -91,7 +91,7 @@ int	check_map(t_cub *cub, char **map)
 		{
 			if (ft_strchr(POS_CHAR, map[i][j]))
 				init_plr(cub, j, i, map[i][j]);
-			if (!check_coord(map, i, j))
+			if (!check_one(cub, i, j))
 				return (0);
 			if (ft_strchr(POS_CHAR, map[i][j]))
 				pos++;

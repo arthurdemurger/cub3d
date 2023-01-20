@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/20 17:00:07 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/20 17:07:32 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ NAME						=	cub3d
 
 # Files
 SRC							=	src/check.c \
-								src/controls.c \
 								src/dda.c \
 								src/error.c \
 								src/free.c \
