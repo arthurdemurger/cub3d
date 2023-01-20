@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 17:52:14 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:04:22 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,17 @@ D =
 ESC = 
 */
 
-void	deal_key(int key, t_cub *cub)
+void deal_key(int key, t_cub *cub)
 {
-	(void)cub;
-	if (key == 65307)
-		ft_close(0, cub);
-	else if (is_input_linux(key))
-		printf("Valid key\n");
-		// ft_move(key, cub);
+    if (key == 53)
+    {
+        mlx_destroy_window(cub->mlx, cub->win_main);
+        // mlx_destroy_window(cub->mlx, cub->win_data);
+        free (cub->mlx);
+        exit(0);
+    }
+    if (key == 13 || key == 0 || key == 1 || key == 2)
+        move(cub, key);
 }
 
 int	main(int ac, char **av)
@@ -103,12 +106,13 @@ int	main(int ac, char **av)
 
 	init(&cub, ac, av);
 	parse(&cub, av[1]);
-	cub.mlx_ptr = mlx_init();
-	cub.win_ptr = mlx_new_window(cub.mlx_ptr, 1500, 1000, "Cub3D");
+	// printf("x : %d | y : %d | pixel_x : %d | pixel_y : %d | angle : %d\n", cub.plr.x, cub.plr.y, cub.plr.real_x, cub.plr.real_y, cub.angle);
+	create_window_main(&cub);
+	//ft_puttab(cub.map.map);
 	// ft_draw(&cub);
-	mlx_hook(cub.win_ptr, 17, 0, (void *)ft_close, &cub);
-	mlx_key_hook(cub.win_ptr, (void *)deal_key, &cub);
-	mlx_loop(cub.mlx_ptr);
+	mlx_hook(cub.win_main, 17, 0, (void *)ft_close, &cub);
+	mlx_key_hook(cub.win_main, (void *)deal_key, &cub);
+	mlx_loop(cub.mlx);
 	// free_all(&cub);
 	// return (0);
 }

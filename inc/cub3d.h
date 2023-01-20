@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 17:55:11 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:00:19 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,17 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "../mlx/mlx.h"
+# include "../files/mlx/mlx.h"
 
 /*
 ** Define constants
 */
+
+/* Colors */
+# define WHITE 0xFFFFFF
+# define RED 0xD72A2A
+# define BLUE 0x1D5DCB
+# define BLACK 0x000000
 
 /* Debug */
 # define ICI printf("ici\n");
@@ -35,7 +41,9 @@
 
 /* Characters */
 # define MAP_CHAR "01NSEW \n"
-# define POS_CHAR "NSEW"
+# define POS_CHAR "NESW"
+# define SIZE 32
+# define SIDE 3
 
 /*
 ** Structures
@@ -58,17 +66,30 @@ typedef struct s_text
 	char	*c;
 }	t_text;
 
+typedef struct s_vector
+{
+	int		x;
+	int		y;
+	int		real_x;
+	int		real_y;
+}	t_vector;
+
 typedef struct s_map
 {
 	char	**map;
+	int		w;
+	int		h;
 }	t_map;
 
 typedef struct s_cub
 {
-	t_map	map;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_text	txtr;
+	t_map		map;
+	t_vector	plr;
+	int			angle;
+	void		*mlx;
+	void		*win_main;
+	void		*win_data;
+	t_text		txtr;
 }	t_cub;
 
 /*
@@ -76,6 +97,15 @@ typedef struct s_cub
 */
 
 /* Main */
+
+/* Create Window */
+void 			create_window_main(t_cub *cub);
+void			draw_square(t_cub *cub, int x, int y, int color);
+void    		grid(t_cub *cub);
+void			fill_squares(t_cub *cub);
+
+/* Move */
+void    		move(t_cub *cub, int key);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
@@ -85,7 +115,7 @@ int				is_texture(t_cub *cub, char *s);
 void			parse(t_cub *cub, char *file);
 t_lst			*parse_texture(t_cub *cub, t_lst *lst);
 int				texture_done(t_cub *cub);
-int				check_map(char **map);
+int				check_map(t_cub *cub, char **map);
 
 /* Free */
 void			*free_tab(char **tab, int len);
@@ -95,6 +125,8 @@ void			free_all(t_cub *cub);
 void			ft_error(char *s);
 
 /* Libft */
+void			ft_bzero(void *s, int n);
+void			*ft_memset(void *s, int c, size_t n);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putstr(char *s);
 void			ft_puttab(char **tab);
@@ -103,6 +135,7 @@ char			**ft_split_charset(char *str, char *charset);
 char			*ft_strchr(char *s, char c);
 int				ft_strncmp(const char *s1, const char *s2, int n);
 int				ft_strcmp(char *s1, char *s2);
+char			*ft_strcpy(char *dest, char *src);
 char			*ft_strdup(char *str);
 int				ft_strlcpy(char *dest, char *src, int size);
 int				ft_strlen(char *s);
@@ -117,8 +150,10 @@ void			ft_lstdelone(t_lst **l_lst, int i);
 t_lst			*ft_lstget(t_lst *lst, int index);
 int				ft_lstindex(t_lst **l_lst, t_lst *lst);
 t_lst			*ft_lstlast(t_lst *lst);
+t_lst			*ft_lstmax(t_lst *lst);
 t_lst			*ft_lstnew(char *content);
 void			ft_lstput(t_lst *lst);
+char			**ft_lst_to_map(t_cub *cub, t_lst *lst);
 int				ft_lstsize(t_lst *lst);
 char			**ft_lst_to_tab(t_lst *lst);
 

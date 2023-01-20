@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
+#    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 11:16:48 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/13 16:21:29 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/20 13:18:49 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,16 @@ NAME						=	libft.a
 
 # Files
 
-SRC							=	ft_putendl_fd.c \
+SRC							=	ft_bzero.c \
+								ft_memset.c \
+								ft_putendl_fd.c \
 								ft_putstr.c \
 								ft_puttab.c \
 								ft_split.c \
 								ft_split_charset.c \
 								ft_strchr.c \
 								ft_strcmp.c \
+								ft_strcpy.c \
 								ft_strncmp.c \
 								ft_strdup.c \
 								ft_strlcpy.c \
@@ -49,9 +52,11 @@ SRC							=	ft_putendl_fd.c \
 								lst/ft_lstget.c \
 								lst/ft_lstindex.c \
 								lst/ft_lstlast.c \
+								lst/ft_lstmax.c \
 								lst/ft_lstnew.c \
 								lst/ft_lstput.c \
 								lst/ft_lstsize.c \
+								lst/ft_lst_to_map.c \
 								lst/ft_lst_to_tab.c
 
 OBJS						=	$(SRC:.c=.o)
