@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/16 15:14:57 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:02:00 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,35 @@
 ** Define constants
 */
 
+/* Colors */
+# define BLUE 0x1D5DCB
+# define BLACK 0x000000
+# define GREEN 0x32CD32
+# define RED 0xD72A2A
+# define WHITE 0xFFFFFF
+
 /* Debug */
 # define ICI printf("ici\n");
 # define LEAKS system("leaks cub3d");
 
 /* Characters */
 # define MAP_CHAR "01NSEW \n"
-# define POS_CHAR "NSEW"
+# define POS_CHAR "NESW"
+# define SIZE 32
+# define SIDE 3
+
+/* Keyboard*/
+# define DESTROY_BUTTON 17
+# define ESC 53
+# define KEYPRESS 2
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define KEY_UP 126
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
 
 /* Keyboard*/
 # define DESTROY_BUTTON 17
@@ -61,6 +83,12 @@ typedef struct s_lst
 	struct s_lst	*prev;
 }	t_lst;
 
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}	t_pos;
+
 typedef struct s_text
 {
 	char	*no;
@@ -71,19 +99,30 @@ typedef struct s_text
 	char	*c;
 }	t_text;
 
+typedef struct s_vector
+{
+	int		x;
+	int		y;
+	int		real_x;
+	int		real_y;
+}	t_vector;
+
 typedef struct s_map
 {
 	char	**map;
-	int		height;
-	int		width;
+	int		w;
+	int		h;
 }	t_map;
 
 typedef struct s_cub
 {
-	t_map	map;
-	void	*mlx;
-	void	*win;
-	t_text	txtr;
+	t_map		map;
+	t_vector	plr;
+	int			angle;
+	void		*mlx;
+	void		*win_main;
+	void		*win_data;
+	t_text		txtr;
 }	t_cub;
 
 /*
@@ -91,6 +130,25 @@ typedef struct s_cub
 */
 
 /* Main */
+
+/* Create Window */
+void			create_window_main(t_cub *cub);
+void			draw_square(t_cub *cub, int x, int y, int color);
+void			grid(t_cub *cub);
+void			fill_squares(t_cub *cub);
+void			create_window_data(t_cub *cub);
+
+/* Update */
+void			update_data(t_cub *cub, int line, char *data);
+
+/* Move */
+void			move(t_cub *cub, int key);
+
+/* Rotate */
+void			rotate(t_cub *cub, int key);
+
+/* DDA */
+void			dda_ray0(t_cub *cub, int x, int y);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
@@ -102,11 +160,6 @@ t_lst			*parse_texture(t_cub *cub, t_lst *lst);
 int				texture_done(t_cub *cub);
 int				check_map(t_cub *cub, char **map);
 
-/* Controls */
-void			controls(t_cub *cub);
-int				deal_key(int key, t_cub *cub);
-int				ft_close(t_cub *cub);
-
 /* Free */
 void			*free_tab(char **tab, int len);
 void			free_all(t_cub *cub);
@@ -116,6 +169,8 @@ void			ft_error(char *s);
 
 /* Libft */
 void			ft_bzero(void *s, int n);
+char			*ft_itoa(int n);
+void			*ft_memset(void *s, int c, size_t n);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putstr(char *s);
 void			ft_puttab(char **tab);
@@ -126,6 +181,7 @@ int				ft_strncmp(const char *s1, const char *s2, int n);
 int				ft_strcmp(char *s1, char *s2);
 char			*ft_strcpy(char *dest, char *src);
 char			*ft_strdup(char *str);
+char			*ft_strjoin(char *s1, char *s2);
 int				ft_strlcpy(char *dest, char *src, int size);
 int				ft_strlen(char *s);
 char			*ft_strstr(char *big, char *little);
@@ -142,6 +198,7 @@ t_lst			*ft_lstlast(t_lst *lst);
 t_lst			*ft_lstmax(t_lst *lst);
 t_lst			*ft_lstnew(char *content);
 void			ft_lstput(t_lst *lst);
+char			**ft_lst_to_map(t_cub *cub, t_lst *lst);
 int				ft_lstsize(t_lst *lst);
 char			**ft_lst_to_map(t_cub *cub, t_lst *lst);
 char			**ft_lst_to_tab(t_lst *lst);

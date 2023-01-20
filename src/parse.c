@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/16 15:14:08 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:03:06 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,11 @@ void	parse(t_cub *cub, char *file)
 	list = read_file(fd);
 	map = parse_texture(cub, list);
 	if (!map)
-		ft_error("The textures are not valid");
+		ft_error("Wrong or missing information for textures");
 	cub->map.map = parse_map(cub, map);
-	if (!cub->map.map || !check_map(cub, cub->map.map))
-		ft_error("The map is not valid");
+	if (!cub->map.map)
+		ft_error("Not a valid map.");
+	if (!check_map(cub, cub->map.map))
+		ft_error("The map must be surrounded by walls.");
 	ft_lstclear(list);
 }

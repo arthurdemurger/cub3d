@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:14:01 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/16 15:14:26 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:01:46 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ char	**ft_lst_to_map(t_cub *cub, t_lst *lst)
 	char	**map;
 
 	tmp = lst;
-	cub->map.height = ft_lstsize(lst);
-	cub->map.width = ft_strlen(ft_lstmax(lst)->content);
-	map = malloc(sizeof(char *) * (cub->map.height + 1));
+	cub->map.h = ft_lstsize(lst);
+	cub->map.w = ft_strlen(ft_lstmax(lst)->content);
+	map = malloc(sizeof(char *) * (cub->map.h + 1));
 	if (!map)
 		return (NULL);
 	i = -1;
-	while (++i < cub->map.height)
+	while (++i < cub->map.h)
 	{
-		map[i] = malloc(sizeof(char) * (cub->map.width + 1));
+		map[i] = malloc(sizeof(char) * (cub->map.w + 1));
 		if (!map[i])
 			return (free_tab(map, ft_tablen(map)));
-		ft_bzero(map[i], cub->map.width);
+		ft_memset(map[i], '0', cub->map.w);
 		ft_strcpy(map[i], tmp->content);
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 11:16:48 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/16 15:14:39 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/20 17:02:56 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ NAME						=	libft.a
 # Files
 
 SRC							=	ft_bzero.c \
+								ft_itoa.c \
+								ft_memset.c \
 								ft_putendl_fd.c \
 								ft_putstr.c \
 								ft_puttab.c \
@@ -36,9 +38,11 @@ SRC							=	ft_bzero.c \
 								ft_split_charset.c \
 								ft_strchr.c \
 								ft_strcmp.c \
+								ft_strcpy.c \
 								ft_strncmp.c \
 								ft_strcpy.c \
 								ft_strdup.c \
+								ft_strjoin.c \
 								ft_strlcpy.c \
 								ft_strlen.c \
 								ft_strstr.c \

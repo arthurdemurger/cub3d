@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:23:58 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/16 11:43:37 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:02:06 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,24 @@ static int	check_zero(char **map, int i, int j)
 	return (1);
 }
 
+void	init_plr(t_cub *cub, int x, int y, char cardinal)
+{
+	int		i;
+	char	*dir;
+
+	cub->plr.x = x;
+	cub->plr.y = y;
+	i = -1;
+	dir = POS_CHAR;
+	while (dir[++i])
+	{
+		if (cardinal == dir[i])
+			cub->angle = 90 * i;
+	}
+	cub->plr.real_x = (x * SIZE) + (SIZE / 2);
+	cub->plr.real_y = (y * SIZE) + (SIZE / 2);
+}
+
 static int	check_one(t_cub *cub, int i, int j)
 {
 	char	**map;
@@ -71,10 +89,9 @@ int	check_map(t_cub *cub, char **map)
 		j = -1;
 		while (map[i][++j] && pos <= 1)
 		{
-			if ((map[i][j] == '0' || ft_strchr(POS_CHAR, map[i][j]))
-				&& !check_zero(map, i, j))
-				return (0);
-			if (map[i][j] == '1' && !check_one(cub, i, j))
+			if (ft_strchr(POS_CHAR, map[i][j]))
+				init_plr(cub, j, i, map[i][j]);
+			if (!check_coord(map, i, j))
 				return (0);
 			if (ft_strchr(POS_CHAR, map[i][j]))
 				pos++;
