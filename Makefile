@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
+#    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/15 17:58:43 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/20 12:12:18 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,10 @@ SRC							=	src/check.c \
 								src/utils/parse_utils.c \
 								src/tests/tests.c
 
-SRC_TEST					=	src/tests/tests.c
+SRC_TEST					=	src/tests/tests.c \
+								src/tests/gnl.c \
+								src/parse.c \
+								src/check.c
 
 LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
 								src/libft/lst/ft_lstadd_back.c \
@@ -84,7 +87,7 @@ CC							=	gcc
 
 LMLX_LINUX					=	-lmlx -lXext -lX11
 
-LMLX_MAC					=	-lmlx -L ./files/mlx -framework OpenGL -framework AppKit
+LMLX_MAC					=	-lmlx -framework OpenGL -framework AppKit
 
 # Rules
 all: 		libft $(NAME)
@@ -93,7 +96,7 @@ all: 		libft $(NAME)
 				@$(CC) ${CFLAGS} -I./includes -c $< -o ${<:.c=.o}
 
 test:
-				@$(CC) $(CFLAGS) $(INC_TEST) $(SRC_TEST) $(LMLX_LINUX) -lm -o $(NAME_TEST)
+				@$(CC) $(CFLAGS) $(INC_TEST) $(SRC_TEST) $(LMLX_MAC) -lm -o $(NAME_TEST)
 				@echo "$(GREEN)********** Compiled. $(RESET)"
 
 linux:

@@ -1,16 +1,7 @@
 #include "../../inc/test/test.h"
+#include "../../inc/test/gnl.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t		i;
 	size_t		j;
@@ -22,20 +13,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	result = malloc (sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!result)
-		return (NULL);
-	while (s1[i])
+		return (0);
+	while (s1[i] && s1[i] != '\n')
 	{
 		result[i] = s1[i];
 		i++;
 	}
-	while (s2[j])
+	while (s2[i] && s2[j] != '\n')
 	{
 		result[i] = s2[j];
 		i++;
 		j++;
 	}
 	result[i] = '\0';
-	free ((void *) s1);
+	free (s1);
 	return (result);
 }
 
@@ -87,7 +78,8 @@ void    grid(t_cub *cub)
     int x;
     int y;
 
-    y = 0;
+    x = 0;
+	y = 0;
     while (x < (SIZE * 20) || y < (SIZE * 20))
     {
         x = 0;
@@ -103,10 +95,10 @@ void    grid(t_cub *cub)
 
 void create_window_main(t_cub *cub)
 {
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
 
-    cub->mlx = mlx_init();
+	cub->mlx = mlx_init();
     cub->win_main = mlx_new_window(cub->mlx, 20 * SIZE, 20 * SIZE, "Cub3D - Test");
     while (x < (SIZE * 20) || y < (SIZE * 20))
     {
@@ -121,23 +113,24 @@ void create_window_main(t_cub *cub)
     grid(cub);
 }
 
-void    move(t_cub *cub, int key)
+void    move_linux(t_cub *cub, int key)
 {
     int x_copy;
     int y_copy;
 
-    grid(cub);
-    y_copy = cub->plr->realy - 5;
-    while (x_copy < (cub->plr->realx + 5) || y_copy < (cub->plr->realy + 5))
+    x_copy = 0;
+	y_copy = cub->plr->realy - 1;
+    while (x_copy < (cub->plr->realx + 1) || y_copy < (cub->plr->realy + 1))
     {
-        x_copy = cub->plr->realx - 5;
-        while (x_copy < (cub->plr->realx + 5))
+        x_copy = cub->plr->realx - 1;
+        while (x_copy < (cub->plr->realx + 1))
         {
             mlx_pixel_put(cub->mlx, cub->win_main, x_copy, y_copy, 0xFFFFFF);
             x_copy++;
         }
         y_copy++;
     }
+	grid(cub);
     if (key == 122)
         cub->plr->realy -= 3;
     else if (key == 113)
@@ -149,27 +142,88 @@ void    move(t_cub *cub, int key)
     draw_spot(cub, cub->plr->realx, cub->plr->realy);
 }
 
-void deal_key(int key, t_cub *cub)
+void    move_mac(t_cub *cub, int key)
 {
-    if (key == 65307)
+    int x_copy;
+    int y_copy;
+
+    x_copy = 0;
+	y_copy = cub->plr->realy - 2;
+    while (x_copy < (cub->plr->realx + 2) || y_copy < (cub->plr->realy + 2))
+    {
+        x_copy = cub->plr->realx - 2;
+        while (x_copy < (cub->plr->realx + 2))
+        {
+            mlx_pixel_put(cub->mlx, cub->win_main, x_copy, y_copy, 0xFFFFFF);
+            x_copy++;
+        }
+        y_copy++;
+    }
+	grid(cub);
+    if (key == 13)
+        cub->plr->realy -= 4;
+    else if (key == 0)
+        cub->plr->realx -= 4;
+    else if (key == 1)
+        cub->plr->realy += 4;
+    else if (key == 2)
+        cub->plr->realx += 4;
+    draw_spot(cub, cub->plr->realx, cub->plr->realy);
+}
+
+/*
+LINUX KEYS
+Z = 122
+Q = 113
+S = 115
+D = 100
+< = 65361
+> = 65363
+ESC = 65307
+=================
+MAC KEYS
+W = 13
+A = 0
+S = 1
+D = 2
+< = 123
+> = 124
+ESC = 53
+*/
+
+// void deal_key_linux(int key, t_cub *cub)
+// {
+//     if (key == 65307)
+//     {
+//         mlx_destroy_window(cub->mlx, cub->win_main);
+//         mlx_destroy_window(cub->mlx, cub->win_data);
+//         free (cub->mlx);
+//         free (cub->plr);
+//         free (cub->dir);
+//         exit(0);
+//     }
+//     if (key == 122 || key == 113 || key == 115 || key == 100)
+//         move_linux(cub, key);
+// }
+
+void deal_key_mac(int key, t_cub *cub)
+{
+    if (key == 53)
     {
         mlx_destroy_window(cub->mlx, cub->win_main);
         mlx_destroy_window(cub->mlx, cub->win_data);
         free (cub->mlx);
-        free (cub->plr);
-        free (cub->dir);
         exit(0);
     }
-    if (key == 122 || key == 113 || key == 115 || key == 100)
-        move(cub, key);
+    if (key == 13 || key == 0 || key == 1 || key == 2)
+        move_mac(cub, key);
 }
 
 void create_window_data(t_cub *cub)
 {
     char    *data;
 
-    data = NULL;
-    cub->win_data = mlx_new_window(cub->mlx, 300, 95, "Cub3D - Data");
+    cub->win_data = mlx_new_window(cub->mlx, 400, 120, "Cub3D - Data");
     mlx_string_put(cub->mlx, cub->win_data, 10, 15, 0xFFFFFF, "Player position :");
     mlx_string_put(cub->mlx, cub->win_data, 10, 40, 0xFFFFFF, "Dir last position :");
     mlx_string_put(cub->mlx, cub->win_data, 10, 65, 0xFFFFFF, "Ray0 length :");
@@ -181,10 +235,10 @@ void create_window_data(t_cub *cub)
 
 void update_data(t_cub *cub, int line, char *data)
 {
-    int     x;
-    int     y;
+    int     x = 0;
+    int     y = 0;
 
-    if (line == 1)
+	if (line == 1)
     {
         y = 15;
         while (x < 250 || y < 20)
@@ -197,7 +251,7 @@ void update_data(t_cub *cub, int line, char *data)
             }
             y++;
         }
-        mlx_string_put(cub->mlx, cub->win_data, 150, 15, 0xFFFFFF, data);
+        mlx_string_put(cub->mlx, cub->win_data, 250, 15, 0xFFFFFF, data);
     }
     else if (line == 2)
     {
@@ -212,7 +266,7 @@ void update_data(t_cub *cub, int line, char *data)
             }
             y++;
         }
-        mlx_string_put(cub->mlx, cub->win_data, 150, 40, 0xFFFFFF, data);
+        mlx_string_put(cub->mlx, cub->win_data, 250, 40, 0xFFFFFF, data);
     }
     else if (line == 3)
     {
@@ -227,7 +281,7 @@ void update_data(t_cub *cub, int line, char *data)
             }
             y++;
         }
-        mlx_string_put(cub->mlx, cub->win_data, 150, 65, 0xFFFFFF, data);
+        mlx_string_put(cub->mlx, cub->win_data, 250, 65, 0xFFFFFF, data);
     }
     else if (line == 4)
     {
@@ -242,7 +296,7 @@ void update_data(t_cub *cub, int line, char *data)
             }
             y++;
         }
-        mlx_string_put(cub->mlx, cub->win_data, 150, 90, 0xFFFFFF, data);
+        mlx_string_put(cub->mlx, cub->win_data, 250, 90, 0xFFFFFF, data);
     }
 }
 
@@ -251,11 +305,12 @@ void    draw_spot(t_cub *cub, int x, int y)
     int x_copy;
     int y_copy;
 
-    y_copy = y - 5;
-    while (x_copy < (x + 5) || y_copy < (y + 5))
+    x_copy = 0;
+	y_copy = y - 2;
+    while (x_copy < (x + 2) || y_copy < (y + 2))
     {
-        x_copy = x - 5;
-        while (x_copy < (x + 5))
+        x_copy = x - 2;
+        while (x_copy < (x + 2))
         {
             mlx_pixel_put(cub->mlx, cub->win_main, x_copy, y_copy, 0xD72A2A);
             x_copy++;
@@ -266,67 +321,80 @@ void    draw_spot(t_cub *cub, int x, int y)
 
 void initial_data(t_cub *cub)
 {
-    cub->plr = malloc(sizeof(t_vector) * 1);
-    cub->dir = malloc(sizeof(t_vector) * 1);
-    if (!cub->plr || !cub->dir)
-    {
-        if (cub->plr)
-            free(cub->plr);
-        exit(0);
-    }
-    cub->plr->x = 7;
-    cub->plr->y = 10;
-    cub->plr->realx = (cub->plr->x * SIZE) + 16;
-    cub->plr->realy = (cub->plr->y * SIZE) + 16;
+	cub->plr = malloc (sizeof(t_vector));
+	cub->plr->x = 7;
+	cub->plr->y = 10;
+	cub->plr->realx = (cub->plr->x * SIZE) + (SIZE / 2);
+	cub->plr->realy = (cub->plr->y * SIZE) + (SIZE / 2);
     draw_spot(cub, cub->plr->realx, cub->plr->realy);
 }
 
-void    set_wall(int button, int x, int y, t_cub *cub)
-{
-    int x_copy;
-    int y_copy;
-
-    while ((x % 32) != 0)
-        x--;
-    while ((y % 32) != 0)
-        y--;
-    if (button == 1)
-    {
-        y_copy = y + 1;
-        while (x_copy < (x + 32) || y_copy < (y + 32))
-        {
-            x_copy = x + 1;
-            while ((x_copy) < (x + 32))
-            {
-                mlx_pixel_put(cub->mlx, cub->win_main, x_copy, y_copy, 0x3345E9);
-                x_copy++;
-            }
-            y_copy++;
-        }
-    }
-}
-
-// void    init_map(t_cub *cub)
+// void    set_wall(int button, int x, int y, t_cub *cub)
 // {
-//     int i = 0;
-//     int x = 0;
-//     int y = 0;
+// 	(void)x;
+// 	(void)y;
+// 	(void)cub;
+// 	printf("%d\n", button);
+    // int x_copy;
+    // int y_copy;
 
-//     while (i < 400)
-//     {
+    // while ((x % 32) != 0)
+    //     x--;
+    // while ((y % 32) != 0)
+    //     y--;
+    // if (button == 1)
+    // {
+    //     y_copy = y + 1;
+    //     while (x_copy < (x + 32) || y_copy < (y + 32))
+    //     {
+    //         x_copy = x + 1;
+    //         while ((x_copy) < (x + 32))
+    //         {
+    //             mlx_pixel_put(cub->mlx, cub->win_main, x_copy, y_copy, 0x3345E9);
+    //             x_copy++;
+    //         }
+    //         y_copy++;
+    //     }
+    // }
+// }
 
-//     }
+// void    init_map(t_cub *cub, char *data)
+// {
+//     char	*temp;
+// 	int		fd;
+// 	t_map	map;
+
+// 	map.h = 1;
+// 	fd = open(data, O_RDONLY);
+// 	temp = get_next_line(fd);
+// 	printf("%s", temp);
+// 	map.map = strdup(temp);
+// 	map.w = ft_strlen(temp) - 1;
+// 	free (temp);
+// 	while (temp)
+// 	{
+// 		temp = get_next_line(fd);
+// 		if (!temp)
+// 			break ;
+// 		map.h++;
+// 		map.map = ft_strjoin(map.map, temp);
+// 		if ((ft_strlen(temp) - 1) > map.w)
+// 			map.w = ft_strlen(temp - 1);
+// 	}
+// 	close(fd);
+// 	cub->map = map;
 // }
 
 int main(void)
 {
     t_cub cub;
 
-    // init_map(&cub);
+	// init_map(&cub, "./maps/test.cub");
     create_window_main(&cub);
-    initial_data(&cub);
+	parse(&cub, "./maps/test.cub");
+    // initial_data(&cub);
     create_window_data(&cub);
-    mlx_key_hook(cub.win_main, (void *)deal_key, &cub);
-    mlx_mouse_hook(cub.win_main, (void *)set_wall, &cub);
+    mlx_key_hook(cub.win_main, (void *)deal_key_mac, &cub);
+    // mlx_mouse_hook(cub.win_main, (void *)set_wall, &cub);
     mlx_loop(cub.mlx);
 }

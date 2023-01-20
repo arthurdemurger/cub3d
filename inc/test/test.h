@@ -11,7 +11,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "../../files/mlx/mlx.h"
+# include <string.h>
+# include "../../MLX/mlx.h"
 
 /*
 ** Define constants
@@ -49,7 +50,9 @@ typedef struct s_text
 
 typedef struct s_map
 {
-	char	**map;
+	char	*map;
+	int		w;
+	int		h;
 }	t_map;
 
 typedef struct s_vector
@@ -87,8 +90,7 @@ void                    update_data(t_cub *cub, int line, char *data);
 void                    initial_data(t_cub *cub);
 char	                *ft_itoa(int n);
 static int	            ft_strlen_int(int n);
-char	                *ft_strjoin(char const *s1, char const *s2);
-size_t	                ft_strlen(const char *s);
+char	                *ft_strjoin(char *s1, char *s2);
 void                    set_wall(int button, int x, int y, t_cub *cub);
 void                    draw_spot(t_cub *cub, int x, int y);
 

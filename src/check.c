@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:23:58 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/15 22:39:14 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:13:13 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ static int	check_zero(char **map, int i, int j)
 	return (1);
 }
 
-// static int	check_one(char **map, int i, int j)
-// {
-// 	if ()
-// }
 
 int	check_map(char **map)
 {
