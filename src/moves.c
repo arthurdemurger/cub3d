@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 17:09:18 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:27:37 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,6 @@ void    move(t_cub *cub, int key)
 		move_down(cub, cub->plr.real_y);
     else if (key == 2)
 		move_right(cub, cub->plr.real_x);
+	grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_main, cub->img.img, 0, 0);
 }

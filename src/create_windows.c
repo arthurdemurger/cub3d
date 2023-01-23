@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 16:17:54 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:25:44 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void create_window_main(t_cub *cub)
 	}
 	fill_squares(cub);
 	circle(cub, 5, RED);
-	grid(cub);
 	display_pov(cub, GREEN);
+	grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_main, cub->img.img, 0, 0);
 }
 void	create_window_data(t_cub *cub)
