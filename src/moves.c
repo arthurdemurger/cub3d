@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 12:51:23 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:56:42 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,118 @@
 
 void	move_up(t_cub *cub, int y)
 {
-	if ((y - 3) % SIZE != 0)
+	int		i;
+	char	*data;
+
+	i = 0;
+	circle(cub, 5, WHITE);
+	display_pov(cub,WHITE);
+	grid(cub);
+	while (i < 4 && ((y - i) % SIZE) != 0)
+		i++;
+	if (cub->map.map[(y / SIZE) - 1][cub->plr.x] == '1')
+		cub->plr.real_y -= i;
+	else
 	{
-		circle(cub, 5, WHITE);
-		dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, WHITE);
-		grid(cub);
 		cub->plr.real_y -= 3;
-		cub->dir = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle - 90);
-		dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, GREEN);
-		circle(cub, 5, RED);
+		if (cub->plr.real_y % SIZE > SIZE - 3)
+		{
+			cub->plr.y -= 1;
+			data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
+			data = ft_strjoin(data, " | Y : ");
+			data = ft_strjoin(data, ft_itoa(cub->plr.y));
+			update_data(cub, 1, data);
+		}
 	}
+	display_pov(cub, GREEN);
+	circle(cub, 5, RED);
 }
 
 void	move_right(t_cub *cub, int x)
 {
-	if ((x + 3) % SIZE != 0)
+	int		i;
+	char	*data;
+
+	i = 0;
+	circle(cub, 5, WHITE);
+	display_pov(cub,WHITE);
+	grid(cub);
+	while (i < 4 && ((x + i) % SIZE) != 0)
+		i++;
+	if (cub->map.map[cub->plr.y][(x / SIZE) + 1] == '1')
+		cub->plr.real_x += i;
+	else
 	{
-		circle(cub, 5, WHITE);
-		dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, WHITE);
-		grid(cub);
 		cub->plr.real_x += 3;
-		cub->dir = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle - 90);
-		dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, GREEN);
-		circle(cub, 5, RED);
+		if (cub->plr.real_x % SIZE < 3)
+		{
+			cub->plr.x += 1;
+			data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
+			data = ft_strjoin(data, " | Y : ");
+			data = ft_strjoin(data, ft_itoa(cub->plr.y));
+			update_data(cub, 1, data);
+		}
 	}
+	display_pov(cub, GREEN);
+	circle(cub, 5, RED);
 }
 
 void	move_down(t_cub *cub, int y)
 {
-	if ((y + 3) % SIZE != 0)
+	int		i;
+	char	*data;
+
+	i = 0;
+	circle(cub, 5, WHITE);
+	display_pov(cub,WHITE);
+	grid(cub);
+	while (i < 4 && ((y + i) % SIZE) != 0)
+		i++;
+	if (cub->map.map[(y / SIZE) + 1][cub->plr.x] == '1')
+		cub->plr.real_y += i;
+	else
 	{
-		circle(cub, 5, WHITE);
-		dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, WHITE);
-		grid(cub);
 		cub->plr.real_y += 3;
-		cub->dir = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle - 90);
-		dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, GREEN);
-		circle(cub, 5, RED);
+		if (cub->plr.real_y % SIZE < 3)
+		{
+			cub->plr.y += 1;
+			data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
+			data = ft_strjoin(data, " | Y : ");
+			data = ft_strjoin(data, ft_itoa(cub->plr.y));
+			update_data(cub, 1, data);
+		}
 	}
+	display_pov(cub, GREEN);
+	circle(cub, 5, RED);
 }
 
 void	move_left(t_cub *cub, int x)
 {
-	if ((x - 3) % SIZE != 0)
+	int		i;
+	char	*data;
+
+	i = 0;
+	circle(cub, 5, WHITE);
+	display_pov(cub,WHITE);
+	grid(cub);
+	while (i < 4 && ((x - i) % SIZE) != 0)
+		i++;
+	if (cub->map.map[cub->plr.y][(x / SIZE) - 1] == '1')
+		cub->plr.real_x -= i;
+	else
 	{
-		circle(cub, 5, WHITE);
-		dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, WHITE);
-		grid(cub);
 		cub->plr.real_x -= 3;
-		cub->dir = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle - 90);
-		dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, GREEN);
-		circle(cub, 5, RED);
+		if (cub->plr.real_x % SIZE > SIZE - 3)
+		{
+			cub->plr.x -= 1;
+			data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
+			data = ft_strjoin(data, " | Y : ");
+			data = ft_strjoin(data, ft_itoa(cub->plr.y));
+			update_data(cub, 1, data);
+		}
 	}
+	display_pov(cub, GREEN);
+	circle(cub, 5, RED);
 }
 
 void    move(t_cub *cub, int key)
@@ -78,4 +138,5 @@ void    move(t_cub *cub, int key)
 		move_down(cub, cub->plr.real_y);
     else if (key == 2)
 		move_right(cub, cub->plr.real_x);
+	mlx_put_image_to_window(cub->mlx, cub->win_main, cub->img.img, 0, 0);
 }

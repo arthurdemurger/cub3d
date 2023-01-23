@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 16:59:18 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:23:45 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void update_data(t_cub *cub, int line, char *data)
 			x = 250;
 			while (x < 430)
 			{
-				mlx_pixel_put(cub->mlx, cub->win_data, x, y, 0x000000);
+				mlx_pixel_put(cub->mlx, cub->win_data, x, y, BLACK);
 				x++;
 			}
 			y++;
 		}
-		mlx_string_put(cub->mlx, cub->win_data, 250, 15, 0xFFFFFF, data);
+		mlx_string_put(cub->mlx, cub->win_data, 250, 15, WHITE, data);
 	}
 	else if (line == 2)
 	{
@@ -40,12 +40,12 @@ void update_data(t_cub *cub, int line, char *data)
 			x = 250;
 			while (x < 400)
 			{
-				mlx_pixel_put(cub->mlx, cub->win_data, x, y, 0x000000);
+				mlx_pixel_put(cub->mlx, cub->win_data, x, y, BLACK);
 				x++;
 			}
 			y++;
 		}
-		mlx_string_put(cub->mlx, cub->win_data, 250, 40, 0xFFFFFF, data);
+		mlx_string_put(cub->mlx, cub->win_data, 250, 40, WHITE, data);
 	}
 	else if (line == 3)
 	{
@@ -55,12 +55,12 @@ void update_data(t_cub *cub, int line, char *data)
 			x = 250;
 			while (x < 400)
 			{
-				mlx_pixel_put(cub->mlx, cub->win_data, x, y, 0x000000);
+				mlx_pixel_put(cub->mlx, cub->win_data, x, y, BLACK);
 				x++;
 			}
 			y++;
 		}
-		mlx_string_put(cub->mlx, cub->win_data, 250, 65, 0xFFFFFF, data);
+		mlx_string_put(cub->mlx, cub->win_data, 250, 65, WHITE, data);
 	}
 	else if (line == 4)
 	{
@@ -70,12 +70,12 @@ void update_data(t_cub *cub, int line, char *data)
 			x = 250;
 			while (x < 400)
 			{
-				mlx_pixel_put(cub->mlx, cub->win_data, x, y, 0x000000);
+				mlx_pixel_put(cub->mlx, cub->win_data, x, y, BLACK);
 				x++;
 			}
 			y++;
 		}
-		mlx_string_put(cub->mlx, cub->win_data, 250, 90, 0xFFFFFF, data);
+		mlx_string_put(cub->mlx, cub->win_data, 250, 90, WHITE, data);
 	}
 	else if (line == 5)
 	{
@@ -85,12 +85,12 @@ void update_data(t_cub *cub, int line, char *data)
 			x = 250;
 			while (x < 400)
 			{
-				mlx_pixel_put(cub->mlx, cub->win_data, x, y, 0x000000);
+				mlx_pixel_put(cub->mlx, cub->win_data, x, y, BLACK);
 				x++;
 			}
 			y++;
 		}
-		mlx_string_put(cub->mlx, cub->win_data, 250, 115, 0xFFFFFF, data);
+		mlx_string_put(cub->mlx, cub->win_data, 250, 115, WHITE, data);
 	}
 	else if (line == 6)
 	{
@@ -100,11 +100,11 @@ void update_data(t_cub *cub, int line, char *data)
 			x = 250;
 			while (x < 400)
 			{
-				mlx_pixel_put(cub->mlx, cub->win_data, x, y, 0x000000);
+				mlx_pixel_put(cub->mlx, cub->win_data, x, y, BLACK);
 				x++;
 			}
 			y++;
 		}
-		mlx_string_put(cub->mlx, cub->win_data, 250, 140, 0xFFFFFF, data);
+		mlx_string_put(cub->mlx, cub->win_data, 250, 140, WHITE, data);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 12:58:57 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:13:46 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,25 @@ typedef struct s_map
 	int		h;
 }	t_map;
 
+typedef struct	s_img
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}	t_img;
+
 typedef struct s_cub
 {
 	t_map		map;
 	t_vector	plr;
 	t_vector	dir;
+	t_vector	rays[360];
+	t_img		img;
 	float		angle;
 	int			r;
+	float		plane;
 	void		*mlx;
 	void		*win_main;
 	void		*win_data;
@@ -135,6 +147,7 @@ typedef struct s_cub
 */
 
 /* Main */
+void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 /* Create Window */
 void			create_window_main(t_cub *cub);
@@ -151,9 +164,10 @@ void			move(t_cub *cub, int key);
 
 /* Rotate */
 void			rotate(t_cub *cub, int key);
+void			display_pov(t_cub *cub, int color);
 
 /* DDA */
-void 			dda_ray0(t_cub *cub, int x, int y, int color);
+void 			dda(t_cub *cub, int x, int y, int color);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);

@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 12:51:15 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:17:54 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	fill_squares(t_cub *cub)
 					x_copy = x * SIZE;
 					while (x_copy < ((x * SIZE) + SIZE))
 					{
-						mlx_pixel_put(cub->mlx, cub->win_main, x_copy, y_copy,
+						my_mlx_pixel_put(&cub->img, x_copy, y_copy,
 							BLUE);
 						x_copy++;
 					}
@@ -58,7 +58,7 @@ void	grid(t_cub *cub)
 		while (x < (SIZE * cub->map.w))
 		{
 			if ((y > 0 && ((x % SIZE) == 0)) || (y % SIZE) == 0)
-				mlx_pixel_put(cub->mlx, cub->win_main, x, y, BLACK);
+				my_mlx_pixel_put(&cub->img, x, y, BLACK);
 			x++;
 		}
 		y++;
@@ -77,7 +77,7 @@ void	draw_square(t_cub *cub, int x, int y, int color)
 		x_copy = x - 3;
 		while (x_copy < (x + 3))
 		{
-			mlx_pixel_put(cub->mlx, cub->win_main, x_copy, y_copy, color);
+			my_mlx_pixel_put(&cub->img, x_copy, y_copy, color);
 			x_copy++;
 		}
 		y_copy++;
@@ -86,29 +86,27 @@ void	draw_square(t_cub *cub, int x, int y, int color)
 
 void create_window_main(t_cub *cub)
 {
-	int x = 0;
-	int y = 0;
-
-	cub->mlx = mlx_init();
+	int x;
+	int y;
+	
+	x = 0;
+	y = 0;
 	cub->win_main = mlx_new_window(cub->mlx, cub->map.w * SIZE, cub->map.h * SIZE, "Cub3D - Test");
 	while (x < (SIZE * cub->map.w) || y < (SIZE * cub->map.h))
 	{
 		x = 0;
 		while (x < (SIZE * cub->map.w))
 		{
-			mlx_pixel_put(cub->mlx, cub->win_main, x, y, WHITE);
+			my_mlx_pixel_put(&cub->img, x, y, WHITE);
 			x++;
 		}
 		y++;
 	}
 	fill_squares(cub);
-    grid(cub);
-	// draw_square(cub, cub->plr.real_x, cub->plr.real_y, RED);
-	mlx_pixel_put(cub->mlx, cub->win_main, cub->plr.real_x, cub->plr.real_y, RED);
 	circle(cub, 5, RED);
-	// circle(cub, 50, GREEN);
-	cub->dir = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle -90);
-	dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, GREEN);
+	grid(cub);
+	display_pov(cub, GREEN);
+	mlx_put_image_to_window(cub->mlx, cub->win_main, cub->img.img, 0, 0);
 }
 void	create_window_data(t_cub *cub)
 {
