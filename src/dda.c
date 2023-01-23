@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 15:34:11 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:13:14 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int abs(int n)
     return (-n); 
 }
  
-void dda_ray0(t_cub *cub, int x, int y)
+void dda_ray0(t_cub *cub, int x, int y, int color)
 {
     t_pos	delta;
 	int		i;
@@ -49,7 +49,7 @@ void dda_ray0(t_cub *cub, int x, int y)
 		if (check_walls(round(fl_x), round(fl_y), cub))
 			break ;
         mlx_pixel_put(cub->mlx, cub->win_main, round(fl_x), round(fl_y),
-                 GREEN);
+                 color);
         fl_x += (delta.x / (float)steps);
         fl_y += (delta.y / (float)steps);
         usleep(100);

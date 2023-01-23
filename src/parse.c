@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/20 13:09:53 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:44:11 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,8 @@ void	parse(t_cub *cub, char *file)
 	if (!check_map(cub, cub->map.map))
 		ft_error("The map must be surrounded by walls.");
 	ft_lstclear(list);
+	if (cub->map.w >= cub->map.h)
+		cub->r = cub->map.w * SIZE;
+	else
+		cub->r = cub->map.h * SIZE;
 }

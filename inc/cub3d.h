@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 16:06:08 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:14:08 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@
 # define POS_CHAR "NESW"
 # define SIZE 32
 # define SIDE 3
+
+/* Managing errors */
+# define MALLOC_ERR "minishell : error in the memory allocation of a malloc."
 
 /* Keyboard*/
 # define DESTROY_BUTTON 17
@@ -105,7 +108,9 @@ typedef struct s_cub
 {
 	t_map		map;
 	t_vector	plr;
-	int			angle;
+	t_vector	dir;
+	float		angle;
+	int			r;
 	void		*mlx;
 	void		*win_main;
 	void		*win_data;
@@ -135,7 +140,11 @@ void    		move(t_cub *cub, int key);
 void			rotate(t_cub *cub, int key);
 
 /* DDA */
-void 			dda_ray0(t_cub *cub, int x, int y);
+void 			dda_ray0(t_cub *cub, int x, int y, int color);
+
+/* Circle */
+void			circle(t_cub *cub, int r, int color);
+t_vector 		intersection(int cx, int cy, int r, float angle);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
@@ -168,6 +177,7 @@ int				ft_strncmp(const char *s1, const char *s2, int n);
 int				ft_strcmp(char *s1, char *s2);
 char			*ft_strcpy(char *dest, char *src);
 char			*ft_strdup(char *str);
+char			*ft_strjoin(char *s1, char *s2);
 int				ft_strlcpy(char *dest, char *src, int size);
 int				ft_strlen(char *s);
 char			*ft_strstr(char *big, char *little);

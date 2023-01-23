@@ -6,7 +6,7 @@
 #    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 11:16:48 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/20 15:57:53 by gponcele         ###   ########.fr        #
+#    Updated: 2023/01/23 10:30:39 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC							=	ft_bzero.c \
 								ft_strcpy.c \
 								ft_strncmp.c \
 								ft_strdup.c \
+								ft_strjoin.c \
 								ft_strlcpy.c \
 								ft_strlen.c \
 								ft_strstr.c \

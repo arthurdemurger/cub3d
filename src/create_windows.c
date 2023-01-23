@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 15:55:35 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:43:21 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,18 @@ void create_window_main(t_cub *cub)
     }
 	fill_squares(cub);
     grid(cub);
-	draw_square(cub, cub->plr.real_x, cub->plr.real_y, RED);
+	// draw_square(cub, cub->plr.real_x, cub->plr.real_y, RED);
+	mlx_pixel_put(cub->mlx, cub->win_main, cub->plr.real_x, cub->plr.real_y, RED);
+	circle(cub, 5, RED);
+	// circle(cub, 50, GREEN);
+	cub->dir = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle -90);
+	dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, GREEN);
 }
 void	create_window_data(t_cub *cub)
 {
 	char	*data;
 
-	(void)data;
-	cub->win_data = mlx_new_window(cub->mlx, 400, 165, "Cub3D - Data");
+	cub->win_data = mlx_new_window(cub->mlx, 450, 165, "Cub3D - Data");
     mlx_string_put(cub->mlx, cub->win_data, 10, 15, WHITE, "Player position :");
     mlx_string_put(cub->mlx, cub->win_data, 10, 40, WHITE, "Dir last position :");
     mlx_string_put(cub->mlx, cub->win_data, 10, 65, WHITE, "Ray0 length :");
@@ -116,4 +120,9 @@ void	create_window_data(t_cub *cub)
 	mlx_string_put(cub->mlx, cub->win_data, 10, 115, WHITE, "Wall_face displayed :");
 	mlx_string_put(cub->mlx, cub->win_data, 10, 140, WHITE, "Angle :");
 	update_data(cub, 6, ft_itoa(cub->angle));
+	data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
+	data = ft_strjoin(data, " | Y : ");
+	data = ft_strjoin(data, ft_itoa(cub->plr.y));
+	update_data(cub, 1, data);
+	free (data);
 }
