@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 12:13:14 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:51:20 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,32 @@ int	check_walls(int x, int y, t_cub *cub)
 	return (0);
 }
 
-int abs(int n) 
+int abs(int n)
 {
 	if (n > 0)
 		return (n);
-    return (-n); 
+	return (-n);
 }
  
 void dda_ray0(t_cub *cub, int x, int y, int color)
 {
-    t_pos	delta;
+	t_pos	delta;
 	int		i;
-    int 	steps;
+	int 	steps;
 	float	fl_x;
 	float	fl_y;
 
 	delta.x = x - cub->plr.real_x;
-    delta.y = y - cub->plr.real_y;
+	delta.y = y - cub->plr.real_y;
 	if (abs(delta.x) > abs(delta.y))
 		steps = abs(delta.x);
 	else
 		steps = abs(delta.y);
 	fl_x = cub->plr.real_x;
-    fl_y = cub->plr.real_y;
+	fl_y = cub->plr.real_y;
 	i = 0;
-    while (i++ <= steps) 
-    {
+	while (i++ <= steps)
+	{
 		if (check_walls(round(fl_x), round(fl_y), cub))
 			break ;
         mlx_pixel_put(cub->mlx, cub->win_main, round(fl_x), round(fl_y),

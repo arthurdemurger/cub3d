@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 12:14:08 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:51:02 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,17 +124,17 @@ typedef struct s_cub
 /* Main */
 
 /* Create Window */
-void 			create_window_main(t_cub *cub);
+void			create_window_main(t_cub *cub);
 void			draw_square(t_cub *cub, int x, int y, int color);
-void    		grid(t_cub *cub);
+void			grid(t_cub *cub);
 void			fill_squares(t_cub *cub);
 void			create_window_data(t_cub *cub);
 
 /* Update */
-void 			update_data(t_cub *cub, int line, char *data);
+void			update_data(t_cub *cub, int line, char *data);
 
 /* Move */
-void    		move(t_cub *cub, int key);
+void			move(t_cub *cub, int key);
 
 /* Rotate */
 void			rotate(t_cub *cub, int key);
