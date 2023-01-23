@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 16:18:43 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:22:57 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	rotate_left(t_cub *cub)
 	circle(cub, 5, RED);
 	if (cub->angle == 0 || cub->angle == 1 || cub->angle == 2)
 		cub->angle += 360;
-	cub->angle -= 3;
+	cub->angle -= 15;
 	update_data(cub, 6, ft_itoa(cub->angle));
 	display_pov(cub, GREEN);
 }
@@ -33,7 +33,7 @@ void	rotate_right(t_cub *cub)
 	circle(cub, 5, RED);
 	if (cub->angle == 359 || cub->angle == 358 || cub->angle == 357)
 		cub->angle -= 360;
-	cub->angle += 3;
+	cub->angle += 15;
 	update_data(cub, 6, ft_itoa(cub->angle));
 	display_pov(cub, GREEN);
 }
@@ -56,7 +56,7 @@ void	display_pov(t_cub *cub, int color)
 	while (--i >= 0)
 	{
 		cub->rays[i] = intersection(cub->rays[180].real_x, cub->rays[180].real_y, (cub->plane / 180) * i, cub->angle - 180);
-		if (!((i + 1) % 120))
+		// if (!((i + 1) % 120))
 			dda(cub, cub->rays[i].real_x, cub->rays[i].real_y, color);
 	}
 	dda(cub, cub->rays[180].real_x, cub->rays[180].real_y, color);
@@ -64,7 +64,7 @@ void	display_pov(t_cub *cub, int color)
 	while (++i <= 359)
 	{
 		cub->rays[i] = intersection(cub->rays[180].real_x, cub->rays[180].real_y, (cub->plane / 180) * (i - 180), cub->angle);
-		if (!((i + 1) % 120))
+		// if (!((i + 1) % 120))
 			dda(cub, cub->rays[i].real_x, cub->rays[i].real_y, color);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 16:18:10 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:16:57 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int abs(int n)
 	return (-n);
 }
  
-void dda(t_cub *cub, int x, int y, int color)
+int dda(t_cub *cub, int x, int y, int color)
 {
 	t_pos	delta;
 	int		i;
@@ -52,6 +52,6 @@ void dda(t_cub *cub, int x, int y, int color)
                  color);
         fl_x += (delta.x / (float)steps);
         fl_y += (delta.y / (float)steps);
-        usleep(100);
     }
+	return (i);
 }

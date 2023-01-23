@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 16:13:46 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:17:05 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 /* Characters */
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "NESW"
-# define SIZE 32
+# define SIZE 64
 # define SIDE 3
 
 /* Managing errors */
@@ -167,7 +167,7 @@ void			rotate(t_cub *cub, int key);
 void			display_pov(t_cub *cub, int color);
 
 /* DDA */
-void 			dda(t_cub *cub, int x, int y, int color);
+int 			dda(t_cub *cub, int x, int y, int color);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
