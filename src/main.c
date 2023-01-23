@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 17:07:09 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:59:14 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ void deal_key(int key, t_cub *cub)
 		rotate(cub, key);
 }
 
-void	click(int button, int x, int y, t_cub *cub)
-{
-	if (button == 1)
-		dda_ray0(cub, x, y);
-}
+// void	click(int button, int x, int y, t_cub *cub)
+// {
+// 	if (button == 1)
+// 		dda_ray0(cub, x, y);
+// }
 
 int	main(int ac, char **av)
 {
@@ -122,7 +122,7 @@ int	main(int ac, char **av)
 	// ft_draw(&cub);
 	mlx_hook(cub.win_main, 17, 0, (void *)ft_close, &cub);
 	mlx_key_hook(cub.win_main, (void *)deal_key, &cub);
-	mlx_mouse_hook(cub.win_main, (void *)click, &cub);
+	// mlx_mouse_hook(cub.win_main, (void *)click, &cub);
 	mlx_loop(cub.mlx);
 	// free_all(&cub);
 	// return (0);

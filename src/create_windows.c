@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_windows.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 16:57:47 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:51:15 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,23 @@ void create_window_main(t_cub *cub)
 		y++;
 	}
 	fill_squares(cub);
-	grid(cub);
-	draw_square(cub, cub->plr.real_x, cub->plr.real_y, RED);
+    grid(cub);
+	// draw_square(cub, cub->plr.real_x, cub->plr.real_y, RED);
+	mlx_pixel_put(cub->mlx, cub->win_main, cub->plr.real_x, cub->plr.real_y, RED);
+	circle(cub, 5, RED);
+	// circle(cub, 50, GREEN);
+	cub->dir = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle -90);
+	dda_ray0(cub, cub->dir.real_x, cub->dir.real_y, GREEN);
 }
 void	create_window_data(t_cub *cub)
 {
 	char	*data;
 
-	cub->win_data = mlx_new_window(cub->mlx, 430, 165, "Cub3D - Data");
-	mlx_string_put(cub->mlx, cub->win_data, 10, 15, WHITE, "Player position :");
-	mlx_string_put(cub->mlx, cub->win_data, 10, 40, WHITE, "Dir last position :");
-	mlx_string_put(cub->mlx, cub->win_data, 10, 65, WHITE, "Ray0 length :");
-	mlx_string_put(cub->mlx, cub->win_data, 10, 90, WHITE, "Wall encountered :");
+	cub->win_data = mlx_new_window(cub->mlx, 450, 165, "Cub3D - Data");
+    mlx_string_put(cub->mlx, cub->win_data, 10, 15, WHITE, "Player position :");
+    mlx_string_put(cub->mlx, cub->win_data, 10, 40, WHITE, "Dir last position :");
+    mlx_string_put(cub->mlx, cub->win_data, 10, 65, WHITE, "Ray0 length :");
+    mlx_string_put(cub->mlx, cub->win_data, 10, 90, WHITE, "Wall encountered :");
 	mlx_string_put(cub->mlx, cub->win_data, 10, 115, WHITE, "Wall_face displayed :");
 	mlx_string_put(cub->mlx, cub->win_data, 10, 140, WHITE, "Angle :");
 	data = ft_strjoin(ft_strdup("x : "), ft_itoa(cub->plr.real_x));
@@ -121,4 +126,9 @@ void	create_window_data(t_cub *cub)
 	data = ft_strjoin(data, ft_itoa(cub->plr.real_y));
 	update_data(cub, 1, data);
 	update_data(cub, 6, ft_itoa(cub->angle));
+	data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
+	data = ft_strjoin(data, " | Y : ");
+	data = ft_strjoin(data, ft_itoa(cub->plr.y));
+	update_data(cub, 1, data);
+	free (data);
 }

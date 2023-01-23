@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 16:55:05 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:51:20 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int abs(int n)
 		return (n);
 	return (-n);
 }
-
-void dda_ray0(t_cub *cub, int x, int y)
+ 
+void dda_ray0(t_cub *cub, int x, int y, int color)
 {
 	t_pos	delta;
 	int		i;
@@ -48,12 +48,12 @@ void dda_ray0(t_cub *cub, int x, int y)
 	{
 		if (check_walls(round(fl_x), round(fl_y), cub))
 			break ;
-		mlx_pixel_put(cub->mlx, cub->win_main, round(fl_x), round(fl_y),
-			GREEN);
-		fl_x += (delta.x / (float)steps);
-		fl_y += (delta.y / (float)steps);
-		usleep(100);
-	}
+        mlx_pixel_put(cub->mlx, cub->win_main, round(fl_x), round(fl_y),
+                 color);
+        fl_x += (delta.x / (float)steps);
+        fl_y += (delta.y / (float)steps);
+        usleep(100);
+    }
 }
 
 
