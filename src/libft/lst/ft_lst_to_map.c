@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:14:01 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 17:01:46 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:44:15 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**ft_lst_to_map(t_cub *cub, t_lst *lst)
 		map[i] = malloc(sizeof(char) * (cub->map.w + 1));
 		if (!map[i])
 			return (free_tab(map, ft_tablen(map)));
-		ft_memset(map[i], '0', cub->map.w);
+		ft_bzero(map[i], cub->map.w + 1);
 		ft_strcpy(map[i], tmp->content);
 		tmp = tmp->next;
 	}
