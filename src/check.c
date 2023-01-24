@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:23:58 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 14:56:31 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:34:43 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	check_map(t_cub *cub, char **map)
 		{
 			if (ft_strchr(POS_CHAR, map[i][j]))
 				init_plr(cub, j, i, map[i][j]);
-			if (!check_one(cub, i, j))
+			if (map[i][j] == '1' && !check_one(cub, i, j))
 				return (0);
 			if (ft_strchr(POS_CHAR, map[i][j]))
 				pos++;
