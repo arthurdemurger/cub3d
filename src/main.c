@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 17:09:56 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:29:40 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,15 @@ int	main(int ac, char **av)
 	init(&cub, ac, av);
 	parse(&cub, av[1]);
 	cub.mlx = mlx_init();
-	cub.img.img = mlx_new_image(cub.mlx, cub.map.w * SIZE, cub.map.h * SIZE);
-	cub.img.addr = mlx_get_data_addr(cub.img.img, &cub.img.bits_per_pixel, &cub.img.line_length,
-								&cub.img.endian);
+	cub.img_map.img = mlx_new_image(cub.mlx, cub.map.w * SIZE, cub.map.h * SIZE);
+	cub.img_map.addr = mlx_get_data_addr(cub.img_map.img, &cub.img_map.bits_per_pixel, &cub.img_map.line_length,
+								&cub.img_map.endian);
+	cub.img_game.img = mlx_new_image(cub.mlx, 1024, 768);
+	cub.img_game.addr = mlx_get_data_addr(cub.img_game.img, &cub.img_game.bits_per_pixel, &cub.img_game.line_length,
+								&cub.img_game.endian);
 	create_window_main(&cub);
 	create_window_data(&cub);
+	create_window_game(&cub);
 	mlx_hook(cub.win_main, 17, 0, (void *)ft_close, &cub);
 	mlx_hook(cub.win_main, KEYPRESS, 0, (void *)deal_key, &cub);
 	// mlx_put_image_to_window(cub.mlx, cub.win_main, cub.img.img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 17:16:57 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:44:50 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,19 @@
 
 int	check_walls(int x, int y, t_cub *cub)
 {
-	if (cub->map.map[y / SIZE][x / SIZE] == '1')
+	int	i;
+
+	i = -1;
+	// if (cub->map.map[y / SIZE][x / SIZE] == '1')
+	// 	return (1);
+	if ((cub->map.map[y / SIZE][x / SIZE] == '1') && x % SIZE != 0 && (cub->angle < 90 || cub->angle > 270))
+		return (3);
+	if ((cub->map.map[y / SIZE][x / SIZE] == '1') && x % SIZE != 0 && (cub->angle > 90 && cub->angle < 270))
 		return (1);
+	if ((cub->map.map[y / SIZE][x / SIZE] == '1') && y % SIZE != 0 && (cub->angle > 0 && cub->angle < 180))
+		return (4);
+	if ((cub->map.map[y / SIZE][x / SIZE] == '1') && y % SIZE != 0 && (cub->angle <= 359 || cub->angle > 180))
+		return (2);
 	return (0);
 }
 
@@ -27,7 +38,7 @@ int abs(int n)
 	return (-n);
 }
  
-int dda(t_cub *cub, int x, int y, int color)
+int dda(t_cub *cub, int x, int y, int color, int ray, int draw)
 {
 	t_pos	delta;
 	int		i;
@@ -46,10 +57,16 @@ int dda(t_cub *cub, int x, int y, int color)
 	i = 0;
 	while (i++ <= steps)
 	{
-		if (check_walls(round(fl_x), round(fl_y), cub))
+		cub->rays[ray].face = check_walls(round(fl_x), round(fl_y), cub);
+		if (cub->rays[ray].face)
 			break ;
-		my_mlx_pixel_put(&cub->img, round(fl_x), round(fl_y),
-                 color);
+		if (draw)
+		{
+			if (ray == 1000)
+				my_mlx_pixel_put(&cub->img_map, round(fl_x), round(fl_y), BLUE);
+			else
+				my_mlx_pixel_put(&cub->img_map, round(fl_x), round(fl_y), color);
+		}
         fl_x += (delta.x / (float)steps);
         fl_y += (delta.y / (float)steps);
     }

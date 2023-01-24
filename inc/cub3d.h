@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 17:17:05 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:17:14 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define GREEN 0x32CD32
 # define RED 0xD72A2A
 # define WHITE 0xFFFFFF
+# define LIGHT_GREEN 0x21F74C
+# define DARK_GREEN 0x1C9B35
 
 /* Debug */
 # define ICI printf("ici\n");
@@ -108,6 +110,8 @@ typedef struct s_vector
 	int		y;
 	int		real_x;
 	int		real_y;
+	int		face;
+	int		l;
 }	t_vector;
 
 typedef struct s_map
@@ -131,14 +135,16 @@ typedef struct s_cub
 	t_map		map;
 	t_vector	plr;
 	t_vector	dir;
-	t_vector	rays[360];
-	t_img		img;
+	t_vector	rays[256];
+	t_img		img_map;
+	t_img		img_game;
 	float		angle;
 	int			r;
 	float		plane;
 	void		*mlx;
 	void		*win_main;
 	void		*win_data;
+	void		*win_game;
 	t_text		txtr;
 }	t_cub;
 
@@ -155,6 +161,10 @@ void			draw_square(t_cub *cub, int x, int y, int color);
 void			grid(t_cub *cub);
 void			fill_squares(t_cub *cub);
 void			create_window_data(t_cub *cub);
+void			create_window_game(t_cub *cub);
+
+/* Draw */
+void			draw(t_cub *cub, int color);
 
 /* Update */
 void			update_data(t_cub *cub, int line, char *data);
@@ -167,7 +177,7 @@ void			rotate(t_cub *cub, int key);
 void			display_pov(t_cub *cub, int color);
 
 /* DDA */
-int 			dda(t_cub *cub, int x, int y, int color);
+int 			dda(t_cub *cub, int x, int y, int color, int ray, int draw);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);

@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/23 17:25:44 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:46:55 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	fill_squares(t_cub *cub)
 					x_copy = x * SIZE;
 					while (x_copy < ((x * SIZE) + SIZE))
 					{
-						my_mlx_pixel_put(&cub->img, x_copy, y_copy,
+						my_mlx_pixel_put(&cub->img_map, x_copy, y_copy,
 							BLUE);
 						x_copy++;
 					}
@@ -58,7 +58,7 @@ void	grid(t_cub *cub)
 		while (x < (SIZE * cub->map.w))
 		{
 			if ((y > 0 && ((x % SIZE) == 0)) || (y % SIZE) == 0)
-				my_mlx_pixel_put(&cub->img, x, y, BLACK);
+				my_mlx_pixel_put(&cub->img_map, x, y, BLACK);
 			x++;
 		}
 		y++;
@@ -77,7 +77,7 @@ void	draw_square(t_cub *cub, int x, int y, int color)
 		x_copy = x - 3;
 		while (x_copy < (x + 3))
 		{
-			my_mlx_pixel_put(&cub->img, x_copy, y_copy, color);
+			my_mlx_pixel_put(&cub->img_map, x_copy, y_copy, color);
 			x_copy++;
 		}
 		y_copy++;
@@ -97,7 +97,7 @@ void create_window_main(t_cub *cub)
 		x = 0;
 		while (x < (SIZE * cub->map.w))
 		{
-			my_mlx_pixel_put(&cub->img, x, y, WHITE);
+			my_mlx_pixel_put(&cub->img_map, x, y, WHITE);
 			x++;
 		}
 		y++;
@@ -106,18 +106,18 @@ void create_window_main(t_cub *cub)
 	circle(cub, 5, RED);
 	display_pov(cub, GREEN);
 	grid(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win_main, cub->img.img, 0, 0);
+	mlx_put_image_to_window(cub->mlx, cub->win_main, cub->img_map.img, 0, 0);
 }
 void	create_window_data(t_cub *cub)
 {
 	char	*data;
 
 	cub->win_data = mlx_new_window(cub->mlx, 450, 165, "Cub3D - Data");
-    mlx_string_put(cub->mlx, cub->win_data, 10, 15, WHITE, "Player position :");
-    mlx_string_put(cub->mlx, cub->win_data, 10, 40, WHITE, "Dir last position :");
-    mlx_string_put(cub->mlx, cub->win_data, 10, 65, WHITE, "Ray0 length :");
-    mlx_string_put(cub->mlx, cub->win_data, 10, 90, WHITE, "Wall encountered :");
-	mlx_string_put(cub->mlx, cub->win_data, 10, 115, WHITE, "Wall_face displayed :");
+    // mlx_string_put(cub->mlx, cub->win_data, 10, 15, WHITE, "Player position :");
+    // mlx_string_put(cub->mlx, cub->win_data, 10, 40, WHITE, "Dir last position :");
+    // mlx_string_put(cub->mlx, cub->win_data, 10, 65, WHITE, "Ray0 length :");
+    // mlx_string_put(cub->mlx, cub->win_data, 10, 90, WHITE, "Wall encountered :");
+	// mlx_string_put(cub->mlx, cub->win_data, 10, 115, WHITE, "Wall_face displayed :");
 	mlx_string_put(cub->mlx, cub->win_data, 10, 140, WHITE, "Angle :");
 	data = ft_strjoin(ft_strdup("x : "), ft_itoa(cub->plr.real_x));
 	data = ft_strjoin(data, " | y : ");
@@ -129,4 +129,11 @@ void	create_window_data(t_cub *cub)
 	data = ft_strjoin(data, ft_itoa(cub->plr.y));
 	update_data(cub, 1, data);
 	free (data);
+}
+
+void	create_window_game(t_cub *cub)
+{
+	cub->win_game = mlx_new_window(cub->mlx, 1024, 768, "Cub3D - Game");
+	draw(cub, 1);
+	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_game.img, 0, 0);
 }

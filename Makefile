@@ -6,7 +6,7 @@
 #    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/23 12:58:52 by gponcele         ###   ########.fr        #
+#    Updated: 2023/01/24 11:18:16 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ NAME						=	cub3d
 SRC							=	src/check.c \
 								src/circle.c \
 								src/dda.c \
+								src/draw.c \
 								src/error.c \
 								src/free.c \
 								src/main.c \
