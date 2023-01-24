@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/24 13:19:47 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:29:55 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,27 @@ void	draw_spot(t_cub *cub, t_vector ray, int col, int color)
 	}
 }
 
+void	draw_floor(t_cub *cub)
+{
+	int	x;
+	int	y;
+
+	y = 383;
+	while (++y < 768)
+	{
+		x = -1;
+		while (++x < 1024)
+			my_mlx_pixel_put(&cub->img_game, x, y, 0xCAA472);
+	}
+}
+
 void	draw(t_cub *cub, int color)
 {
 	int	i;
 	
 	i = -1;
 	// cub->rays[128] = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle - 90);
+	draw_floor(cub);
 	while (++i <= 127)
 	{
 		// cub->rays[i] = intersection(cub->rays[128].real_x, cub->rays[128].real_y, (cub->plane / 128) * (128 - i), cub->angle - 180);

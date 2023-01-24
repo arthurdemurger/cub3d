@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/24 11:29:40 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:30:17 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int ac, char **av)
 	create_window_data(&cub);
 	create_window_game(&cub);
 	mlx_hook(cub.win_main, 17, 0, (void *)ft_close, &cub);
-	mlx_hook(cub.win_main, KEYPRESS, 0, (void *)deal_key, &cub);
+	mlx_hook(cub.win_game, KEYPRESS, 0, (void *)deal_key, &cub);
 	// mlx_put_image_to_window(cub.mlx, cub.win_main, cub.img.img, 0, 0);
 	// mlx_mouse_hook(cub.win_main, (void *)click, &cub);
 	mlx_loop(cub.mlx);
