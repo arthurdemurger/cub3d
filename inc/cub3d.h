@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/24 12:17:14 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:22:52 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,19 @@
 # define ICI printf("ici\n");
 # define LEAKS system("leaks cub3d");
 
+/* Directions */
+# define NO 1
+# define NE 2
+# define SE 3
+# define SO 4
+
 /* Characters */
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "NESW"
-# define SIZE 64
+# define SIZE 32
 # define SIDE 3
+# define NB_RAYS 1024
+# define RADIUS 100
 
 /* Managing errors */
 # define MALLOC_ERR "minishell : error in the memory allocation of a malloc."
@@ -110,9 +118,27 @@ typedef struct s_vector
 	int		y;
 	int		real_x;
 	int		real_y;
-	int		face;
-	int		l;
 }	t_vector;
+
+typedef struct s_ray
+{
+	int		x;
+	int		y;
+	int		real_x;
+	int		real_y;
+	int		face;
+	float	l;
+	float	angle;
+	// int		x1;
+	// int		x2;
+	// float	xa;
+	// int		y1;
+	// int		y2;
+	// float	ya;
+	int		dir;
+	// float	l_h;
+	// float	l_v;
+}	t_ray;
 
 typedef struct s_map
 {
@@ -135,7 +161,7 @@ typedef struct s_cub
 	t_map		map;
 	t_vector	plr;
 	t_vector	dir;
-	t_vector	rays[256];
+	t_ray		rays[NB_RAYS];
 	t_img		img_map;
 	t_img		img_game;
 	float		angle;
@@ -177,11 +203,14 @@ void			rotate(t_cub *cub, int key);
 void			display_pov(t_cub *cub, int color);
 
 /* DDA */
-int 			dda(t_cub *cub, int x, int y, int color, int ray, int draw);
+void 			dda(t_cub *cub, int x, int y, int color, int ray);
+float			distance(int x1, int y1, int x2, int y2);
+float 			expand_ray(t_cub *cub, float angle);
+float			angle(float a, float b);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
-t_vector 		intersection(int cx, int cy, int r, float angle);
+t_ray	 		intersection(t_cub *cub, int cx, int cy, int r, float angle);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);

@@ -6,7 +6,7 @@
 #    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 11:16:48 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/23 12:59:29 by gponcele         ###   ########.fr        #
+#    Updated: 2023/01/24 16:18:15 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ NAME						=	libft.a
 # Files
 
 SRC							=	ft_bzero.c \
+								ft_fl_min.c \
 								ft_itoa.c \
 								ft_memset.c \
 								ft_putendl_fd.c \
