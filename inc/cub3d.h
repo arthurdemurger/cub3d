@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/25 13:22:52 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:47:32 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@
 
 /* Characters */
 # define MAP_CHAR "01NSEW \n"
-# define POS_CHAR "NESW"
+# define POS_CHAR "ESWN"
 # define SIZE 32
 # define SIDE 3
 # define NB_RAYS 1024
 # define RADIUS 100
+# define ZOOM 0.66
 
 /* Managing errors */
 # define MALLOC_ERR "minishell : error in the memory allocation of a malloc."
@@ -165,7 +166,7 @@ typedef struct s_cub
 	t_img		img_map;
 	t_img		img_game;
 	float		angle;
-	int			r;
+	float		r;
 	float		plane;
 	void		*mlx;
 	void		*win_main;
@@ -190,7 +191,7 @@ void			create_window_data(t_cub *cub);
 void			create_window_game(t_cub *cub);
 
 /* Draw */
-void			draw(t_cub *cub, int color);
+void			draw(t_cub *cub);
 
 /* Update */
 void			update_data(t_cub *cub, int line, char *data);
@@ -205,12 +206,12 @@ void			display_pov(t_cub *cub, int color);
 /* DDA */
 void 			dda(t_cub *cub, int x, int y, int color, int ray);
 float			distance(int x1, int y1, int x2, int y2);
-float 			expand_ray(t_cub *cub, float angle);
+float 			expand_ray(t_cub *cub, float angle, int color);
 float			angle(float a, float b);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
-t_ray	 		intersection(t_cub *cub, int cx, int cy, int r, float angle);
+t_ray	 		intersection(t_cub *cub, int cx, int cy, float r, float angle);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);

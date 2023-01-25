@@ -6,13 +6,13 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/25 13:21:23 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:52:08 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_col(t_cub *cub, int l, int col, int color)
+void	draw_col(t_cub *cub, float l, int col, int color)
 {
 	int		i;
 	float	height;
@@ -21,44 +21,18 @@ void	draw_col(t_cub *cub, int l, int col, int color)
 	height = (cub->r * SIZE) / l;
 	my_mlx_pixel_put(&cub->img_game, col, i, color);
 	while (++i <= 384 + ((int)height / 2))
-	{
-		// printf("[x : %d; y : %d]\n", col, i);
 		my_mlx_pixel_put(&cub->img_game, col, i, color);
-	}
 	i = 384;
 	while (--i >= 384 - ((int)height / 2))
-	{
-		// printf("[x : %d; y : %d]\n", col, i);
 		my_mlx_pixel_put(&cub->img_game, col, i, color);
-	}
 }
 
-void	draw_spot(t_cub *cub, t_ray ray, int col, int color)
+void	get_color(t_cub *cub, t_ray ray, int col)
 {
-	int	i;
-
-	i = -1;
-	// if (ray.face == 5)
-	// {
-	// 	if (color)
-	// 		draw_col(cub, ray.l, col + i, BLUE);
-	// 	else
-	// 		draw_col(cub, ray.l, col + i, WHITE);
-	// }
-	if (ray.face == 1 || ray.face == 3)
-	{
-		if (color)
-			draw_col(cub, ray.l, col + i, LIGHT_GREEN);
-		else
-			draw_col(cub, ray.l, col + i, WHITE);
-	}
-	else if (ray.face == 2 || ray.face == 4)
-	{
-		if (color)
-			draw_col(cub, ray.l, col + i, DARK_GREEN);
-		else
-			draw_col(cub, ray.l, col + i, WHITE);
-	}
+	if (ray.face % 2)
+		draw_col(cub, ray.l, col, LIGHT_GREEN);
+	else if (!ray.face % 2)
+		draw_col(cub, ray.l, col, DARK_GREEN);
 }
 
 void	draw_floor(t_cub *cub)
@@ -89,17 +63,14 @@ void	draw_ceiling(t_cub *cub)
 	}
 }
 
-void	draw(t_cub *cub, int color)
+void	draw(t_cub *cub)
 {
 	int	i;
 	
 	i = -1;
 	draw_floor(cub);
 	draw_ceiling(cub);
-	while (++i <= (NB_RAYS / 2) - 1)
-		draw_spot(cub, cub->rays[i], i, color);	
-	draw_spot(cub, cub->rays[i], i, color);
-	while (++i <= NB_RAYS - 1)
-		draw_spot(cub, cub->rays[i], i, color);
+	while (++i < NB_RAYS)
+		get_color(cub, cub->rays[i], i);	
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_game.img, 0, 0);
 }

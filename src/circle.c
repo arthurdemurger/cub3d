@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/25 12:12:26 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:55:40 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,17 @@ void	circle(t_cub *cub, int r, int color)
 	}
 }
 
-t_ray intersection(t_cub *cub, int cx, int cy, int r, float angle) 
+void	init_ray(t_ray *ray)
+{
+	ray->angle = 0;
+	ray->dir = 0;
+	ray->face = 1;
+	ray->l = 0;
+	ray->real_x = 0;
+	ray->real_y = 0;
+}
+
+t_ray intersection(t_cub *cub, int cx, int cy, float r, float angle) 
 {
 	t_ray		dir;
 	float		rad;
@@ -34,6 +44,7 @@ t_ray intersection(t_cub *cub, int cx, int cy, int r, float angle)
 	int			y;
 
 	(void)cub;
+	init_ray(&dir);
 	rad = angle * (M_PI / 180);
     x = cx + r * cos(rad);
     y = cy + r * sin(rad);

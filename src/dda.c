@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/25 13:58:22 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:59:57 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void dda(t_cub *cub, int x, int y, int color, int ray)
 	i = 0;
 	while (i++ <= steps)
 	{
-		if (check_walls(round(fl_x), round(fl_y), cub))
+		cub->rays[ray].face = check_walls(round(fl_x), round(fl_y), cub);
+		if (cub->rays[ray].face)
 			break ;
 		my_mlx_pixel_put(&cub->img_map, round(fl_x), round(fl_y), color);
         fl_x += (delta.x / (float)steps);
@@ -83,12 +84,14 @@ float	angle(float a, float b)
 
 	right = 90;
 	c = (atan(a / b)) * (180 / M_PI);
+	if (c < 0)
+		c = 360 - c;
 	// printf("%f\n", c);
 	// printf("A : %f\nB : %f\n", a, b);
 	return (right - c);
 }
 
-float expand_ray(t_cub *cub, float angle)
+float expand_ray(t_cub *cub, float angle, int color)
 {
 	double	rad;
     int		i;
@@ -103,6 +106,7 @@ float expand_ray(t_cub *cub, float angle)
         y = cub->plr.real_y + (i * sin(rad));
         if (cub->map.map[y / SIZE][x / SIZE] == '1')
             break ;
+		my_mlx_pixel_put(&cub->img_map, round(x), round(y), color);
         i++;
     }
 	return (distance(cub->plr.real_x, cub->plr.real_y, x, y));

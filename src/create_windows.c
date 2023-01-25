@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/24 17:30:02 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:47:43 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,6 @@ void	create_window_data(t_cub *cub)
 void	create_window_game(t_cub *cub)
 {
 	cub->win_game = mlx_new_window(cub->mlx, 1024, 768, "Cub3D - Game");
-	draw(cub, 1);
+	draw(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_game.img, 0, 0);
 }
