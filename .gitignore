@@ -4,5 +4,4 @@ a.out
 cub3d
 .vscode
 .DS_Store
-*.cub
 libft.a
