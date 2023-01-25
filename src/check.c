@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:23:58 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/24 11:34:43 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:44:37 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,18 @@ void	init_plr(t_cub *cub, int x, int y, char cardinal)
 	cub->plr.real_y = (y * SIZE) + (SIZE / 2);
 }
 
-static int	check_one(t_cub *cub, int i, int j)
+static int	check_one(t_cub *cub, int y, int x)
 {
 	char	**map;
 
 	map = cub->map.map;
-	if (j > 0 && is_good_coord(map[i][j - 1]))
+	if (x > 0 && is_good_coord(map[y][x - 1]))
 		return (1);
-	if (is_good_coord(map[i][j + 1]))
+	if (is_good_coord(map[y][x + 1]))
 		return (1);
-	if (i < cub->map.h - 1 && is_good_coord(map[i + 1][j]))
+	if (y < cub->map.h - 1 && is_good_coord(map[y + 1][x]))
 		return (1);
-	if (i > 0 && is_good_coord(map[i - 1][j]))
+	if (y > 0 && is_good_coord(map[y - 1][x]))
 		return (1);
 	return (0);
 }
@@ -91,6 +91,8 @@ int	check_map(t_cub *cub, char **map)
 		{
 			if (ft_strchr(POS_CHAR, map[i][j]))
 				init_plr(cub, j, i, map[i][j]);
+			if (map[i][j] == '0' && !check_zero(cub->map.map, i, j))
+				return (0);
 			if (map[i][j] == '1' && !check_one(cub, i, j))
 				return (0);
 			if (ft_strchr(POS_CHAR, map[i][j]))
