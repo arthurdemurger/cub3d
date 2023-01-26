@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:48:57 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:04:09 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	rotate_left(t_cub *cub)
 {
 	circle(cub, 1, RED);
-	if (cub->angle >= 0 && cub->angle < ROT_ANGLE)
+	if (cub->angle >= 0 && cub->angle < 15)
 		cub->angle += 360;
-	cub->angle -= ROT_ANGLE;
+	cub->angle -= 15;
 	draw(cub);
 	update_data(cub, 6, ft_itoa(cub->angle));
 }
@@ -25,10 +25,9 @@ void	rotate_left(t_cub *cub)
 void	rotate_right(t_cub *cub)
 {
 	circle(cub, 1, RED);
-	if (cub->angle < 360 && cub->angle >= 360 - ROT_ANGLE)
+	if (cub->angle < 360 && cub->angle >= 345)
 		cub->angle -= 360;
-	cub->angle += ROT_ANGLE;
-	display_pov(cub, GREEN);
+	cub->angle += 15;
 	draw(cub);
 	update_data(cub, 6, ft_itoa(cub->angle));
 }
@@ -36,9 +35,9 @@ void	rotate_right(t_cub *cub)
 void	rotate(t_cub *cub, int key)
 {
     clean_map(cub);
-	if (key == KEY_LEFT)
+	if (key == 65361)
 		rotate_left(cub);
-	else if (key == KEY_RIGHT)
+	else if (key == 65363)
 		rotate_right(cub);
 	grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);

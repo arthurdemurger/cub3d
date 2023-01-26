@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 11:42:15 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:45:02 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	circle(t_cub *cub, int r, int color)
 
 	for (float angle = 0; angle <= 360; angle += 0.1)
 	{
-		rad = angle * (M_PI / 180);
-		x = cub->plr.real_x + r * cos(rad);
-		y = cub->plr.real_y + r * sin(rad);
+	    rad = angle * (M_PI / 180);
+	    x = (cub->plr.real_x / 4) + r * cos(rad);
+	    y = (cub->plr.real_y / 4) + r * sin(rad);
 		my_mlx_pixel_put(&cub->img_map, x, y, color);
 	}
 }

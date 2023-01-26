@@ -122,13 +122,13 @@ void	move_left(t_cub *cub, int x)
 
 void    move(t_cub *cub, int key)
 {
-    if (key == W)
+    if (key == 122)
 		move_up(cub, cub->plr.real_y);
-    else if (key == A)
+    else if (key == 113)
 		move_left(cub, cub->plr.real_x);
-    else if (key == S)
+    else if (key == 115)
 		move_down(cub, cub->plr.real_y);
-    else if (key == D)
+    else if (key == 100)
 		move_right(cub, cub->plr.real_x);
 	grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_main, cub->img_map.img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:30:41 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:46:55 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ float expand_ray(t_cub *cub, int index, float angle, int color)
 		cub->rays[index].face = check_walls(x, y, cub);
 		if (cub->rays[index].face)
 			break ;
-		my_mlx_pixel_put(&cub->img_map, round(x), round(y), color);
+		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
 		i++;
 	}
 	return (distance(cub->plr.real_x, cub->plr.real_y, x, y));
