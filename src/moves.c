@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 13:48:41 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:57:18 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@ void	move_up(t_cub *cub)
 	circle(cub, 1, RED);
 	while (i <= PIX_MOVE)
 	{
-		printf("angle : %f\n", cub->angle);
 		pos = intersection(cub, cub->plr.real_x, cub->plr.real_y, i, cub->angle);
 		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
 			break ;
+		cub->plr.real_x = pos.real_x;
+		cub->plr.real_y = pos.real_y;
+		cub->plr.x = pos.real_x / SIZE;
+		cub->plr.y = pos.real_y / SIZE;
 		i++;
 	}
-	cub->plr.real_x = pos.real_x;
-	cub->plr.real_y = pos.real_y;
-	cub->plr.x = pos.real_x / SIZE;
-	cub->plr.y = pos.real_y / SIZE;
 	draw(cub);
 	circle(cub, 1, RED);
 }
@@ -44,16 +43,15 @@ void	move_right(t_cub *cub)
 	circle(cub, 1, RED);
 	while (i <= PIX_MOVE)
 	{
-		printf("angle : %f\n", cub->angle);
 		pos = intersection(cub, cub->plr.real_x, cub->plr.real_y, i, cub->angle + 90);
 		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
 			break ;
+		cub->plr.real_x = pos.real_x;
+		cub->plr.real_y = pos.real_y;
+		cub->plr.x = pos.real_x / SIZE;
+		cub->plr.y = pos.real_y / SIZE;
 		i++;
 	}
-	cub->plr.real_x = pos.real_x;
-	cub->plr.real_y = pos.real_y;
-	cub->plr.x = pos.real_x / SIZE;
-	cub->plr.y = pos.real_y / SIZE;
 	draw(cub);
 	circle(cub, 1, RED);
 }
@@ -67,16 +65,15 @@ int		i;
 	circle(cub, 1, RED);
 	while (i <= PIX_MOVE)
 	{
-		printf("angle : %f\n", cub->angle);
 		pos = intersection(cub, cub->plr.real_x, cub->plr.real_y, i, cub->angle - 180);
 		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
 			break ;
+		cub->plr.real_x = pos.real_x;
+		cub->plr.real_y = pos.real_y;
+		cub->plr.x = pos.real_x / SIZE;
+		cub->plr.y = pos.real_y / SIZE;
 		i++;
 	}
-	cub->plr.real_x = pos.real_x;
-	cub->plr.real_y = pos.real_y;
-	cub->plr.x = pos.real_x / SIZE;
-	cub->plr.y = pos.real_y / SIZE;
 	draw(cub);
 	circle(cub, 1, RED);
 }
@@ -90,16 +87,15 @@ void	move_left(t_cub *cub)
 	circle(cub, 1, RED);
 	while (i <= PIX_MOVE)
 	{
-		printf("angle : %f\n", cub->angle);
 		pos = intersection(cub, cub->plr.real_x, cub->plr.real_y, i, cub->angle - 90);
 		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
 			break ;
+		cub->plr.real_x = pos.real_x;
+		cub->plr.real_y = pos.real_y;
+		cub->plr.x = pos.real_x / SIZE;
+		cub->plr.y = pos.real_y / SIZE;
 		i++;
 	}
-	cub->plr.real_x = pos.real_x;
-	cub->plr.real_y = pos.real_y;
-	cub->plr.x = pos.real_x / SIZE;
-	cub->plr.y = pos.real_y / SIZE;
 	draw(cub);
 	circle(cub, 1, RED);
 }
