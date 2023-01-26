@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_fl_min.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/15 22:22:09 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 17:03:01 by ademurge         ###   ########.fr       */
+/*   Created: 2022/03/03 18:23:26 by ademurge          #+#    #+#             */
+/*   Updated: 2023/01/24 18:32:31 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-void	ft_bzero(void *s, int n)
+float	ft_fl_min(float a, float b, t_ray *ray)
 {
-	while (n--)
-		*(char *)(s++) = 0;
+	(void)ray;
+	if (a <= b)
+	{
+		return (a);
+	}
+	return (b);
 }
