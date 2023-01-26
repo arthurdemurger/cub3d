@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 10:54:50 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:58:01 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_close(int keycode, t_cub *cub)
 {
 	(void) keycode;
 	(void)cub;
-	// free_all(cub);
 	exit (0);
 }
 
@@ -72,7 +71,7 @@ int	main(int ac, char **av)
 								&cub.img_game.endian);
 	create_window_main(&cub);
 	create_window_data(&cub);
-	mlx_hook(cub.win_game, 17, 0, (void *)ft_close, &cub);
-	mlx_key_hook(cub.win_game, (void *)deal_key, &cub);
+	mlx_hook(cub.win_game, DESTROY_BUTTON, 0, (void *)ft_close, &cub);
+	mlx_hook(cub.win_game, KEYPRESS, 0, (void *)deal_key, &cub);
 	mlx_loop(cub.mlx);
 }
