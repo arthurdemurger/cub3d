@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/24 14:48:30 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/26 10:54:50 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int ac, char **av)
 	cub.img_map.img = mlx_new_image(cub.mlx, cub.map.w * SIZE, cub.map.h * SIZE);
 	cub.img_map.addr = mlx_get_data_addr(cub.img_map.img, &cub.img_map.bits_per_pixel, &cub.img_map.line_length,
 								&cub.img_map.endian);
-	cub.img_game.img = mlx_new_image(cub.mlx, 1024, 768);
+	cub.img_game.img = mlx_new_image(cub.mlx, WIN_WIDTH, WIN_HEIGHT);
 	cub.img_game.addr = mlx_get_data_addr(cub.img_game.img, &cub.img_game.bits_per_pixel, &cub.img_game.line_length,
 								&cub.img_game.endian);
 	create_window_main(&cub);

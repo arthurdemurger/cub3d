@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_windows.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/25 17:47:43 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/26 10:54:40 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	create_window_data(t_cub *cub)
 
 void	create_window_game(t_cub *cub)
 {
-	cub->win_game = mlx_new_window(cub->mlx, 1024, 768, "Cub3D - Game");
+	cub->win_game = mlx_new_window(cub->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D - Game");
 	draw(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_game.img, 0, 0);
 }

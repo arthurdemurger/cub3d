@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   circle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/25 17:55:40 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:42:15 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	circle(t_cub *cub, int r, int color)
 	float		rad;
 	int			x, y;
 
-	for (float angle = 0; angle <= 360; angle += 0.1) 
+	for (float angle = 0; angle <= 360; angle += 0.1)
 	{
-	    rad = angle * (M_PI / 180);
-	    x = cub->plr.real_x + r * cos(rad);
-	    y = cub->plr.real_y + r * sin(rad);
+		rad = angle * (M_PI / 180);
+		x = cub->plr.real_x + r * cos(rad);
+		y = cub->plr.real_y + r * sin(rad);
 		my_mlx_pixel_put(&cub->img_map, x, y, color);
 	}
 }
@@ -30,7 +30,7 @@ void	init_ray(t_ray *ray)
 {
 	ray->angle = 0;
 	ray->dir = 0;
-	ray->face = 1;
+	ray->face = 0;
 	ray->l = 0;
 	ray->real_x = 0;
 	ray->real_y = 0;
