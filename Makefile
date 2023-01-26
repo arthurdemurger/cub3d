@@ -36,15 +36,19 @@ SRC							=	src/check.c \
 								src/utils/parse_utils.c
 
 LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
+								src/libft/lst/ft_lst_to_map.c \
 								src/libft/lst/ft_lstadd_back.c \
 								src/libft/lst/ft_lstclear.c \
 								src/libft/lst/ft_lstdelone.c \
 								src/libft/lst/ft_lstget.c \
 								src/libft/lst/ft_lstindex.c \
 								src/libft/lst/ft_lstlast.c \
+								src/libft/lst/ft_lstmax.c \
 								src/libft/lst/ft_lstnew.c \
 								src/libft/lst/ft_lstput.c \
 								src/libft/lst/ft_lstsize.c \
+								src/libft/ft_itoa.c \
+								src/libft/ft_memset.c \
 								src/libft/ft_putendl_fd.c \
 								src/libft/ft_putstr.c \
 								src/libft/ft_puttab.c \
@@ -52,7 +56,9 @@ LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
 								src/libft/ft_split.c \
 								src/libft/ft_strchr.c \
 								src/libft/ft_strcmp.c \
+								src/libft/ft_strcpy.c \
 								src/libft/ft_strlcpy.c \
+								src/libft/ft_strjoin.c \
 								src/libft/ft_strncmp.c \
 								src/libft/ft_strstr.c \
 								src/libft/ft_strtrim.c \
@@ -83,7 +89,7 @@ all: 		libft $(NAME)
 				@$(CC) ${CFLAGS} -I./includes -c $< -o ${<:.c=.o}
 
 linux:
-					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) $(LMLX_LINUX) -o $(NAME)
+					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) $(LMLX_LINUX) -lm -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
 $(NAME): $(OBJS)
