@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/20 16:55:05 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:35:58 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,37 @@
 
 int	check_walls(int x, int y, t_ray *ray)
 {
-	(void)ray;
-	(void)x;
-	(void)y;
-	// if ((cub->map.map[y / SIZE][x / SIZE] == '1') && x % SIZE != 0 && (cub->angle < 90 || cub->angle > 270))
-	// 	return (3);
-	// if ((cub->map.map[y / SIZE][x / SIZE] == '1') && x % SIZE != 0 && (cub->angle > 90 && cub->angle < 270))
-	// 	return (1);
-	// if ((cub->map.map[y / SIZE][x / SIZE] == '1') && y % SIZE != 0 && (cub->angle > 0 && cub->angle < 180))
-	// 	return (4);
-	// if ((cub->map.map[y / SIZE][x / SIZE] == '1') && y % SIZE != 0 && (cub->angle <= 359 || cub->angle > 180))
-	// 	return (2);
-	return (1);
+	if (cub->map.map[y / SIZE][x / SIZE] == '1' && !(x % SIZE) && !(y % SIZE))
+		return (5);
+	if (cub->map.map[y / SIZE][x / SIZE] == '1' && (cub->angle >= 270.00000000 && cub->angle <= 360.00000000))
+	{
+		if (!(x % SIZE))
+			return (WEST);
+		else if (!((y + 1) % SIZE))
+			return (SOUTH);
+	}
+	if (cub->map.map[y / SIZE][x / SIZE] == '1' && (cub->angle >= 180.00000000 && cub->angle <= 270.00000000))
+	{
+		if (!((x + 1) % SIZE))
+			return (EAST);
+		else if (!((y + 1) % SIZE))
+			return (SOUTH);
+	}
+		if (cub->map.map[y / SIZE][x / SIZE] == '1' && (cub->angle >= 90.00000000 && cub->angle <= 180.00000000))
+	{
+		if (!((x + 1) % SIZE))
+			return (EAST);
+		else if (!(y % SIZE))
+			return (NORTH);
+	}
+	if (cub->map.map[y / SIZE][x / SIZE] == '1' && (cub->angle >= 0.00000000 && cub->angle <= 90.00000000))
+	{
+		if (!(x % SIZE))
+			return (WEST);
+		else if (!(y % SIZE))
+			return (NORTH);
+	}
+	return (0);
 }
 
 int abs(int n)
@@ -68,9 +87,9 @@ int abs(int n)
 float	distance(int x1, int y1, int x2, int y2)
 {
 	int dx;
-    int dy;
+	int dy;
 
-    dx = x2 - x1;
+	dx = x2 - x1;
 	dy = y2 - y1;
 	return (sqrtf(pow(dx, 2) + pow(dy, 2)));
 }
@@ -84,21 +103,19 @@ float	angle(float a, float b)
 	c = (atan(a / b)) * (180 / M_PI);
 	if (c < 0)
 		c = 360 - c;
-	// printf("%f\n", c);
-	// printf("A : %f\nB : %f\n", a, b);
 	return (right - c);
 }
 
 float expand_ray(t_cub *cub, float angle, t_ray *ray)
 {
 	double	rad;
-    int		i;
+	int		i;
 	int		x;
 	int		y;
 
 	rad = angle * (M_PI / 180);
-    i = 0;
-    while (1) 
+	i = 0;
+	while (1)
 	{
         x = cub->plr.real_x + (i * cos(rad));
         y = cub->plr.real_y + (i * sin(rad));
@@ -108,7 +125,7 @@ float expand_ray(t_cub *cub, float angle, t_ray *ray)
             break ;
 		}
 		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
-        i++;
-    }
+		i++;
+	}
 	return (distance(cub->plr.real_x, cub->plr.real_y, x, y));
 }
