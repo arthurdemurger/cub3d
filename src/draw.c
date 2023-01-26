@@ -78,14 +78,14 @@ void	draw(t_cub *cub)
 	init_draw(cub);
 	cub->rays[NB_RAYS / 2] = intersection(cub, cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle);
 	cub->rays[NB_RAYS / 2].angle = cub->angle;
-	cub->rays[NB_RAYS / 2].l = expand_ray(cub, cub->rays[NB_RAYS / 2].angle);
+	cub->rays[NB_RAYS / 2].l = expand_ray(cub, cub->rays[NB_RAYS / 2].angle, &cub->rays[NB_RAYS / 2]);
 	while (++i <= (NB_RAYS / 2) - 1)
 	{
 		cub->rays[i] = intersection(cub, cub->rays[NB_RAYS / 2].real_x, cub->rays[NB_RAYS / 2].real_y, (cub->plane / (NB_RAYS / 2)) * (NB_RAYS / 2 - i), cub->angle + 90);
 		cub->rays[i].angle = cub->angle - angle(SIZE, (cub->plane / (NB_RAYS / 2)) * ((NB_RAYS / 2 ) - i));
 		if (cub->rays[i].angle < 0)
 			cub->rays[i].angle = 360 + cub->rays[i].angle;
-		cub->rays[i].l = expand_ray(cub, cub->rays[i].angle);
+		cub->rays[i].l = expand_ray(cub, cub->rays[i].angle, &cub->rays[i]);
 	}
 	while (++i <= NB_RAYS - 1)
 	{
@@ -93,7 +93,7 @@ void	draw(t_cub *cub)
 		cub->rays[i].angle = cub->angle + angle(SIZE, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)));
 		if (cub->rays[i].angle >= 360)
 			cub->rays[i].angle -= 360;
-		cub->rays[i].l = expand_ray(cub, cub->rays[i].angle);
+		cub->rays[i].l = expand_ray(cub, cub->rays[i].angle, &cub->rays[i]);
 	}
 	draw_game(cub);
 }

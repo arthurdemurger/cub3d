@@ -207,7 +207,7 @@ void			display_pov(t_cub *cub, int color);
 /* DDA */
 void 			dda(t_cub *cub, int x, int y, int color, int ray);
 float			distance(int x1, int y1, int x2, int y2);
-float 			expand_ray(t_cub *cub, float angle);
+float 			expand_ray(t_cub *cub, float angle, t_ray *ray);
 float			angle(float a, float b);
 
 /* Circle */

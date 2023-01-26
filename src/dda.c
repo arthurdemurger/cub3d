@@ -13,10 +13,11 @@
 #include "../inc/cub3d.h"
 
 
-int	check_walls(int x, int y, t_cub *cub)
+int	check_walls(int x, int y, t_ray *ray)
 {
-	if (cub->map.map[y / SIZE][x / SIZE] == '1')
-		return (1);
+	(void)ray;
+	(void)x;
+	(void)y;
 	// if ((cub->map.map[y / SIZE][x / SIZE] == '1') && x % SIZE != 0 && (cub->angle < 90 || cub->angle > 270))
 	// 	return (3);
 	// if ((cub->map.map[y / SIZE][x / SIZE] == '1') && x % SIZE != 0 && (cub->angle > 90 && cub->angle < 270))
@@ -25,7 +26,7 @@ int	check_walls(int x, int y, t_cub *cub)
 	// 	return (4);
 	// if ((cub->map.map[y / SIZE][x / SIZE] == '1') && y % SIZE != 0 && (cub->angle <= 359 || cub->angle > 180))
 	// 	return (2);
-	return (0);
+	return (1);
 }
 
 int abs(int n)
@@ -35,34 +36,34 @@ int abs(int n)
 	return (-n);
 }
  
-void dda(t_cub *cub, int x, int y, int color, int ray)
-{
-	t_pos	delta;
-	int		i;
-	int 	steps;
-	float	fl_x;
-	float	fl_y;
+// void dda(t_cub *cub, int x, int y, int color, int ray)
+// {
+// 	t_pos	delta;
+// 	int		i;
+// 	int 	steps;
+// 	float	fl_x;
+// 	float	fl_y;
 
-	(void)ray;
-	delta.x = x - cub->plr.real_x;
-	delta.y = y - cub->plr.real_y;
-	if (abs(delta.x) > abs(delta.y))
-		steps = abs(delta.x);
-	else
-		steps = abs(delta.y);
-	fl_x = cub->plr.real_x;
-	fl_y = cub->plr.real_y;
-	i = 0;
-	while (i++ <= steps)
-	{
-		cub->rays[ray].face = check_walls(round(fl_x), round(fl_y), cub);
-		if (cub->rays[ray].face)
-			break ;
-		my_mlx_pixel_put(&cub->img_map, round(fl_x), round(fl_y), color);
-        fl_x += (delta.x / (float)steps);
-        fl_y += (delta.y / (float)steps);
-    }
-}
+// 	(void)ray;
+// 	delta.x = x - cub->plr.real_x;
+// 	delta.y = y - cub->plr.real_y;
+// 	if (abs(delta.x) > abs(delta.y))
+// 		steps = abs(delta.x);
+// 	else
+// 		steps = abs(delta.y);
+// 	fl_x = cub->plr.real_x;
+// 	fl_y = cub->plr.real_y;
+// 	i = 0;
+// 	while (i++ <= steps)
+// 	{
+// 		cub->rays[ray].face = check_walls(round(fl_x), round(fl_y), cub);
+// 		if (cub->rays[ray].face)
+// 			break ;
+// 		my_mlx_pixel_put(&cub->img_map, round(fl_x), round(fl_y), color);
+//         fl_x += (delta.x / (float)steps);
+//         fl_y += (delta.y / (float)steps);
+//     }
+// }
 
 float	distance(int x1, int y1, int x2, int y2)
 {
@@ -88,7 +89,7 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-float expand_ray(t_cub *cub, float angle)
+float expand_ray(t_cub *cub, float angle, t_ray *ray)
 {
 	double	rad;
     int		i;
@@ -102,7 +103,10 @@ float expand_ray(t_cub *cub, float angle)
         x = cub->plr.real_x + (i * cos(rad));
         y = cub->plr.real_y + (i * sin(rad));
         if (cub->map.map[y / SIZE][x / SIZE] == '1')
+		{
+			ray->face = check_walls(x, y, ray);
             break ;
+		}
 		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
         i++;
     }
