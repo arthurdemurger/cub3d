@@ -6,44 +6,46 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 13:35:58 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:46:40 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-
-int	check_walls(int x, int y, t_ray *ray)
+int	check_walls(t_cub *cub, int x, int y)
 {
-	if (cub->map.map[y / SIZE][x / SIZE] == '1' && !(x % SIZE) && !(y % SIZE))
-		return (5);
-	if (cub->map.map[y / SIZE][x / SIZE] == '1' && (cub->angle >= 270.00000000 && cub->angle <= 360.00000000))
+	if (cub->map.map[y / SIZE][x / SIZE] == '1')
 	{
-		if (!(x % SIZE))
-			return (WEST);
-		else if (!((y + 1) % SIZE))
-			return (SOUTH);
-	}
-	if (cub->map.map[y / SIZE][x / SIZE] == '1' && (cub->angle >= 180.00000000 && cub->angle <= 270.00000000))
-	{
-		if (!((x + 1) % SIZE))
-			return (EAST);
-		else if (!((y + 1) % SIZE))
-			return (SOUTH);
-	}
-		if (cub->map.map[y / SIZE][x / SIZE] == '1' && (cub->angle >= 90.00000000 && cub->angle <= 180.00000000))
-	{
-		if (!((x + 1) % SIZE))
-			return (EAST);
-		else if (!(y % SIZE))
-			return (NORTH);
-	}
-	if (cub->map.map[y / SIZE][x / SIZE] == '1' && (cub->angle >= 0.00000000 && cub->angle <= 90.00000000))
-	{
-		if (!(x % SIZE))
-			return (WEST);
-		else if (!(y % SIZE))
-			return (NORTH);
+		if (!(x % SIZE) && !(y % SIZE))
+			return (5);
+		if (cub->angle >= 270.00000000 && cub->angle <= 360.00000000)
+		{
+			if (!(x % SIZE))
+				return (WEST);
+			else if (!((y + 1) % SIZE))
+				return (SOUTH);
+		}
+		if (cub->angle >= 180.00000000 && cub->angle <= 270.00000000)
+		{
+			if (!((x + 1) % SIZE))
+				return (EAST);
+			else if (!((y + 1) % SIZE))
+				return (SOUTH);
+		}
+		if (cub->angle >= 90.00000000 && cub->angle <= 180.00000000)
+		{
+			if (!((x + 1) % SIZE))
+				return (EAST);
+			else if (!(y % SIZE))
+				return (NORTH);
+		}
+		if (cub->angle >= 0.00000000 && cub->angle <= 90.00000000)
+		{
+			if (!(x % SIZE))
+				return (WEST);
+			else if (!(y % SIZE))
+				return (NORTH);
+		}
 	}
 	return (0);
 }
@@ -54,7 +56,7 @@ int abs(int n)
 		return (n);
 	return (-n);
 }
- 
+
 // void dda(t_cub *cub, int x, int y, int color, int ray)
 // {
 // 	t_pos	delta;
@@ -106,7 +108,7 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-float expand_ray(t_cub *cub, float angle, t_ray *ray)
+float expand_ray(t_cub *cub, float angle, int index)
 {
 	double	rad;
 	int		i;
@@ -117,13 +119,11 @@ float expand_ray(t_cub *cub, float angle, t_ray *ray)
 	i = 0;
 	while (1)
 	{
-        x = cub->plr.real_x + (i * cos(rad));
-        y = cub->plr.real_y + (i * sin(rad));
-        if (cub->map.map[y / SIZE][x / SIZE] == '1')
-		{
-			ray->face = check_walls(x, y, ray);
-            break ;
-		}
+		x = cub->plr.real_x + (i * cos(rad));
+		y = cub->plr.real_y + (i * sin(rad));
+		cub->rays[index].face = check_walls(cub, x, y);
+		if (cub->rays[index].face)
+			break ;
 		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
 		i++;
 	}
