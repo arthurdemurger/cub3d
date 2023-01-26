@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:46:55 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:49:24 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-float expand_ray(t_cub *cub, int index, float angle, int color)
+float expand_ray(t_cub *cub, int index, float angle)
 {
 	double	rad;
 	int		i;

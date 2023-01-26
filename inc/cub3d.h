@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:44:45 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:49:15 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ void			display_pov(t_cub *cub, int color);
 /* DDA */
 void 			dda(t_cub *cub, int x, int y, int color, int ray);
 float			distance(int x1, int y1, int x2, int y2);
-float 			expand_ray(t_cub *cub, float angle);
+float 			expand_ray(t_cub *cub, int i, float angle);
 float			angle(float a, float b);
 
 /* Circle */

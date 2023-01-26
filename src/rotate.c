@@ -6,11 +6,11 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:48:57 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:52:04 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "../inc/cub3d.h"
 
 void	rotate_left(t_cub *cub)
 {
@@ -28,7 +28,7 @@ void	rotate_right(t_cub *cub)
 	if (cub->angle < 360 && cub->angle >= 360 - ROT_ANGLE)
 		cub->angle -= 360;
 	cub->angle += ROT_ANGLE;
-	display_pov(cub, GREEN);
+	// display_pov(cub, GREEN);
 	draw(cub);
 	update_data(cub, 6, ft_itoa(cub->angle));
 }
