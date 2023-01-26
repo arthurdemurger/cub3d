@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	init(t_cub *cub, int ac, char **av)
 {
@@ -44,16 +44,16 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void deal_key(int key, t_cub *cub)
 {
-	if (key == ESC)
+    if (key == 65307)
 	{
 		mlx_destroy_window(cub->mlx, cub->win_main);
 		mlx_destroy_window(cub->mlx, cub->win_data);
 		free (cub->mlx);
 		exit(0);
 	}
-	if (key == W || key == A || key == S || key == D)
+	if (key == 122 || key == 113 || key == 115 || key == 100)
 		move(cub, key);
-	else if (key == KEY_LEFT || key == KEY_RIGHT)
+	else if (key == 65361 || key == 65363)
 		rotate(cub, key);
 }
 
@@ -72,7 +72,12 @@ int	main(int ac, char **av)
 								&cub.img_game.endian);
 	create_window_main(&cub);
 	create_window_data(&cub);
+	// create_window_game(&cub);
 	mlx_hook(cub.win_game, 17, 0, (void *)ft_close, &cub);
 	mlx_key_hook(cub.win_game, (void *)deal_key, &cub);
+	// mlx_put_image_to_window(cub.mlx, cub.win_main, cub.img.img, 0, 0);
+	// mlx_mouse_hook(cub.win_main, (void *)click, &cub);
 	mlx_loop(cub.mlx);
+	// free_all(&cub);
+	// return (0);
 }

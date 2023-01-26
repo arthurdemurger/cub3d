@@ -20,8 +20,8 @@ void	circle(t_cub *cub, int r, int color)
 	for (float angle = 0; angle <= 360; angle += 0.1) 
 	{
 	    rad = angle * (M_PI / 180);
-	    x = cub->plr.real_x + r * cos(rad);
-	    y = cub->plr.real_y + r * sin(rad);
+	    x = (cub->plr.real_x / 4) + r * cos(rad);
+	    y = (cub->plr.real_y / 4) + r * sin(rad);
 		my_mlx_pixel_put(&cub->img_map, x, y, color);
 	}
 }

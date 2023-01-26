@@ -189,6 +189,7 @@ void			grid(t_cub *cub);
 void			fill_squares(t_cub *cub);
 void			create_window_data(t_cub *cub);
 void			create_window_game(t_cub *cub);
+void			clean_map(t_cub *cub);
 
 /* Draw */
 void			draw(t_cub *cub);
@@ -206,7 +207,7 @@ void			display_pov(t_cub *cub, int color);
 /* DDA */
 void 			dda(t_cub *cub, int x, int y, int color, int ray);
 float			distance(int x1, int y1, int x2, int y2);
-float 			expand_ray(t_cub *cub, float angle, int color);
+float 			expand_ray(t_cub *cub, float angle);
 float			angle(float a, float b);
 
 /* Circle */

@@ -15,9 +15,6 @@
 
 int	check_walls(int x, int y, t_cub *cub)
 {
-	int	i;
-
-	i = -1;
 	if (cub->map.map[y / SIZE][x / SIZE] == '1')
 		return (1);
 	// if ((cub->map.map[y / SIZE][x / SIZE] == '1') && x % SIZE != 0 && (cub->angle < 90 || cub->angle > 270))
@@ -91,7 +88,7 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-float expand_ray(t_cub *cub, float angle, int color)
+float expand_ray(t_cub *cub, float angle)
 {
 	double	rad;
     int		i;
@@ -106,7 +103,7 @@ float expand_ray(t_cub *cub, float angle, int color)
         y = cub->plr.real_y + (i * sin(rad));
         if (cub->map.map[y / SIZE][x / SIZE] == '1')
             break ;
-		my_mlx_pixel_put(&cub->img_map, round(x), round(y), color);
+		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
         i++;
     }
 	return (distance(cub->plr.real_x, cub->plr.real_y, x, y));

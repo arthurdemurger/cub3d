@@ -35,9 +35,9 @@ void	rotate_right(t_cub *cub)
 void	rotate(t_cub *cub, int key)
 {
     clean_map(cub);
-	if (key == KEY_LEFT)
+	if (key == 65361)
 		rotate_left(cub);
-	else if (key == KEY_RIGHT)
+	else if (key == 65363)
 		rotate_right(cub);
 	grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
