@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:45:02 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:36:59 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_ray(t_ray *ray)
 	ray->real_y = 0;
 }
 
-t_ray intersection(t_cub *cub, int cx, int cy, float r, float angle) 
+t_ray intersection(t_cub *cub, int cx, int cy, float r, float angle)
 {
 	t_ray		dir;
 	float		rad;
@@ -46,13 +46,9 @@ t_ray intersection(t_cub *cub, int cx, int cy, float r, float angle)
 	(void)cub;
 	init_ray(&dir);
 	rad = angle * (M_PI / 180);
-    x = cx + r * cos(rad);
-    y = cy + r * sin(rad);
+	x = cx + (r * cos(rad));
+	y = cy + (r * sin(rad));
 	dir.real_x = x;
 	dir.real_y = y;
-	// if (dir.real_x < 0)
-	// 	dir.real_x = 0;
-	// if (dir.real_y < 0)
-	// 	dir.real_y = 0;
 	return (dir);
 }

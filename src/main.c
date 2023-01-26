@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:58:01 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:08:32 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void deal_key(int key, t_cub *cub)
 {
 	if (key == ESC)
 	{
-		mlx_destroy_window(cub->mlx, cub->win_main);
+		mlx_destroy_window(cub->mlx, cub->win_game);
 		mlx_destroy_window(cub->mlx, cub->win_data);
 		free (cub->mlx);
 		exit(0);

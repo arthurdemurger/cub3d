@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:49:24 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:35:58 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,16 @@ int abs(int n)
 	return (-n);
 }
 
-void dda(t_cub *cub, int x, int y, int color, int ray)
+t_pos	dda(t_cub *cub, int x, int y, int color, int ray)
 {
+	t_pos	pos;
 	t_pos	delta;
 	int		i;
 	int 	steps;
 	float	fl_x;
 	float	fl_y;
 
+	(void) color;
 	delta.x = x - cub->plr.real_x;
 	delta.y = y - cub->plr.real_y;
 	if (abs(delta.x) > abs(delta.y))
@@ -77,10 +79,13 @@ void dda(t_cub *cub, int x, int y, int color, int ray)
 		cub->rays[ray].face = check_walls(round(fl_x), round(fl_y), cub);
 		if (cub->rays[ray].face)
 			break ;
-		my_mlx_pixel_put(&cub->img_map, round(fl_x), round(fl_y), color);
+		// my_mlx_pixel_put(&cub->img_map, round(fl_x), round(fl_y), color);
 		fl_x += (delta.x / (float)steps);
 		fl_y += (delta.y / (float)steps);
 	}
+	pos.x = round(fl_x);
+	pos.y = round(fl_y);
+	return (pos);
 }
 
 float	distance(int x1, int y1, int x2, int y2)

@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:49:15 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:32:01 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "ESWN"
 # define ROT_ANGLE 10
+# define PIX_MOVE 3
 # define SIZE 32
 # define SIDE 3
 # define NB_RAYS 1024
@@ -214,7 +215,7 @@ void			rotate(t_cub *cub, int key);
 void			display_pov(t_cub *cub, int color);
 
 /* DDA */
-void 			dda(t_cub *cub, int x, int y, int color, int ray);
+t_pos 			dda(t_cub *cub, int x, int y, int color, int ray);
 float			distance(int x1, int y1, int x2, int y2);
 float 			expand_ray(t_cub *cub, int i, float angle);
 float			angle(float a, float b);

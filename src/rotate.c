@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 12:52:04 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:06:04 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	rotate_right(t_cub *cub)
 
 void	rotate(t_cub *cub, int key)
 {
-    clean_map(cub);
+	clean_map(cub);
 	if (key == KEY_LEFT)
 		rotate_left(cub);
 	else if (key == KEY_RIGHT)
