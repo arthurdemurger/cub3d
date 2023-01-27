@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 12:59:14 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 17:42:48 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "ESWN"
 # define ROT_ANGLE 10
-# define PIX_MOVE 10
+# define PIX_MOVE 5
 # define SIZE 32
 # define SIDE 3
 # define NB_RAYS 1024
@@ -66,7 +66,8 @@
 # define ZOOM 0.66
 # define WIN_HEIGHT 768
 # define WIN_WIDTH 1024
-
+# define LEFT 1
+# define RIGHT 0
 /* Managing errors */
 # define MALLOC_ERR "minishell : error in the memory allocation of a malloc."
 
@@ -141,6 +142,7 @@ typedef struct s_ray
 	float	l;
 	float	angle;
 	int		dir;
+	float	real_l;
 }	t_ray;
 
 typedef struct s_map
@@ -208,7 +210,7 @@ void			rotate(t_cub *cub, int key);
 void			display_pov(t_cub *cub, int color);
 
 /* DDA */
-t_pos			dda(t_cub *cub, int x, int y, int color, int ray);
+void			dda(t_cub *cub, t_ray *ray);
 float			distance(int x1, int y1, int x2, int y2);
 void			expand_ray(t_cub *cub, t_ray *ray);
 float			angle(float a, float b);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 12:58:31 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:02:24 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	draw_col(t_cub *cub, t_ray ray, int col, int color)
 	float	height;
 
 	i = WIN_HEIGHT / 2;
-	height = ((cub->r * SIZE) / ray.l) * 7;
+	height = ((cub->r * SIZE) / ray.real_l) * 7;
 	my_mlx_pixel_put(&cub->img_game, col, i, color);
-	while (++i <= (WIN_HEIGHT / 2) + ((int)height / 2))
+	while (++i <= (WIN_HEIGHT / 2) + ((int)height / 2) && i < 768)
 		my_mlx_pixel_put(&cub->img_game, col, i, color);
 	i = WIN_HEIGHT / 2;
-	while (--i >= (WIN_HEIGHT / 2) - ((int)height / 2))
+	while (--i >= (WIN_HEIGHT / 2) - ((int)height / 2) && i >= 0)
 		my_mlx_pixel_put(&cub->img_game, col, i, color);
 }
 
@@ -44,6 +44,7 @@ void	draw_game(t_cub *cub)
 	i = -1;
 	while (++i < NB_RAYS)
 		get_color(cub, cub->rays[i], i);
+	printf("=====\n");
 	draw_cursor(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_game.img, 0, 0);
 }
@@ -73,14 +74,33 @@ void	init_draw(t_cub *cub)
 	}
 }
 
+t_pos	find_angle(t_pos point1, t_pos point2, int side)
+{
+	float	angle;
+	t_pos	pos;
+
+	angle = atan2(point2.y - point1.y, point2.x - point1.x);
+	if (side == 1)
+		angle += M_PI_2;
+	else
+		angle -= M_PI_2;
+	pos.x = point2.x + cos(angle);
+	pos.y = point2.y + sin(angle);
+	return (pos);
+}
+
 void	fish_eye_corr(t_cub *cub, int index)
 {
-	printf("l before : %f | ", cub->rays[index].l);
-	if (index > MID_RAY)
-		cub->rays[index].l = cub->rays[index].l * cos(min_angle(cub->rays[index].angle, cub->angle));
+	float	angle;
+	float	radian;
+
+	if (index < MID_RAY)
+		angle = min_angle(cub->angle, cub->rays[index].angle);
 	else
-		cub->rays[index].l = cub->rays[index].l * cos(add_angle(cub->rays[index].angle, cub->angle));
-	printf("l after : %f\n", cub->rays[index].l);
+		angle = add_angle(cub->angle, cub->rays[index].angle);
+	radian = angle * (M_PI / 180);
+	cub->rays[index].real_l = cub->rays[index].l * cos(radian);
+	printf("real length : %f\n     length : %f\n=====\n", cub->rays[index].real_l, cub->rays[index].l);
 }
 
 void	draw(t_cub *cub)
@@ -99,7 +119,7 @@ void	draw(t_cub *cub)
 		if (cub->rays[i].angle < 0)
 			cub->rays[i].angle = 360 + cub->rays[i].angle;
 		expand_ray(cub, &cub->rays[i]);
-		// fish_eye_corr(cub, i);
+		fish_eye_corr(cub, i);
 	}
 	while (++i < NB_RAYS)
 	{
@@ -108,7 +128,7 @@ void	draw(t_cub *cub)
 		if (cub->rays[i].angle >= 360)
 			cub->rays[i].angle -= 360;
 		expand_ray(cub, &cub->rays[i]);
-		// fish_eye_corr(cub, i);
+		fish_eye_corr(cub, i);
 	}
 	draw_game(cub);
 }

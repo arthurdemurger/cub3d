@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 12:41:54 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:13:24 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	is_corner(int x, int y)
 // 	float	x_dec;
 // 	float	y_dec;
 
-// 	printf("x : %f | y : %f\n", x, y); 
+// 	printf("x : %f | y : %f\n", x, y);
 // 	x_dec = x - floorf(x);
 // 	y_dec = y - floorf(y);
 // 	if (corner == 1)
@@ -183,25 +183,51 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
+void dda(t_cub *cub, t_ray *ray)
+{
+	double	rad;
+	int		i;
+	float	x;
+	float	y;
+
+	rad = cub->angle * (M_PI / 180);
+	i = 0;
+	while (1)
+	{
+		x = ray->real_x + (i * cos(rad));
+		y = ray->real_y + (i * sin(rad));
+		if (cub->map.map[(int)y / SIZE][(int)x / SIZE] == '1')
+		{
+			ray->face = check_walls(cub->plr, x, y);
+			ray->l = distance(ray->real_x, ray->real_y, x, y);
+			break ;
+		}
+		i++;
+	}
+}
+
 void expand_ray(t_cub *cub, t_ray *ray)
 {
 	double	rad;
 	int		i;
-	float	floats[2];
+	float	x;
+	float	y;
 
 	rad = ray->angle * (M_PI / 180);
 	i = 0;
 	while (1)
 	{
-		floats[0] = cub->plr.real_x + (i * cos(rad));
-		floats[1] = cub->plr.real_y + (i * sin(rad));
-		if (cub->map.map[(int)floats[1] / SIZE][(int)floats[0] / SIZE] == '1')
+		x = cub->plr.real_x + (i * cos(rad));
+		y = cub->plr.real_y + (i * sin(rad));
+		if (cub->map.map[(int)y / SIZE][(int)x / SIZE] == '1')
 		{
-			ray->face = check_walls(cub->plr, floats[0], floats[1]);
-			ray->l = distance(cub->plr.real_x, cub->plr.real_y, floats[0], floats[1]);
+			ray->real_x = roundf(x);
+			ray->real_y = roundf(y);
+			ray->face = check_walls(cub->plr, x, y);
+			ray->l = distance(cub->plr.real_x, cub->plr.real_y, x, y);
 			break ;
 		}
-		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / 4, round(floats[1]) / 4, GREEN);
+		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
 		i++;
 	}
 }
