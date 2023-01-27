@@ -12,42 +12,67 @@
 
 #include "../inc/cub3d.h"
 
-int	check_walls(t_cub *cub, int x, int y)
+int	corner(int x, int y)
 {
-	if (cub->map.map[y / SIZE][x / SIZE] == '1')
-	{
-		if (!(x % SIZE) && !(y % SIZE))
-			return (5);
-		if (cub->angle >= 270.00000000 && cub->angle <= 360.00000000)
-		{
-			if (!(x % SIZE))
-				return (WEST);
-			else if (!((y + 1) % SIZE))
-				return (SOUTH);
-		}
-		if (cub->angle >= 180.00000000 && cub->angle <= 270.00000000)
-		{
-			if (!((x + 1) % SIZE))
-				return (EAST);
-			else if (!((y + 1) % SIZE))
-				return (SOUTH);
-		}
-		if (cub->angle >= 90.00000000 && cub->angle <= 180.00000000)
-		{
-			if (!((x + 1) % SIZE))
-				return (EAST);
-			else if (!(y % SIZE))
-				return (NORTH);
-		}
-		if (cub->angle >= 0.00000000 && cub->angle <= 90.00000000)
-		{
-			if (!(x % SIZE))
-				return (WEST);
-			else if (!(y % SIZE))
-				return (NORTH);
-		}
-	}
+	if (!(x % SIZE) && !(x % (SIZE - 1)) && !(y % SIZE) && !(y % (SIZE - 1)))
+		return (2);
+	else if ((x % SIZE) && !(x % (SIZE - 1)) && !(y % SIZE) && !(y % (SIZE - 1)))
+		return (1);
+	else if (!(y % SIZE) && !(y % (SIZE - 1)) && !(x % SIZE) && !(x % (SIZE - 1)))
+		return (1);
+	else if ((x % SIZE) && (y % SIZE) && !(x % (SIZE - 1)) && !(y % (SIZE - 1)))
+		return (1);
 	return (0);
+}
+
+void	check_walls(int x, int y, t_ray *ray)
+{
+	if (corner(x, y) == 2)
+		ICI
+	if (corner(x, y))
+		ray->face = 5;
+	else if (!(y % SIZE) && !(y % (SIZE - 1)) && (x % (SIZE - 1)))
+		ray->face = NORTH;
+	else if (!(x % SIZE) && !(x % (SIZE - 1)) && (y % (SIZE - 1)))
+		ray->face = WEST;
+	else if (!(x % (SIZE - 1)) && (x % SIZE) && (y % (SIZE - 1)))
+		ray->face = EAST;
+	else if (!(y % SIZE - 1) && (y % SIZE) && (x % (SIZE - 1)))
+		ray->face = SOUTH;
+	// if (cub->map.map[y / SIZE][x / SIZE] == '1')
+	// {
+	// 	if (!(x % SIZE) && !(y % SIZE))
+	// 		return (5);
+	// 	if (cub->angle >= 270.00000000 && cub->angle <= 360.00000000)
+	// 	{
+	// 		if (!(x % SIZE))
+	// 			return (WEST);
+	// 		else if (!((y + 1) % SIZE))
+	// 			return (SOUTH);
+	// 	}
+	// 	if (cub->angle >= 180.00000000 && cub->angle <= 270.00000000)
+	// 	{
+	// 		if (!((x + 1) % SIZE))
+	// 			return (EAST);
+	// 		else if (!((y + 1) % SIZE))
+	// 			return (SOUTH);
+	// 	}
+	// 	if (cub->angle >= 90.00000000 && cub->angle <= 180.00000000)
+	// 	{
+	// 		if (!((x + 1) % SIZE))
+	// 			return (EAST);
+	// 		else if (!(y % SIZE))
+	// 			return (NORTH);
+	// 	}
+	// 	if (cub->angle >= 0.00000000 && cub->angle <= 90.00000000)
+	// 	{
+	// 		if (!(x % SIZE))
+	// 			return (WEST);
+	// 		else if (!(y % SIZE))
+	// 			return (NORTH);
+	// 	}
+	// }
+	// return (0);
 }
 
 int abs(int n)
@@ -108,7 +133,7 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-float expand_ray(t_cub *cub, float angle, int index)
+float expand_ray(t_cub *cub, float angle, t_ray *ray)
 {
 	double	rad;
 	int		i;
@@ -121,9 +146,11 @@ float expand_ray(t_cub *cub, float angle, int index)
 	{
 		x = cub->plr.real_x + (i * cos(rad));
 		y = cub->plr.real_y + (i * sin(rad));
-		cub->rays[index].face = check_walls(cub, x, y);
-		if (cub->rays[index].face)
+		if (cub->map.map[y / SIZE][x / SIZE] == '1')
+		{
+			check_walls(x, y, ray);
 			break ;
+		}
 		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
 		i++;
 	}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
+#    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/24 11:18:16 by gponcele         ###   ########.fr        #
+#    Updated: 2023/01/27 10:28:05 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,18 +39,39 @@ SRC							=	src/check.c \
 								src/create_windows.c \
 								src/gnl/get_next_line.c \
 								src/gnl/get_next_line_utils.c \
+								src/utils/draw_utils.c \
 								src/utils/parse_utils.c
 
-LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
+SRC_LINUX					=	src/check.c \
+								src/circle.c \
+								src/dda.c \
+								src/draw.c \
+								src/error.c \
+								src/free.c \
+								src/linux/main.c \
+								src/linux/moves.c \
+								src/parse.c \
+								src/update_data.c \
+								src/linux/rotate.c \
+								src/create_windows.c \
+								src/gnl/get_next_line.c \
+								src/gnl/get_next_line_utils.c \
+								src/utils/parse_utils.c \
+								src/libft/lst/ft_lst_to_tab.c \
+								src/libft/lst/ft_lst_to_map.c \
 								src/libft/lst/ft_lstadd_back.c \
 								src/libft/lst/ft_lstclear.c \
 								src/libft/lst/ft_lstdelone.c \
 								src/libft/lst/ft_lstget.c \
 								src/libft/lst/ft_lstindex.c \
 								src/libft/lst/ft_lstlast.c \
+								src/libft/lst/ft_lstmax.c \
 								src/libft/lst/ft_lstnew.c \
 								src/libft/lst/ft_lstput.c \
 								src/libft/lst/ft_lstsize.c \
+								src/libft/ft_bzero.c \
+								src/libft/ft_itoa.c \
+								src/libft/ft_memset.c \
 								src/libft/ft_putendl_fd.c \
 								src/libft/ft_putstr.c \
 								src/libft/ft_puttab.c \
@@ -58,8 +79,9 @@ LIBFT_LINUX					=	src/libft/lst/ft_lst_to_tab.c \
 								src/libft/ft_split.c \
 								src/libft/ft_strchr.c \
 								src/libft/ft_strcmp.c \
-								src/libft/ft_strjoin.c \
+								src/libft/ft_strcpy.c \
 								src/libft/ft_strlcpy.c \
+								src/libft/ft_strjoin.c \
 								src/libft/ft_strncmp.c \
 								src/libft/ft_strstr.c \
 								src/libft/ft_strtrim.c \
@@ -90,7 +112,7 @@ all: 		libft $(NAME)
 				@$(CC) ${CFLAGS} -I./includes -c $< -o ${<:.c=.o}
 
 linux:
-					@$(CC) $(CFLAGS) $(INC) $(SRC) $(LIBFT_LINUX) $(LMLX_LINUX) -o $(NAME)
+					@$(CC) $(CFLAGS) $(INC) $(SRC_LINUX) $(LMLX_LINUX) -lm -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
 $(NAME): $(OBJS)

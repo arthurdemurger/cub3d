@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/25 17:47:32 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:14:24 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@
 */
 
 /* Colors */
-# define BLUE 0x1D5DCB
+# define BLUE 0x0000CD
 # define BLACK 0x000000
-# define GREEN 0x32CD32
-# define RED 0xD72A2A
+# define GREEN 0x008000
+# define RED 0xFF0000
 # define WHITE 0xFFFFFF
-# define LIGHT_GREEN 0x21F74C
-# define DARK_GREEN 0x1C9B35
+# define LIGHT_GREEN 0x7FFF00
+# define DARK_GREEN 0x006400
+# define FLOOR 0xCAA472
 
 /* Debug */
 # define ICI printf("ici\n");
@@ -47,15 +48,24 @@
 # define NE 2
 # define SE 3
 # define SO 4
+# define NORTH 1
+# define EAST 2
+# define SOUTH 3
+# define WEST 4
 
 /* Characters */
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "ESWN"
+# define ROT_ANGLE 10
+# define PIX_MOVE 5
 # define SIZE 32
 # define SIDE 3
 # define NB_RAYS 1024
+# define MID_RAY 512
 # define RADIUS 100
 # define ZOOM 0.66
+# define WIN_HEIGHT 768
+# define WIN_WIDTH 1024
 
 /* Managing errors */
 # define MALLOC_ERR "minishell : error in the memory allocation of a malloc."
@@ -130,15 +140,7 @@ typedef struct s_ray
 	int		face;
 	float	l;
 	float	angle;
-	// int		x1;
-	// int		x2;
-	// float	xa;
-	// int		y1;
-	// int		y2;
-	// float	ya;
 	int		dir;
-	// float	l_h;
-	// float	l_v;
 }	t_ray;
 
 typedef struct s_map
@@ -148,7 +150,7 @@ typedef struct s_map
 	int		h;
 }	t_map;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void		*img;
 	char		*addr;
@@ -189,9 +191,11 @@ void			grid(t_cub *cub);
 void			fill_squares(t_cub *cub);
 void			create_window_data(t_cub *cub);
 void			create_window_game(t_cub *cub);
+void			clean_map(t_cub *cub);
 
 /* Draw */
 void			draw(t_cub *cub);
+void			draw_cursor(t_cub *cub);
 
 /* Update */
 void			update_data(t_cub *cub, int line, char *data);
@@ -204,14 +208,14 @@ void			rotate(t_cub *cub, int key);
 void			display_pov(t_cub *cub, int color);
 
 /* DDA */
-void 			dda(t_cub *cub, int x, int y, int color, int ray);
+t_pos			dda(t_cub *cub, int x, int y, int color, int ray);
 float			distance(int x1, int y1, int x2, int y2);
-float 			expand_ray(t_cub *cub, float angle, int color);
+float			expand_ray(t_cub *cub, float angle, int index);
 float			angle(float a, float b);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
-t_ray	 		intersection(t_cub *cub, int cx, int cy, float r, float angle);
+t_ray			intersection(int cx, int cy, float r, float angle);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
@@ -222,6 +226,10 @@ void			parse(t_cub *cub, char *file);
 t_lst			*parse_texture(t_cub *cub, t_lst *lst);
 int				texture_done(t_cub *cub);
 int				check_map(t_cub *cub, char **map);
+
+/* Utils */
+float	add_angle(float a, float b);
+float	min_angle(float a, float b);
 
 /* Free */
 void			*free_tab(char **tab, int len);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/25 17:04:58 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:09:32 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,5 @@ void	parse(t_cub *cub, char *file)
 		ft_error("The map must be surrounded by walls.");
 	ft_lstclear(list);
 	cub->r = SIZE;
-	cub->plane = ((cub->r * ZOOM)) / 2;
+	cub->plane = (cub->r * ZOOM) / 2;
 }
