@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 11:14:49 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:49:10 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	move_up(t_cub *cub)
 	t_ray	pos;
 
 	i = 1;
-	circle(cub, 1, RED);
+	circle(cub, 1, WHITE);
 	while (i <= PIX_MOVE)
 	{
 		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, cub->angle);
@@ -40,7 +40,7 @@ void	move_right(t_cub *cub)
 	t_ray	pos;
 
 	i = 1;
-	circle(cub, 1, RED);
+	circle(cub, 1, WHITE);
 	while (i <= PIX_MOVE)
 	{
 		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, add_angle(cub->angle, 90));
@@ -62,7 +62,7 @@ int		i;
 	t_ray	pos;
 
 	i = 1;
-	circle(cub, 1, RED);
+	circle(cub, 1, WHITE);
 	while (i <= PIX_MOVE)
 	{
 		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, add_angle(cub->angle, 180));
@@ -84,7 +84,7 @@ void	move_left(t_cub *cub)
 	t_ray	pos;
 
 	i = 1;
-	circle(cub, 1, RED);
+	circle(cub, 1, WHITE);
 	while (i <= PIX_MOVE)
 	{
 		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, min_angle(cub->angle, 90));
