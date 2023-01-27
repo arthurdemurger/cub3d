@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 17:42:48 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:04:03 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,23 +126,32 @@ typedef struct s_text
 
 typedef struct s_vector
 {
-	int		x;
-	int		y;
-	int		real_x;
-	int		real_y;
+	int			x;
+	int			y;
+	int			real_x;
+	int			real_y;
+	int			x1;
+	int			x2;
+	float		xa;
+	int			y1;
+	int			y2;
+	float		ya;
 }	t_vector;
 
 typedef struct s_ray
 {
-	int		x;
-	int		y;
-	int		real_x;
-	int		real_y;
-	int		face;
-	float	l;
-	float	angle;
-	int		dir;
-	float	real_l;
+	int			x;
+	int			y;
+	int			real_x;
+	int			real_y;
+	float		l;
+	float		angle;
+	int			dir;
+	int			side;
+	float		l_h;
+	float		l_v;
+	t_vector	inter;
+	float		real_l;
 }	t_ray;
 
 typedef struct s_map
@@ -212,7 +221,7 @@ void			display_pov(t_cub *cub, int color);
 /* DDA */
 void			dda(t_cub *cub, t_ray *ray);
 float			distance(int x1, int y1, int x2, int y2);
-void			expand_ray(t_cub *cub, t_ray *ray);
+void			expand_ray(t_cub *cub, int index, t_ray *ray);
 float			angle(float a, float b);
 
 /* Corners */
