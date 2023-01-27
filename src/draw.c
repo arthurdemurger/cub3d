@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 10:40:37 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:14:49 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ void	draw(t_cub *cub)
 
 	i = -1;
 	init_draw(cub);
-	cub->rays[MID_RAY] = intersection(cub, cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle);
+	cub->rays[MID_RAY] = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle);
 	cub->rays[MID_RAY].angle = cub->angle;
 	cub->rays[MID_RAY].l = expand_ray(cub, cub->rays[MID_RAY].angle, MID_RAY);
 	while (++i < MID_RAY)
 	{
-		cub->rays[i] = intersection(cub, cub->rays[(NB_RAYS / 2)].real_x, cub->rays[(NB_RAYS / 2)].real_y, (cub->plane / ((NB_RAYS / 2))) * ((NB_RAYS / 2) - i), cub->angle + 90);
+		cub->rays[i] = intersection(cub->rays[(NB_RAYS / 2)].real_x, cub->rays[(NB_RAYS / 2)].real_y, (cub->plane / ((NB_RAYS / 2))) * ((NB_RAYS / 2) - i), cub->angle + 90);
 		cub->rays[i].angle = cub->angle - angle(SIZE, (cub->plane / (NB_RAYS / 2)) * ((NB_RAYS / 2) - i));
 		if (cub->rays[i].angle < 0)
 			cub->rays[i].angle = 360 + cub->rays[i].angle;
@@ -90,7 +90,7 @@ void	draw(t_cub *cub)
 	}
 	while (++i < NB_RAYS)
 	{
-		cub->rays[i] = intersection(cub, cub->rays[(NB_RAYS / 2)].real_x, cub->rays[(NB_RAYS / 2)].real_y, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)), cub->angle - 90);
+		cub->rays[i] = intersection(cub->rays[(NB_RAYS / 2)].real_x, cub->rays[(NB_RAYS / 2)].real_y, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)), cub->angle - 90);
 		cub->rays[i].angle = cub->angle + angle(SIZE, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)));
 		if (cub->rays[i].angle >= 360)
 			cub->rays[i].angle -= 360;

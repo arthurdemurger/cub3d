@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 10:42:23 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:14:24 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ float			angle(float a, float b);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
-t_ray			intersection(t_cub *cub, int cx, int cy, float r, float angle);
+t_ray			intersection(int cx, int cy, float r, float angle);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
@@ -226,6 +226,10 @@ void			parse(t_cub *cub, char *file);
 t_lst			*parse_texture(t_cub *cub, t_lst *lst);
 int				texture_done(t_cub *cub);
 int				check_map(t_cub *cub, char **map);
+
+/* Utils */
+float	add_angle(float a, float b);
+float	min_angle(float a, float b);
 
 /* Free */
 void			*free_tab(char **tab, int len);

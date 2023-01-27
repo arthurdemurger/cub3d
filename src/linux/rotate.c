@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/25 18:04:09 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:14:49 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ void	rotate(t_cub *cub, int key)
 	
 // 	i = -1;
 // 	cub->rays[NB_RAYS / 2].face = 1;
-// 	cub->rays[NB_RAYS / 2] = intersection(cub, cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle);
+// 	cub->rays[NB_RAYS / 2] = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle);
 // 	cub->rays[NB_RAYS / 2].angle = cub->angle;
 // 	cub->rays[NB_RAYS / 2].l = expand_ray(cub, cub->rays[NB_RAYS / 2].angle, color);
 // 	while (++i <= (NB_RAYS / 2) - 1)
 // 	{
 // 		cub->rays[i].face = 1;
-// 		cub->rays[i] = intersection(cub, cub->rays[NB_RAYS / 2].real_x, cub->rays[NB_RAYS / 2].real_y, (cub->plane / (NB_RAYS / 2)) * (NB_RAYS / 2 - i), cub->angle + 90);
+// 		cub->rays[i] = intersection(cub->rays[NB_RAYS / 2].real_x, cub->rays[NB_RAYS / 2].real_y, (cub->plane / (NB_RAYS / 2)) * (NB_RAYS / 2 - i), cub->angle + 90);
 // 		cub->rays[i].angle = cub->angle - angle(SIZE, (cub->plane / (NB_RAYS / 2)) * ((NB_RAYS / 2 ) - i));
 // 		if (cub->rays[i].angle < 0)
 // 			cub->rays[i].angle = 360 + cub->rays[i].angle;
@@ -86,7 +86,7 @@ void	rotate(t_cub *cub, int key)
 // 	while (++i <= NB_RAYS - 1)
 // 	{
 // 		cub->rays[i].face = 1;
-// 		cub->rays[i] = intersection(cub, cub->rays[NB_RAYS / 2].real_x, cub->rays[NB_RAYS / 2].real_y, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)), cub->angle - 90);
+// 		cub->rays[i] = intersection(cub->rays[NB_RAYS / 2].real_x, cub->rays[NB_RAYS / 2].real_y, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)), cub->angle - 90);
 // 		cub->rays[i].angle = cub->angle + angle(SIZE, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)));
 // 		if (cub->rays[i].angle >= 360)
 // 			cub->rays[i].angle -= 360;

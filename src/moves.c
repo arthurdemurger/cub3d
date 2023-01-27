@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 15:57:18 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:14:49 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	move_up(t_cub *cub)
 	circle(cub, 1, RED);
 	while (i <= PIX_MOVE)
 	{
-		pos = intersection(cub, cub->plr.real_x, cub->plr.real_y, i, cub->angle);
+		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, cub->angle);
 		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
 			break ;
 		cub->plr.real_x = pos.real_x;
@@ -43,7 +43,7 @@ void	move_right(t_cub *cub)
 	circle(cub, 1, RED);
 	while (i <= PIX_MOVE)
 	{
-		pos = intersection(cub, cub->plr.real_x, cub->plr.real_y, i, cub->angle + 90);
+		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, add_angle(cub->angle, 90));
 		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
 			break ;
 		cub->plr.real_x = pos.real_x;
@@ -65,7 +65,7 @@ int		i;
 	circle(cub, 1, RED);
 	while (i <= PIX_MOVE)
 	{
-		pos = intersection(cub, cub->plr.real_x, cub->plr.real_y, i, cub->angle - 180);
+		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, add_angle(cub->angle, 180));
 		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
 			break ;
 		cub->plr.real_x = pos.real_x;
@@ -87,7 +87,7 @@ void	move_left(t_cub *cub)
 	circle(cub, 1, RED);
 	while (i <= PIX_MOVE)
 	{
-		pos = intersection(cub, cub->plr.real_x, cub->plr.real_y, i, cub->angle - 90);
+		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, min_angle(cub->angle, 90));
 		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
 			break ;
 		cub->plr.real_x = pos.real_x;
