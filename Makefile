@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
+#    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/27 10:28:05 by ademurge         ###   ########.fr        #
+#    Updated: 2023/01/27 12:42:08 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ NAME						=	cub3d
 # Files
 SRC							=	src/check.c \
 								src/circle.c \
+								src/corners.c \
 								src/dda.c \
 								src/draw.c \
 								src/error.c \

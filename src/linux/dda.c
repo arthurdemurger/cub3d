@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 14:46:40 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:26:18 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,14 +133,14 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-float expand_ray(t_cub *cub, float angle, t_ray *ray)
+float expand_ray(t_cub *cub, t_ray *ray)
 {
 	double	rad;
 	int		i;
 	int		x;
 	int		y;
 
-	rad = angle * (M_PI / 180);
+	rad = ray->angle * (M_PI / 180);
 	i = 0;
 	while (1)
 	{

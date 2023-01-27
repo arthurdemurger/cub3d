@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 10:45:54 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:50:19 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	launch(t_cub *cub)
 		&cub->img_game.bits_per_pixel, &cub->img_game.line_length,
 		&cub->img_game.endian);
 	create_window_main(cub);
-	create_window_data(cub);
+	// create_window_data(cub);
 	mlx_hook(cub->win_game, DESTROY_BUTTON, 0, (void *)ft_close, cub);
 	mlx_hook(cub->win_game, KEYPRESS, 0, (void *)deal_key, cub);
 	mlx_loop(cub->mlx);

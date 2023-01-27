@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 11:14:24 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:52:53 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,8 +210,14 @@ void			display_pov(t_cub *cub, int color);
 /* DDA */
 t_pos			dda(t_cub *cub, int x, int y, int color, int ray);
 float			distance(int x1, int y1, int x2, int y2);
-float			expand_ray(t_cub *cub, float angle, int index);
+void			expand_ray(t_cub *cub, t_ray *ray);
 float			angle(float a, float b);
+
+/* Corners */
+int				north_west(t_vector plr, int x, int y);
+int				north_east(t_vector plr, int x, int y);
+int				south_west(t_vector plr, int x, int y);
+int				south_east(t_vector plr, int x, int y);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
