@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
+#    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/24 11:18:16 by gponcele         ###   ########.fr        #
+#    Updated: 2023/01/27 10:28:05 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC							=	src/check.c \
 								src/create_windows.c \
 								src/gnl/get_next_line.c \
 								src/gnl/get_next_line_utils.c \
+								src/utils/draw_utils.c \
 								src/utils/parse_utils.c
 
 SRC_LINUX					=	src/check.c \

@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/26 14:46:19 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:33:51 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "ESWN"
 # define ROT_ANGLE 10
-# define PIX_MOVE 3
+# define PIX_MOVE 5
 # define SIZE 32
 # define SIDE 3
 # define NB_RAYS 1024
@@ -203,6 +203,7 @@ void			clean_map(t_cub *cub);
 
 /* Draw */
 void			draw(t_cub *cub);
+void			draw_cursor(t_cub *cub);
 
 /* Update */
 void			update_data(t_cub *cub, int line, char *data);
