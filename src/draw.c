@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 12:57:14 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:58:31 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	draw(t_cub *cub)
 		cub->rays[i].angle = cub->angle - angle(SIZE, (cub->plane / (NB_RAYS / 2)) * ((NB_RAYS / 2) - i));
 		if (cub->rays[i].angle < 0)
 			cub->rays[i].angle = 360 + cub->rays[i].angle;
-		cub->rays[i].l = expand_ray(cub, cub->rays[i].angle, i);
+		expand_ray(cub, &cub->rays[i]);
 		// fish_eye_corr(cub, i);
 	}
 	while (++i < NB_RAYS)
@@ -107,7 +107,7 @@ void	draw(t_cub *cub)
 		cub->rays[i].angle = cub->angle + angle(SIZE, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)));
 		if (cub->rays[i].angle >= 360)
 			cub->rays[i].angle -= 360;
-		cub->rays[i].l = expand_ray(cub, cub->rays[i].angle, i);
+		expand_ray(cub, &cub->rays[i]);
 		// fish_eye_corr(cub, i);
 	}
 	draw_game(cub);

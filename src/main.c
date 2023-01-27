@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 12:50:19 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:59:41 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void deal_key(int key, t_cub *cub)
 	if (key == ESC)
 	{
 		mlx_destroy_window(cub->mlx, cub->win_game);
-		mlx_destroy_window(cub->mlx, cub->win_data);
 		free (cub->mlx);
 		exit(0);
 	}
