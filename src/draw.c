@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 10:33:58 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:40:37 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void	init_draw(t_cub *cub)
 		while (++x < WIN_WIDTH)
 			my_mlx_pixel_put(&cub->img_game, x, y, BLACK);
 	}
-	y = 383;
-	while (++y < 768)
+	y = (WIN_HEIGHT / 2) - 1;
+	while (++y < WIN_HEIGHT)
 	{
 		x = -1;
-		while (++x < 1024)
+		while (++x < WIN_WIDTH)
 			my_mlx_pixel_put(&cub->img_game, x, y, FLOOR);
 	}
 }

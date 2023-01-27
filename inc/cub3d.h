@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 10:33:51 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:42:23 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,15 +140,7 @@ typedef struct s_ray
 	int		face;
 	float	l;
 	float	angle;
-	// int		x1;
-	// int		x2;
-	// float	xa;
-	// int		y1;
-	// int		y2;
-	// float	ya;
 	int		dir;
-	// float	l_h;
-	// float	l_v;
 }	t_ray;
 
 typedef struct s_map
@@ -158,7 +150,7 @@ typedef struct s_map
 	int		h;
 }	t_map;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void		*img;
 	char		*addr;
@@ -216,14 +208,14 @@ void			rotate(t_cub *cub, int key);
 void			display_pov(t_cub *cub, int color);
 
 /* DDA */
-t_pos 			dda(t_cub *cub, int x, int y, int color, int ray);
+t_pos			dda(t_cub *cub, int x, int y, int color, int ray);
 float			distance(int x1, int y1, int x2, int y2);
-float 			expand_ray(t_cub *cub, float angle, int index);
+float			expand_ray(t_cub *cub, float angle, int index);
 float			angle(float a, float b);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
-t_ray	 		intersection(t_cub *cub, int cx, int cy, float r, float angle);
+t_ray			intersection(t_cub *cub, int cx, int cy, float r, float angle);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
