@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 18:04:40 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:05:55 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void	cardinal(t_cub *cub, int index)
 		if (cub->map.map[(int)y / SIZE][(int)x / SIZE] == '1')
 		{
 			cub->rays[index].side = check_walls(cub->rays[index].angle);
-			cub->rays[index].l = distance(cub->plr.real_x, cub->plr.real_y, floats[0], floats[1]);
+			cub->rays[index].l = distance(cub->plr.real_x, cub->plr.real_y, x, y);
 			break ;
 		}
 		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
