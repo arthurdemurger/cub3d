@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 12:59:14 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 17:26:33 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "ESWN"
 # define ROT_ANGLE 10
-# define PIX_MOVE 10
+# define PIX_MOVE 5
 # define SIZE 32
 # define SIDE 3
 # define NB_RAYS 1024
@@ -125,22 +125,31 @@ typedef struct s_text
 
 typedef struct s_vector
 {
-	int		x;
-	int		y;
-	int		real_x;
-	int		real_y;
+	int			x;
+	int			y;
+	int			real_x;
+	int			real_y;
+	int			x1;
+	int			x2;
+	float		xa;
+	int			y1;
+	int			y2;
+	float		ya;
 }	t_vector;
 
 typedef struct s_ray
 {
-	int		x;
-	int		y;
-	int		real_x;
-	int		real_y;
-	int		face;
-	float	l;
-	float	angle;
-	int		dir;
+	int			x;
+	int			y;
+	int			real_x;
+	int			real_y;
+	float		l;
+	float		angle;
+	int			dir;
+	int			side;
+	float		l_h;
+	float		l_v;
+	t_vector 	inter;
 }	t_ray;
 
 typedef struct s_map
@@ -210,7 +219,7 @@ void			display_pov(t_cub *cub, int color);
 /* DDA */
 t_pos			dda(t_cub *cub, int x, int y, int color, int ray);
 float			distance(int x1, int y1, int x2, int y2);
-void			expand_ray(t_cub *cub, t_ray *ray);
+void			expand_ray(t_cub *cub, int index, t_ray *ray);
 float			angle(float a, float b);
 
 /* Corners */

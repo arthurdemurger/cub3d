@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 12:58:31 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 17:26:23 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ void	draw_col(t_cub *cub, t_ray ray, int col, int color)
 	i = WIN_HEIGHT / 2;
 	height = ((cub->r * SIZE) / ray.l) * 7;
 	my_mlx_pixel_put(&cub->img_game, col, i, color);
-	while (++i <= (WIN_HEIGHT / 2) + ((int)height / 2))
+	while (++i <= (WIN_HEIGHT / 2) + ((int)height / 2) && i < 768)
 		my_mlx_pixel_put(&cub->img_game, col, i, color);
 	i = WIN_HEIGHT / 2;
-	while (--i >= (WIN_HEIGHT / 2) - ((int)height / 2))
+	while (--i >= (WIN_HEIGHT / 2) - ((int)height / 2) && i >= 0)
 		my_mlx_pixel_put(&cub->img_game, col, i, color);
 }
 
 void	get_color(t_cub *cub, t_ray ray, int col)
 {
-	if (ray.face == 5)
-		draw_col(cub, ray, col, BLACK);
-	else if (ray.face % 2)
+	// if (ray.face == 5)
+	// 	draw_col(cub, ray, col, BLACK);
+	if (ray.side % 2)
 		draw_col(cub, ray, col, LIGHT_GREEN);
-	else if (!(ray.face % 2))
+	else if (!(ray.side % 2))
 		draw_col(cub, ray, col, DARK_GREEN);
 }
 
@@ -50,13 +50,17 @@ void	draw_game(t_cub *cub)
 
 void	init_draw(t_cub *cub)
 {
-	int	i;
+	// int	i;
 	int	x;
 	int	y;
 
-	i = -1;
-	while (++i < NB_RAYS)
-		cub->rays[i].face = 0;
+	// i = -1;
+	// while (++i < NB_RAYS)
+	// {
+	// 	cub->rays[i].side = 0;
+	// 	cub->rays[i].l_h = 0;
+	// 	cub->rays[i].l_v = 0;
+	// }
 	y = (WIN_HEIGHT / 2) - 1;
 	while (--y > 0)
 	{
@@ -91,14 +95,14 @@ void	draw(t_cub *cub)
 	init_draw(cub);
 	cub->rays[MID_RAY] = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle);
 	cub->rays[MID_RAY].angle = cub->angle;
-	expand_ray(cub, &cub->rays[MID_RAY]);
+	expand_ray(cub, MID_RAY, &cub->rays[MID_RAY]);
 	while (++i < MID_RAY)
 	{
 		cub->rays[i] = intersection(cub->rays[(NB_RAYS / 2)].real_x, cub->rays[(NB_RAYS / 2)].real_y, (cub->plane / ((NB_RAYS / 2))) * ((NB_RAYS / 2) - i), cub->angle + 90);
 		cub->rays[i].angle = cub->angle - angle(SIZE, (cub->plane / (NB_RAYS / 2)) * ((NB_RAYS / 2) - i));
 		if (cub->rays[i].angle < 0)
 			cub->rays[i].angle = 360 + cub->rays[i].angle;
-		expand_ray(cub, &cub->rays[i]);
+		expand_ray(cub, i, &cub->rays[i]);
 		// fish_eye_corr(cub, i);
 	}
 	while (++i < NB_RAYS)
@@ -107,7 +111,7 @@ void	draw(t_cub *cub)
 		cub->rays[i].angle = cub->angle + angle(SIZE, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)));
 		if (cub->rays[i].angle >= 360)
 			cub->rays[i].angle -= 360;
-		expand_ray(cub, &cub->rays[i]);
+		expand_ray(cub, i, &cub->rays[i]);
 		// fish_eye_corr(cub, i);
 	}
 	draw_game(cub);

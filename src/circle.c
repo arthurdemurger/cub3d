@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   circle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 11:22:28 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:36:29 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_ray(t_ray *ray)
 {
 	ray->angle = 0;
 	ray->dir = 0;
-	ray->face = 0;
+	ray->side = 0;
 	ray->l = 0;
 	ray->real_x = 0;
 	ray->real_y = 0;
