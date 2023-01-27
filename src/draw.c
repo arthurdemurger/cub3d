@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 11:14:49 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:49:17 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,16 @@ void	init_draw(t_cub *cub)
 	}
 }
 
+void	fish_eye_corr(t_cub *cub, int index)
+{
+	printf("l before : %f | ", cub->rays[index].l);
+	if (index > MID_RAY)
+		cub->rays[index].l = cub->rays[index].l * cos(min_angle(cub->rays[index].angle, cub->angle));
+	else
+		cub->rays[index].l = cub->rays[index].l * cos(add_angle(cub->rays[index].angle, cub->angle));
+	printf("l after : %f\n", cub->rays[index].l);
+}
+
 void	draw(t_cub *cub)
 {
 	int		i;
@@ -87,6 +97,7 @@ void	draw(t_cub *cub)
 		if (cub->rays[i].angle < 0)
 			cub->rays[i].angle = 360 + cub->rays[i].angle;
 		cub->rays[i].l = expand_ray(cub, cub->rays[i].angle, i);
+		// fish_eye_corr(cub, i);
 	}
 	while (++i < NB_RAYS)
 	{
@@ -95,6 +106,7 @@ void	draw(t_cub *cub)
 		if (cub->rays[i].angle >= 360)
 			cub->rays[i].angle -= 360;
 		cub->rays[i].l = expand_ray(cub, cub->rays[i].angle, i);
+		// fish_eye_corr(cub, i);
 	}
 	draw_game(cub);
 }
