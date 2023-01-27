@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/25 18:04:09 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:06:50 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	display_pov(t_cub *cub, int color)
 		cub->rays[i].angle = cub->angle + angle(SIZE, (cub->plane / (NB_RAYS / 2)) * (i - (NB_RAYS / 2)));
 		if (cub->rays[i].angle >= 360)
 			cub->rays[i].angle -= 360;
-		printf("%f\n", cub->rays[i].angle);
 		cub->rays[i].l = expand_ray(cub, cub->rays[i].angle, color);
 	}
 }
