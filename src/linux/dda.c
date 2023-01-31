@@ -6,39 +6,89 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 11:26:18 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:41:54 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	corner(int x, int y)
+int	is_corner(int x, int y)
 {
-	if (!(x % SIZE) && !(x % (SIZE - 1)) && !(y % SIZE) && !(y % (SIZE - 1)))
+	if (!(y % SIZE) && !(x % SIZE))
+		return (1);
+	else if (!(y % SIZE) && !((x + 1) % SIZE))
 		return (2);
-	else if ((x % SIZE) && !(x % (SIZE - 1)) && !(y % SIZE) && !(y % (SIZE - 1)))
-		return (1);
-	else if (!(y % SIZE) && !(y % (SIZE - 1)) && !(x % SIZE) && !(x % (SIZE - 1)))
-		return (1);
-	else if ((x % SIZE) && (y % SIZE) && !(x % (SIZE - 1)) && !(y % (SIZE - 1)))
-		return (1);
+	else if (!(x % SIZE) && !((y + 1) % SIZE))
+		return (3);
+	else if (!((x + 1) % SIZE) && !((y + 1) % SIZE))
+		return (4);
 	return (0);
 }
 
-void	check_walls(int x, int y, t_ray *ray)
+// int	get_side(float x, float y, int corner)
+// {
+// 	float	x_dec;
+// 	float	y_dec;
+
+// 	printf("x : %f | y : %f\n", x, y); 
+// 	x_dec = x - floorf(x);
+// 	y_dec = y - floorf(y);
+// 	if (corner == 1)
+// 	{
+// 		if (x_dec > y_dec)
+// 			return (WEST);
+// 		return (NORTH);
+// 	}
+// 	else if (corner == 2)
+// 	{
+// 		if ((floorf(x) + 1) - x_dec > y_dec)
+// 			return (EAST);
+// 		return (NORTH);
+// 	}
+// 	else if (corner == 3)
+// 	{
+// 		if ((floorf(y) + 1) - y_dec > x_dec)
+// 			return (SOUTH);
+// 		return (WEST);
+// 	}
+// 	if ((floorf(x) + 1) - x_dec > (floorf(y) + 1) - y_dec)
+// 		return (SOUTH);
+// 	return (EAST);
+// }
+
+// void	display_wall(int side)
+// {
+// 	if (side == 1)
+// 		printf("NORTH\n");
+// 	else if (side == 2)
+// 		printf("EAST\n");
+// 	else if (side == 3)
+// 		printf("SOUTH\n");
+// 	else if (side == 4)
+// 		printf("WEST\n");
+// }
+
+int	check_walls(t_vector plr, float *floats)
 {
-	if (corner(x, y) == 2)
-		ICI
-	if (corner(x, y))
-		ray->face = 5;
-	else if (!(y % SIZE) && !(y % (SIZE - 1)) && (x % (SIZE - 1)))
-		ray->face = NORTH;
-	else if (!(x % SIZE) && !(x % (SIZE - 1)) && (y % (SIZE - 1)))
-		ray->face = WEST;
-	else if (!(x % (SIZE - 1)) && (x % SIZE) && (y % (SIZE - 1)))
-		ray->face = EAST;
-	else if (!(y % SIZE - 1) && (y % SIZE) && (x % (SIZE - 1)))
-		ray->face = SOUTH;
+	int	corner;
+	// int side;
+
+	corner = is_corner(floorf(floats[0]), floorf(floats[1]));
+	if (corner == 1)
+		return (north_west(plr, floats));
+	else if (corner == 2)
+		return (north_east(plr, floats));
+	else if (corner == 3)
+		return (south_west(plr, floats));
+	else if (corner == 4)
+		return (south_east(plr, floats));
+	if (!((int)floorf(floats[1]) % SIZE))
+		return (NORTH);
+	else if (!((int)floorf(floats[0]) % SIZE))
+		return (WEST);
+	else if (!((int)(floorf(floats[0]) + 1) % SIZE))
+		return (EAST);
+	return (SOUTH);
 	// if (cub->map.map[y / SIZE][x / SIZE] == '1')
 	// {
 	// 	if (!(x % SIZE) && !(y % SIZE))
@@ -133,26 +183,31 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-float expand_ray(t_cub *cub, t_ray *ray)
+void expand_ray(t_cub *cub, int index, t_ray *ray)
 {
 	double	rad;
 	int		i;
-	int		x;
-	int		y;
+	float	floats[4];
 
+	(void)index;
 	rad = ray->angle * (M_PI / 180);
 	i = 0;
 	while (1)
 	{
-		x = cub->plr.real_x + (i * cos(rad));
-		y = cub->plr.real_y + (i * sin(rad));
-		if (cub->map.map[y / SIZE][x / SIZE] == '1')
+		floats[0] = cub->plr.real_x + (i * cos(rad));
+		floats[1] = cub->plr.real_y + (i * sin(rad));
+		if (cub->map.map[(int)floorf(floats[1]) / SIZE][(int)floorf(floats[0]) / SIZE] == '1')
 		{
-			check_walls(x, y, ray);
+			ray->side = check_walls(cub->plr, floats);
+			ray->l = distance(cub->plr.real_x, cub->plr.real_y, floats[0], floats[1]);
 			break ;
 		}
-		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
+		floats[2] = floats[0];
+		floats[3] = floats[1];
+		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / 4, round(floats[1]) / 4, GREEN);
 		i++;
 	}
-	return (distance(cub->plr.real_x, cub->plr.real_y, x, y));
+	// printf("Côté rayon %d : %d\n", index, ray->side);
+	// if (index == 934)
+	// 	printf("%f | %f\n", floats[0], floats[1]);
 }
