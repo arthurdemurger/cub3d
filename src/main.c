@@ -58,8 +58,8 @@ void deal_key(int key, t_cub *cub)
 void	launch(t_cub *cub)
 {
 	cub->mlx = mlx_init();
-	cub->img_map.img = mlx_new_image(cub->mlx, (cub->map.w * SIZE) / 4,
-		(cub->map.h * SIZE) / 4);
+	cub->img_map.img = mlx_new_image(cub->mlx, (cub->map.w * SIZE) / MAP_DIV,
+		(cub->map.h * SIZE) / MAP_DIV);
 	cub->img_map.addr = mlx_get_data_addr(cub->img_map.img,
 		&cub->img_map.bits_per_pixel, &cub->img_map.line_length,
 		&cub->img_map.endian);

@@ -27,12 +27,12 @@ void	fill_squares(t_cub *cub)
 		{
 			if (cub->map.map[y][x] == '1')
 			{
-				y_copy = y * (SIZE / 4);
-				while (y_copy < ((y * (SIZE / 4)) + (SIZE / 4))
-					|| x_copy < ((x * (SIZE / 4)) + (SIZE / 4)))
+				y_copy = y * (SIZE / MAP_DIV);
+				while (y_copy < ((y * (SIZE / MAP_DIV)) + (SIZE / MAP_DIV))
+					|| x_copy < ((x * (SIZE / MAP_DIV)) + (SIZE / MAP_DIV)))
 				{
-					x_copy = x * (SIZE / 4);
-					while (x_copy < ((x * (SIZE / 4)) + (SIZE / 4)))
+					x_copy = x * (SIZE / MAP_DIV);
+					while (x_copy < ((x * (SIZE / MAP_DIV)) + (SIZE / MAP_DIV)))
 					{
 						my_mlx_pixel_put(&cub->img_map, x_copy, y_copy,
 							BLUE);
@@ -52,12 +52,12 @@ void	grid(t_cub *cub)
 
 	x = 0;
 	y = 0;
-	while (x < ((SIZE * cub->map.w)) / 4 || y < ((SIZE * cub->map.h)) / 4)
+	while (x < ((SIZE * cub->map.w)) / MAP_DIV || y < ((SIZE * cub->map.h)) / MAP_DIV)
 	{
 		x = 0;
-		while (x < ((SIZE * cub->map.w)) / 4)
+		while (x < ((SIZE * cub->map.w)) / MAP_DIV)
 		{
-			if ((y > 0 && ((x % (SIZE / 4)) == 0)) || (y % (SIZE / 4)) == 0)
+			if ((y > 0 && ((x % (SIZE / MAP_DIV)) == 0)) || (y % (SIZE / MAP_DIV)) == 0)
 				my_mlx_pixel_put(&cub->img_map, x, y, BLACK);
 			x++;
 		}
@@ -72,10 +72,10 @@ void	clean_map(t_cub *cub)
 
 	x = 0;
 	y = 0;
-	while (x < ((SIZE * cub->map.w)) / 4 || y < ((SIZE * cub->map.h)) / 4)
+	while (x < ((SIZE * cub->map.w)) / MAP_DIV || y < ((SIZE * cub->map.h)) / MAP_DIV)
 	{
 		x = 0;
-		while (x < ((SIZE * cub->map.w)) / 4)
+		while (x < ((SIZE * cub->map.w)) / MAP_DIV)
 		{
 			my_mlx_pixel_put(&cub->img_map, x, y, WHITE);
 			x++;
@@ -92,7 +92,7 @@ void create_window_main(t_cub *cub)
 	clean_map(cub);
 	circle(cub, 1, RED);
 	draw(cub);
-	grid(cub);
+	// grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
 	// printf("%d | %d\n", cub->plr.real_x / SIZE, cub->plr.real_y / SIZE);
 }

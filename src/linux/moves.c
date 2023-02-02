@@ -6,130 +6,112 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/24 11:04:01 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/01/27 12:57:22 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-void	move_up(t_cub *cub, int y)
+void	move_up(t_cub *cub)
 {
 	int		i;
-	char	*data;
+	t_ray	pos;
 
-	i = 0;
-	circle(cub, 5, WHITE);
-	grid(cub);
-	while (i < 4 && ((y - i) % SIZE) != 0)
-		i++;
-	if (cub->map.map[(y / SIZE) - 1][cub->plr.x] == '1')
-		cub->plr.real_y -= i;
-	else
+	i = 1;
+	circle(cub, 1, WHITE);
+	while (i <= PIX_MOVE)
 	{
-		cub->plr.real_y -= 3;
-		if (cub->plr.real_y % SIZE > SIZE - 3)
-		{
-			cub->plr.y -= 1;
-			data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
-			data = ft_strjoin(data, " | Y : ");
-			data = ft_strjoin(data, ft_itoa(cub->plr.y));
-			update_data(cub, 1, data);
-		}
+		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, cub->angle);
+		if (cub->map.map[(int)floorf(pos.real_y) / SIZE][(int)floorf(pos.real_x) / SIZE] == '1')
+			break ;
+		cub->plr.real_x = pos.real_x;
+		cub->plr.real_y = pos.real_y;
+		cub->plr.x = pos.real_x / SIZE;
+		cub->plr.y = pos.real_y / SIZE;
+		i++;
 	}
-	circle(cub, 5, RED);
+	draw(cub);
+	circle(cub, 1, RED);
 }
 
-void	move_right(t_cub *cub, int x)
+void	move_right(t_cub *cub)
 {
 	int		i;
-	char	*data;
+	t_ray	pos;
 
-	i = 0;
-	circle(cub, 5, WHITE);
-	grid(cub);
-	while (i < 4 && ((x + i) % SIZE) != 0)
-		i++;
-	if (cub->map.map[cub->plr.y][(x / SIZE) + 1] == '1')
-		cub->plr.real_x += i;
-	else
+	i = 1;
+	circle(cub, 1, WHITE);
+	while (i <= PIX_MOVE)
 	{
-		cub->plr.real_x += 3;
-		if (cub->plr.real_x % SIZE < 3)
-		{
-			cub->plr.x += 1;
-			data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
-			data = ft_strjoin(data, " | Y : ");
-			data = ft_strjoin(data, ft_itoa(cub->plr.y));
-			update_data(cub, 1, data);
-		}
+		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, add_angle(cub->angle, 90));
+		if (cub->map.map[(int)floorf(pos.real_y) / SIZE][(int)floorf(pos.real_x) / SIZE] == '1')
+			break ;
+		cub->plr.real_x = pos.real_x;
+		cub->plr.real_y = pos.real_y;
+		cub->plr.x = pos.real_x / SIZE;
+		cub->plr.y = pos.real_y / SIZE;
+		i++;
 	}
-	circle(cub, 5, RED);
+	draw(cub);
+	circle(cub, 1, RED);
 }
 
-void	move_down(t_cub *cub, int y)
+void	move_down(t_cub *cub)
+{
+int		i;
+	t_ray	pos;
+
+	i = 1;
+	circle(cub, 1, WHITE);
+	while (i <= PIX_MOVE)
+	{
+		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, add_angle(cub->angle, 180));
+		if (cub->map.map[(int)floorf(pos.real_y) / SIZE][(int)floorf(pos.real_x) / SIZE] == '1')
+			break ;
+		cub->plr.real_x = pos.real_x;
+		cub->plr.real_y = pos.real_y;
+		cub->plr.x = pos.real_x / SIZE;
+		cub->plr.y = pos.real_y / SIZE;
+		i++;
+	}
+	draw(cub);
+	circle(cub, 1, RED);
+}
+
+void	move_left(t_cub *cub)
 {
 	int		i;
-	char	*data;
+	t_ray	pos;
 
-	i = 0;
-	circle(cub, 5, WHITE);
-	grid(cub);
-	while (i < 4 && ((y + i) % SIZE) != 0)
-		i++;
-	if (cub->map.map[(y / SIZE) + 1][cub->plr.x] == '1')
-		cub->plr.real_y += i;
-	else
+	i = 1;
+	circle(cub, 1, WHITE);
+	while (i <= PIX_MOVE)
 	{
-		cub->plr.real_y += 3;
-		if (cub->plr.real_y % SIZE < 3)
-		{
-			cub->plr.y += 1;
-			data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
-			data = ft_strjoin(data, " | Y : ");
-			data = ft_strjoin(data, ft_itoa(cub->plr.y));
-			update_data(cub, 1, data);
-		}
+		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, min_angle(cub->angle, 90));
+		if (cub->map.map[(int)floorf(pos.real_y) / SIZE][(int)floorf(pos.real_x) / SIZE] == '1')
+			break ;
+		cub->plr.real_x = pos.real_x;
+		cub->plr.real_y = pos.real_y;
+		cub->plr.x = pos.real_x / SIZE;
+		cub->plr.y = pos.real_y / SIZE;
+		i++;
 	}
-	circle(cub, 5, RED);
+	draw(cub);
+	circle(cub, 1, RED);
 }
 
-void	move_left(t_cub *cub, int x)
+void	move(t_cub *cub, int key)
 {
-	int		i;
-	char	*data;
-
-	i = 0;
-	circle(cub, 5, WHITE);
-	grid(cub);
-	while (i < 4 && ((x - i) % SIZE) != 0)
-		i++;
-	if (cub->map.map[cub->plr.y][(x / SIZE) - 1] == '1')
-		cub->plr.real_x -= i;
-	else
-	{
-		cub->plr.real_x -= 3;
-		if (cub->plr.real_x % SIZE > SIZE - 3)
-		{
-			cub->plr.x -= 1;
-			data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
-			data = ft_strjoin(data, " | Y : ");
-			data = ft_strjoin(data, ft_itoa(cub->plr.y));
-			update_data(cub, 1, data);
-		}
-	}
-	circle(cub, 5, RED);
-}
-
-void    move(t_cub *cub, int key)
-{
-    if (key == 122)
-		move_up(cub, cub->plr.real_y);
-    else if (key == 113)
-		move_left(cub, cub->plr.real_x);
-    else if (key == 115)
-		move_down(cub, cub->plr.real_y);
-    else if (key == 100)
-		move_right(cub, cub->plr.real_x);
-	grid(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win_main, cub->img_map.img, 0, 0);
+	clean_map(cub);
+	if (key == 122)
+		move_up(cub);
+	else if (key == 113)
+		move_left(cub);
+	else if (key == 115)
+		move_down(cub);
+	else if (key == 100)
+		move_right(cub);
+	// grid(cub);
+	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
+	// printf("%d | %d\n", cub->plr.real_x / SIZE, cub->plr.real_y / SIZE);
 }

@@ -58,7 +58,8 @@
 # define POS_CHAR "ESWN"
 # define ROT_ANGLE 10
 # define PIX_MOVE 5
-# define SIZE 32
+# define MAP_DIV 8
+# define SIZE 64
 # define SIDE 3
 # define NB_RAYS 1024
 # define MID_RAY 512
@@ -68,6 +69,8 @@
 # define WIN_WIDTH 1024
 # define LEFT 1
 # define RIGHT 0
+# define INT_MAX 2147483647
+
 /* Managing errors */
 # define MALLOC_ERR "minishell : error in the memory allocation of a malloc."
 
@@ -128,30 +131,36 @@ typedef struct s_vector
 {
 	int			x;
 	int			y;
-	int			real_x;
-	int			real_y;
-	int			x1;
-	int			x2;
-	float		xa;
-	int			y1;
-	int			y2;
-	float		ya;
+	float		real_x;
+	float		real_y;
 }	t_vector;
 
 typedef struct s_ray
 {
 	int			x;
 	int			y;
-	int			real_x;
-	int			real_y;
+	float		real_x;
+	float		real_y;
+	float		real_x_h;
+	float		real_y_h;
+	float		real_x_v;
+	float		real_y_v;
 	float		l;
 	float		angle;
 	int			dir;
 	int			side;
 	float		l_h;
 	float		l_v;
-	t_vector	inter;
 	float		real_l;
+	float		x1;
+	float		x2;
+	float		xa;
+	float		y1;
+	float		y2;
+	float		ya;
+	float		copy_x;
+	float		copy_y;
+	int			draw;
 }	t_ray;
 
 typedef struct s_map
@@ -220,15 +229,17 @@ void			display_pov(t_cub *cub, int color);
 
 /* DDA */
 void			dda(t_cub *cub, t_ray *ray);
-float			distance(int x1, int y1, int x2, int y2);
-void			expand_ray(t_cub *cub, int index, t_ray *ray);
+float			real_distance(t_cub *cub, t_ray *ray);
+// int				distance(t_cub *cub, int x, int y, int ray);
+// float			distance(t_cub cub, t_ray ray, float *floats);
+void			expand_ray(t_cub *cub, t_ray *ray);
 float			angle(float a, float b);
 
 /* Corners */
-int				north_west(t_vector plr, int x, int y);
-int				north_east(t_vector plr, int x, int y);
-int				south_west(t_vector plr, int x, int y);
-int				south_east(t_vector plr, int x, int y);
+int				north_west(t_vector plr, float *floats);
+int				north_east(t_vector plr, float *floats);
+int				south_west(t_vector plr, float *floats);
+int				south_east(t_vector plr, float *floats);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
@@ -245,8 +256,8 @@ int				texture_done(t_cub *cub);
 int				check_map(t_cub *cub, char **map);
 
 /* Utils */
-float	add_angle(float a, float b);
-float	min_angle(float a, float b);
+float			add_angle(float a, float b);
+float			min_angle(float a, float b);
 
 /* Free */
 void			*free_tab(char **tab, int len);

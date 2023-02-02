@@ -137,55 +137,54 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-float	check_walls_h(t_cub *cub, t_vector *inter, int index, int x)
+float	check_walls_h(t_cub *cub, t_ray *ray, int index, int x)
 {
-	if (!inter->x1)
-		inter->x1 = x;
+	if (!ray->x1)
+		ray->x1 = x;
 	else
 	{
-		inter->x2 = x;
-		inter->xa = inter->x2 - inter->x1;
-		while (cub->map.map[inter->real_y / SIZE][inter->real_x / SIZE] != '1')
+		ray->x2 = x;
+		ray->xa = ray->x2 - ray->x1;
+		while (cub->map.map[ray->real_y / SIZE][ray->real_x / SIZE] != '1')
 		{
 			if (cub->rays[index].angle > 0 && cub->rays[index].angle < 180)
 			{
-				ICI
-				inter->real_x += inter->xa;
-				inter->real_y -= SIZE;
+				ray->real_x += ray->xa;
+				ray->real_y -= SIZE;
 			}
 			else
 			{
-				inter->real_x += inter->xa;
-				inter->real_y += SIZE;
+				ray->real_x += ray->xa;
+				ray->real_y += SIZE;
 			}
 		}
-		return (distance(cub->plr.real_x, cub->plr.real_y, inter->real_x, inter->real_y));
+		return (distance(cub->plr.real_x, cub->plr.real_y, ray->real_x, ray->real_y));
 	}
 	return (0);
 }
 
-float	check_walls_v(t_cub *cub, t_vector *inter, int index, int y)
+float	check_walls_v(t_cub *cub, t_ray *ray, int index, int y)
 {
-	if (!inter->y1)
-		inter->y1 = y;
+	if (!ray->y1)
+		ray->y1 = y;
 	else
 	{
-		inter->y2 = y;
-		inter->ya = inter->y2 - inter->y1;
-		while (cub->map.map[inter->real_y / SIZE][inter->real_x / SIZE] != '1')
+		ray->y2 = y;
+		ray->ya = ray->y2 - ray->y1;
+		while (cub->map.map[ray->real_y / SIZE][ray->real_x / SIZE] != '1')
 		{
 			if (cub->rays[index].angle > 90 && cub->rays[index].angle < 270)
 			{
-				inter->real_x -= SIZE;
-				inter->real_y += inter->ya;
+				ray->real_x -= SIZE;
+				ray->real_y += ray->ya;
 			}
 			else
 			{
-				inter->real_x += SIZE;
-				inter->real_y += inter->ya;
+				ray->real_x += SIZE;
+				ray->real_y += ray->ya;
 			}
 		}
-		return (distance(cub->plr.real_x, cub->plr.real_y, inter->real_x, inter->real_y));
+		return (distance(cub->plr.real_x, cub->plr.real_y, ray->real_x, ray->real_y));
 	}
 	return (0);
 }
@@ -220,7 +219,7 @@ void	cardinal(t_cub *cub, int index)
 			cub->rays[index].l = distance(cub->plr.real_x, cub->plr.real_y, x, y);
 			break ;
 		}
-		my_mlx_pixel_put(&cub->img_map, round(x) / 4, round(y) / 4, GREEN);
+		my_mlx_pixel_put(&cub->img_map, round(x) / MAP_DIV, round(y) / MAP_DIV, GREEN);
 		i++;
 	}
 }
@@ -231,6 +230,12 @@ void	init_rays(t_ray *ray)
 	ray->l_h = 0;
 	ray->l_v = 0;
 	ray->l = 0;
+	ray->x1 = 0;
+	ray->x2 = 0;
+	ray->xa = 0;
+	ray->y1 = 0;
+	ray->y2 = 0;
+	ray->ya = 0;
 }
 
 void expand_ray(t_cub *cub, int index, t_ray *ray)
@@ -239,7 +244,7 @@ void expand_ray(t_cub *cub, int index, t_ray *ray)
 	int			i;
 	float		floats[2];
 
-	// printf("%d : ", index);
+	printf("%d\n", index);
 	init_rays(ray);
 	if (!((int)ray->angle % 90))
 		cardinal(cub, index);
@@ -256,16 +261,16 @@ void expand_ray(t_cub *cub, int index, t_ray *ray)
 				if (cub->map.map[(int)floats[1] / SIZE][(int)floats[0] / SIZE])
 					ray->l_h = distance(cub->plr.real_x, cub->plr.real_y, floats[0], floats[1]);
 				else
-					ray->l_h = check_walls_h(cub, &ray->inter, index, floats[0]);
+					ray->l_h = check_walls_h(cub, ray, index, floats[0]);
 			}
 			if ((!((int)floats[0] % SIZE) || !((int)(floats[0] + 1) % SIZE)) && !ray->l_v)
 			{
 				if (cub->map.map[(int)floats[1] / SIZE][(int)floats[0] / SIZE])
 					ray->l_v = distance(cub->plr.real_x, cub->plr.real_y, floats[0], floats[1]);
 				else
-					ray->l_v = check_walls_v(cub, &ray->inter, index, floats[1]);
+					ray->l_v = check_walls_v(cub, ray, index, floats[1]);
 			}
-			my_mlx_pixel_put(&cub->img_map, round(floats[0]) / 4, round(floats[1]) / 4, GREEN);
+			my_mlx_pixel_put(&cub->img_map, round(floats[0]) / MAP_DIV, round(floats[1]) / MAP_DIV, GREEN);
 			i++;
 		}
 		ray->side = get_side(ray->angle, *ray);

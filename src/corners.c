@@ -12,39 +12,46 @@
 
 #include "../inc/cub3d.h"
 
-// int	north_west(t_cub *cub, int index, int x, int y)
-// {
-// 	if ((cub->plr.real_x / SIZE < x / SIZE) && (cub->plr.real_y / SIZE >= y / SIZE))
-// 		return (WEST);
-// 	else if ((cub->plr.real_y / SIZE < y / SIZE) && (cub->plr.real_x / SIZE >= x / SIZE))
-// 		return (NORTH);
-// 	else if (index = MID_RAY && )
-// 	return (5);
-// }
+int	north_west(t_vector plr, float *floats)
+{
+    if ((plr.real_x / SIZE < floats[0] / SIZE) && (plr.real_y / SIZE >= floats[1] / SIZE))
+		return (WEST);
+	else if ((plr.real_y / SIZE < floats[1] / SIZE) && (plr.real_x / SIZE >= floats[0] / SIZE))
+		return (NORTH);
+    if (floats[3] / SIZE < floats[1] / SIZE || floats[2] / SIZE == floats[0] / SIZE)
+        return (NORTH);
+    return (WEST);
+}
 
-// int	north_east(t_cub *cub, int index, int x, int y)
-// {
-// 	if ((cub->plr.real_x / SIZE > x / SIZE) && (cub->plr.real_y / SIZE >= y / SIZE))
-// 		return (EAST);
-// 	else if ((cub->plr.real_y / SIZE < y / SIZE) && (cub->plr.real_x / SIZE <= x / SIZE))
-// 		return (NORTH);
-// 	return (5);
-// }
+int	north_east(t_vector plr, float *floats)
+{
+    if ((plr.real_x / SIZE > floats[0] / SIZE) && (plr.real_y / SIZE >= floats[1] / SIZE))
+		return (EAST);
+	else if ((plr.real_y / SIZE < floats[1] / SIZE) && (plr.real_x / SIZE <= floats[0] / SIZE))
+		return (NORTH);
+    if (floats[3] / SIZE < floats[1] / SIZE || floats[2] / SIZE == floats[0] / SIZE)
+        return(NORTH);
+    return (EAST);
+}
 
-// int	south_west(t_cub *cub, int index, int x, int y)
-// {
-// 	if ((cub->plr.real_x / SIZE < x / SIZE) && (cub->plr.real_y / SIZE >= y / SIZE))
-// 		return (WEST);
-// 	else if ((cub->plr.real_y / SIZE > y / SIZE) && (cub->plr.real_x / SIZE >= x / SIZE))
-// 		return (SOUTH);
-// 	return (5);
-// }
+int	south_west(t_vector plr, float *floats)
+{
+    if ((plr.real_x / SIZE < floats[0] / SIZE) && (plr.real_y / SIZE <= floats[1] / SIZE))
+		return (WEST);
+	else if ((plr.real_y / SIZE > floats[1] / SIZE) && (plr.real_x / SIZE >= floats[0] / SIZE))
+		return (SOUTH);
+    if (floats[3] / SIZE > floats[1] / SIZE || floats[2] / SIZE == floats[0] / SIZE)
+        return (SOUTH);
+    return (WEST);
+}
 
-// int	south_east(t_cub *cub, int index, int x, int y)
-// {
-// 	if ((cub->plr.real_x / SIZE > x / SIZE) && (cub->plr.real_y / SIZE <= y / SIZE))
-// 		return (WEST);
-// 	else if ((cub->plr.real_y / SIZE > y / SIZE) && (cub->plr.real_x / SIZE <= x / SIZE))
-// 		return (SOUTH);
-// 	return (5);
-// }
+int	south_east(t_vector plr, float *floats)
+{
+    if ((plr.real_x / SIZE > floats[0] / SIZE) && (plr.real_y / SIZE <= floats[1] / SIZE))
+		return (WEST);
+	else if ((plr.real_y / SIZE > floats[1] / SIZE) && (plr.real_x / SIZE <= floats[0] / SIZE))
+		return (SOUTH);
+    if (floats[3] / SIZE > floats[1] / SIZE || floats[2] / SIZE == floats[0] / SIZE)
+        return (SOUTH);
+    return (EAST);
+}

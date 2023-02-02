@@ -45,7 +45,8 @@ SRC							=	src/check.c \
 
 SRC_LINUX					=	src/check.c \
 								src/circle.c \
-								src/dda.c \
+								src/corners.c \
+								src/linux/dda.c \
 								src/draw.c \
 								src/error.c \
 								src/free.c \
@@ -58,6 +59,7 @@ SRC_LINUX					=	src/check.c \
 								src/gnl/get_next_line.c \
 								src/gnl/get_next_line_utils.c \
 								src/utils/parse_utils.c \
+								src/utils/draw_utils.c \
 								src/libft/lst/ft_lst_to_tab.c \
 								src/libft/lst/ft_lst_to_map.c \
 								src/libft/lst/ft_lstadd_back.c \
