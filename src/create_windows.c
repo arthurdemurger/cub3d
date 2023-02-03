@@ -87,14 +87,12 @@ void	clean_map(t_cub *cub)
 
 void create_window_main(t_cub *cub)
 {
-	// cub->win_main = mlx_new_window(cub->mlx, cub->map.w * SIZE, cub->map.h * SIZE, "Cub3D - Test");
 	cub->win_game = mlx_new_window(cub->mlx, 1024, 768, "Cub3D - Game");
 	clean_map(cub);
 	circle(cub, 1, RED);
 	draw(cub);
 	// grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
-	// printf("%d | %d\n", cub->plr.real_x / SIZE, cub->plr.real_y / SIZE);
 }
 void	create_window_data(t_cub *cub)
 {

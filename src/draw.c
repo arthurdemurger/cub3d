@@ -30,10 +30,16 @@ void	draw_col(t_cub *cub, t_ray ray, int col, int color)
 
 void	get_color(t_cub *cub, t_ray ray, int col)
 {
-	if (ray.side % 2)
+	if (ray.side == NORTH)
 		draw_col(cub, ray, col, LIGHT_GREEN);
-	else if (!(ray.side % 2))
+	else if (ray.side == EAST)
 		draw_col(cub, ray, col, DARK_GREEN);
+	else if (ray.side == SOUTH)
+		draw_col(cub, ray, col, BLUE);
+	else if (ray.side == WEST)
+		draw_col(cub, ray, col, RED);
+	else if (ray.side == 5)
+		draw_col(cub, ray, col, WHITE);
 }
 
 void	draw_game(t_cub *cub)
@@ -87,14 +93,14 @@ void	draw(t_cub *cub)
 	init_draw(cub);
 	cub->rays[MID_RAY] = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle);
 	cub->rays[MID_RAY].angle = cub->angle;
-	expand_ray(cub, &cub->rays[MID_RAY]);
+	expand_ray(cub, &cub->rays[MID_RAY], i);
 	while (++i < MID_RAY)
 	{
 		cub->rays[i] = intersection(cub->rays[MID_RAY].real_x, cub->rays[MID_RAY].real_y, (cub->plane / (MID_RAY)) * (MID_RAY - i), cub->angle - 90);
 		cub->rays[i].angle = cub->angle - angle(SIZE, (cub->plane / MID_RAY) * (MID_RAY - i));
 		if (cub->rays[i].angle < 0)
 			cub->rays[i].angle = 360 + cub->rays[i].angle;	
-		expand_ray(cub, &cub->rays[i]);
+		expand_ray(cub, &cub->rays[i], i);
 		fish_eye_corr(cub, &cub->rays[i]);
 	}
 	while (++i < NB_RAYS)
@@ -103,8 +109,9 @@ void	draw(t_cub *cub)
 		cub->rays[i].angle = cub->angle + angle(SIZE, (cub->plane / MID_RAY) * (i - MID_RAY));
 		if (cub->rays[i].angle >= 360)
 			cub->rays[i].angle -= 360;
-		expand_ray(cub, &cub->rays[i]);
+		expand_ray(cub, &cub->rays[i], i);
 		fish_eye_corr(cub, &cub->rays[i]);
 	}
+	// printf("=======================\n");
 	draw_game(cub);
 }

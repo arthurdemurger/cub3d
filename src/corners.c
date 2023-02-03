@@ -12,46 +12,77 @@
 
 #include "../inc/cub3d.h"
 
-int	north_west(t_vector plr, float *floats)
+float   absf(float n)
 {
-    if ((plr.real_x / SIZE < floats[0] / SIZE) && (plr.real_y / SIZE >= floats[1] / SIZE))
-		return (WEST);
-	else if ((plr.real_y / SIZE < floats[1] / SIZE) && (plr.real_x / SIZE >= floats[0] / SIZE))
-		return (NORTH);
-    if (floats[3] / SIZE < floats[1] / SIZE || floats[2] / SIZE == floats[0] / SIZE)
-        return (NORTH);
-    return (WEST);
+    if (n < 0)
+        return (-n);
+    return (n);
 }
 
-int	north_east(t_vector plr, float *floats)
+int	north_west(t_vector plr, float *floats, char **map)
 {
-    if ((plr.real_x / SIZE > floats[0] / SIZE) && (plr.real_y / SIZE >= floats[1] / SIZE))
+    int   x;
+    int   y;
+
+    x = (int)floorf(floats[0]);
+    y = (int)floorf(floats[1]);
+    if ((plr.real_x / SIZE < x / SIZE) && (plr.real_y / SIZE >= y / SIZE))
+		return (WEST);
+	else if ((plr.real_y / SIZE < y / SIZE) && (plr.real_x / SIZE >= x / SIZE))
+		return (NORTH);
+    y -= 1;
+    if (map[y / SIZE][x / SIZE] == '1')
+        return (WEST);
+    return (NORTH);
+}
+
+int	north_east(t_vector plr, float *floats, char **map)
+{
+    int   x;
+    int   y;
+
+    x = (int)floorf(floats[0]);
+    y = (int)floorf(floats[1]);
+    if ((plr.real_x / SIZE > x / SIZE) && (plr.real_y / SIZE >= y / SIZE))
 		return (EAST);
-	else if ((plr.real_y / SIZE < floats[1] / SIZE) && (plr.real_x / SIZE <= floats[0] / SIZE))
+	else if ((plr.real_y / SIZE < y / SIZE) && (plr.real_x / SIZE <= x / SIZE))
 		return (NORTH);
-    if (floats[3] / SIZE < floats[1] / SIZE || floats[2] / SIZE == floats[0] / SIZE)
-        return(NORTH);
-    return (EAST);
+    y -= 1;
+    if (map[y / SIZE][x / SIZE] == '1')
+        return (EAST);
+    return (NORTH);
 }
 
-int	south_west(t_vector plr, float *floats)
+int	south_west(t_vector plr, float *floats, char **map)
 {
-    if ((plr.real_x / SIZE < floats[0] / SIZE) && (plr.real_y / SIZE <= floats[1] / SIZE))
+    int   x;
+    int   y;
+
+    x = (int)floorf(floats[0]);
+    y = (int)floorf(floats[1]);
+    if ((plr.real_x / SIZE < x / SIZE) && (plr.real_y / SIZE <= y / SIZE))
 		return (WEST);
-	else if ((plr.real_y / SIZE > floats[1] / SIZE) && (plr.real_x / SIZE >= floats[0] / SIZE))
+	else if ((plr.real_y / SIZE > y / SIZE) && (plr.real_x / SIZE >= x / SIZE))
 		return (SOUTH);
-    if (floats[3] / SIZE > floats[1] / SIZE || floats[2] / SIZE == floats[0] / SIZE)
-        return (SOUTH);
-    return (WEST);
+    y += 1;
+    if (map[y / SIZE][x / SIZE] == '1')
+        return (WEST);
+    return (SOUTH);
 }
 
-int	south_east(t_vector plr, float *floats)
+int	south_east(t_vector plr, float *floats, char **map)
 {
+    int   x;
+    int   y;
+
+    x = (int)floorf(floats[0]);
+    y = (int)floorf(floats[1]);
     if ((plr.real_x / SIZE > floats[0] / SIZE) && (plr.real_y / SIZE <= floats[1] / SIZE))
-		return (WEST);
+		return (EAST);
 	else if ((plr.real_y / SIZE > floats[1] / SIZE) && (plr.real_x / SIZE <= floats[0] / SIZE))
 		return (SOUTH);
-    if (floats[3] / SIZE > floats[1] / SIZE || floats[2] / SIZE == floats[0] / SIZE)
-        return (SOUTH);
-    return (EAST);
+    y += 1;
+    if (map[y / SIZE][x / SIZE] == '1')
+        return (EAST);
+    return (SOUTH);
 }

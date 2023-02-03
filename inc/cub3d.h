@@ -230,16 +230,14 @@ void			display_pov(t_cub *cub, int color);
 /* DDA */
 void			dda(t_cub *cub, t_ray *ray);
 float			real_distance(t_cub *cub, t_ray *ray);
-// int				distance(t_cub *cub, int x, int y, int ray);
-// float			distance(t_cub cub, t_ray ray, float *floats);
-void			expand_ray(t_cub *cub, t_ray *ray);
+void			expand_ray(t_cub *cub, t_ray *ray, int index);
 float			angle(float a, float b);
 
 /* Corners */
-int				north_west(t_vector plr, float *floats);
-int				north_east(t_vector plr, float *floats);
-int				south_west(t_vector plr, float *floats);
-int				south_east(t_vector plr, float *floats);
+int				north_west(t_vector plr, float *floats, char **map);
+int				north_east(t_vector plr, float *floats, char **map);
+int				south_west(t_vector plr, float *floats, char **map);
+int				south_east(t_vector plr, float *floats, char **map);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);

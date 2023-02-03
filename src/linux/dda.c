@@ -14,36 +14,52 @@
 
 int	is_corner(int x, int y)
 {
-	if (!(y % SIZE) && !(x % SIZE))
+	if (y % SIZE == 0 && x % SIZE == 0)
 		return (1);
-	else if (!(y % SIZE) && !((x + 1) % SIZE))
+	else if (y % SIZE == 0 && (x + 1) % SIZE == 0)
 		return (2);
-	else if (!(x % SIZE) && !((y + 1) % SIZE))
+	else if (x % SIZE == 0 && (y + 1) % SIZE == 0)
 		return (3);
-	else if (!((x + 1) % SIZE) && !((y + 1) % SIZE))
+	else if ((x + 1) % SIZE == 0 && (y + 1) % SIZE == 0)
 		return (4);
 	return (0);
 }
 
-int	check_walls(t_vector plr, float *floats)
+float   absf2(float n)
+{
+    if (n < 0)
+        return (-n);
+    return (n);
+}
+
+int	check_walls(t_cub *cub, float *floats)
 {
 	int	corner;
+	int	x;
+	int	y;
 
-	corner = is_corner(floorf(floats[0]), floorf(floats[1]));
+	x = (int)floorf(floats[0]);
+	y = (int)floorf(floats[1]);
+	corner = is_corner(x, y);
+	// if (corner != 0)
+	// {
+	// 	// printf("%f\n", absf2(floats[1] - floats[0]));
+	// 	return (5);
+	// }
 	if (corner == 1)
-		return (north_west(plr, floats));
+		return (north_west(cub->plr, floats, cub->map.map));
 	else if (corner == 2)
-		return (north_east(plr, floats));
+		return (north_east(cub->plr, floats, cub->map.map));
 	else if (corner == 3)
-		return (south_west(plr, floats));
+		return (south_west(cub->plr, floats, cub->map.map));
 	else if (corner == 4)
-		return (south_east(plr, floats));
-	if (!((int)floorf(floats[1]) % SIZE))
-		return (NORTH);
-	else if (!((int)floorf(floats[0]) % SIZE))
+		return (south_east(cub->plr, floats, cub->map.map));
+	if (x % SIZE == 0)
 		return (WEST);
-	else if (!((int)(floorf(floats[0]) + 1) % SIZE))
+	else if ((x + 1) % SIZE == 0)
 		return (EAST);
+	else if (y % SIZE == 0)
+		return (NORTH);
 	return (SOUTH);
 }
 
@@ -69,27 +85,48 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-void expand_ray(t_cub *cub, t_ray *ray)
+int	is_wall(int x, int y, char **map, float angle)
+{
+	(void)angle;
+	if (map[y][x] == '1')
+		return (1);
+	else if (map[y + 1][x] == '1')
+		return (1);
+	else if (map[y][x + 1] == '1')
+		return (1);
+	else if (map[y + 1][x + 1] == '1')
+		return (1);
+	return (0);
+}
+
+void expand_ray(t_cub *cub, t_ray *ray, int index)
 {
 	float	rad;
-	int		i;
+	float	i;
 	float	floats[4];
+	int		ints[2];
 
+	(void)index;
 	rad = ray->angle * (M_PI / 180);
 	i = 0;
 	while (1)
 	{
 		floats[0] = cub->plr.real_x + (i * cos(rad));
 		floats[1] = cub->plr.real_y + (i * sin(rad));
-		if (cub->map.map[(int)(floats[1] / SIZE)][(int)(floats[0] / SIZE)] == '1')
+		ints[0] = (int)floorf(floats[0]);
+		ints[1] = (int)floorf(floats[1]);
+		if (cub->map.map[ints[1] / SIZE][ints[0] / SIZE] == '1')
+		// if (is_wall(ints[0] / SIZE, ints[1] / SIZE, cub->map.map, ray->angle))
 		{
-			ray->side = check_walls(cub->plr, floats);
+			// if (index == 511)
+			// 	printf("%f | %f\n", floats[0], floats[1]);
 			ray->l = distance(*cub, floats);
+			ray->side = check_walls(cub, floats);
 			break ;
 		}
 		floats[2] = floats[0];
 		floats[3] = floats[1];
 		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / MAP_DIV, round(floats[1]) / MAP_DIV, GREEN);
-		i++;
+		i += 0.5;
 	}
 }
