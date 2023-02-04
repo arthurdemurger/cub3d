@@ -99,14 +99,13 @@ int	is_wall(int x, int y, char **map, float angle)
 	return (0);
 }
 
-void expand_ray(t_cub *cub, t_ray *ray, int index)
+void expand_ray(t_cub *cub, t_ray *ray)
 {
 	float	rad;
-	float	i;
+	int		i;
 	float	floats[4];
 	int		ints[2];
 
-	(void)index;
 	rad = ray->angle * (M_PI / 180);
 	i = 0;
 	while (1)
@@ -116,10 +115,7 @@ void expand_ray(t_cub *cub, t_ray *ray, int index)
 		ints[0] = (int)floorf(floats[0]);
 		ints[1] = (int)floorf(floats[1]);
 		if (cub->map.map[ints[1] / SIZE][ints[0] / SIZE] == '1')
-		// if (is_wall(ints[0] / SIZE, ints[1] / SIZE, cub->map.map, ray->angle))
 		{
-			// if (index == 511)
-			// 	printf("%f | %f\n", floats[0], floats[1]);
 			ray->l = distance(*cub, floats);
 			ray->side = check_walls(cub, floats);
 			break ;
@@ -127,6 +123,6 @@ void expand_ray(t_cub *cub, t_ray *ray, int index)
 		floats[2] = floats[0];
 		floats[3] = floats[1];
 		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / MAP_DIV, round(floats[1]) / MAP_DIV, GREEN);
-		i += 0.5;
+		i++;
 	}
 }

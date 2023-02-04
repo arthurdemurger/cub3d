@@ -230,7 +230,7 @@ void			display_pov(t_cub *cub, int color);
 /* DDA */
 void			dda(t_cub *cub, t_ray *ray);
 float			real_distance(t_cub *cub, t_ray *ray);
-void			expand_ray(t_cub *cub, t_ray *ray, int index);
+void			expand_ray(t_cub *cub, t_ray *ray);
 float			angle(float a, float b);
 
 /* Corners */

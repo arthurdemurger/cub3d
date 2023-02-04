@@ -93,14 +93,14 @@ void	draw(t_cub *cub)
 	init_draw(cub);
 	cub->rays[MID_RAY] = intersection(cub->plr.real_x, cub->plr.real_y, cub->r, cub->angle);
 	cub->rays[MID_RAY].angle = cub->angle;
-	expand_ray(cub, &cub->rays[MID_RAY], i);
+	expand_ray(cub, &cub->rays[MID_RAY]);
 	while (++i < MID_RAY)
 	{
 		cub->rays[i] = intersection(cub->rays[MID_RAY].real_x, cub->rays[MID_RAY].real_y, (cub->plane / (MID_RAY)) * (MID_RAY - i), cub->angle - 90);
 		cub->rays[i].angle = cub->angle - angle(SIZE, (cub->plane / MID_RAY) * (MID_RAY - i));
 		if (cub->rays[i].angle < 0)
 			cub->rays[i].angle = 360 + cub->rays[i].angle;	
-		expand_ray(cub, &cub->rays[i], i);
+		expand_ray(cub, &cub->rays[i]);
 		fish_eye_corr(cub, &cub->rays[i]);
 	}
 	while (++i < NB_RAYS)
@@ -109,9 +109,8 @@ void	draw(t_cub *cub)
 		cub->rays[i].angle = cub->angle + angle(SIZE, (cub->plane / MID_RAY) * (i - MID_RAY));
 		if (cub->rays[i].angle >= 360)
 			cub->rays[i].angle -= 360;
-		expand_ray(cub, &cub->rays[i], i);
+		expand_ray(cub, &cub->rays[i]);
 		fish_eye_corr(cub, &cub->rays[i]);
 	}
-	// printf("=======================\n");
 	draw_game(cub);
 }

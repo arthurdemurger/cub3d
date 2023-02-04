@@ -26,9 +26,9 @@ int	north_west(t_vector plr, float *floats, char **map)
 
     x = (int)floorf(floats[0]);
     y = (int)floorf(floats[1]);
-    if ((plr.real_x / SIZE < x / SIZE) && (plr.real_y / SIZE >= y / SIZE))
+    if ((plr.x < x / SIZE) && (plr.y >= y / SIZE))
 		return (WEST);
-	else if ((plr.real_y / SIZE < y / SIZE) && (plr.real_x / SIZE >= x / SIZE))
+	else if ((plr.y < y / SIZE) && (plr.x >= x / SIZE))
 		return (NORTH);
     y -= 1;
     if (map[y / SIZE][x / SIZE] == '1')
@@ -43,9 +43,9 @@ int	north_east(t_vector plr, float *floats, char **map)
 
     x = (int)floorf(floats[0]);
     y = (int)floorf(floats[1]);
-    if ((plr.real_x / SIZE > x / SIZE) && (plr.real_y / SIZE >= y / SIZE))
+    if ((plr.x > x / SIZE) && (plr.y >= y / SIZE))
 		return (EAST);
-	else if ((plr.real_y / SIZE < y / SIZE) && (plr.real_x / SIZE <= x / SIZE))
+	else if ((plr.y < y / SIZE) && (plr.x <= x / SIZE))
 		return (NORTH);
     y -= 1;
     if (map[y / SIZE][x / SIZE] == '1')
@@ -60,9 +60,9 @@ int	south_west(t_vector plr, float *floats, char **map)
 
     x = (int)floorf(floats[0]);
     y = (int)floorf(floats[1]);
-    if ((plr.real_x / SIZE < x / SIZE) && (plr.real_y / SIZE <= y / SIZE))
+    if ((plr.x < x / SIZE) && (plr.y <= y / SIZE))
 		return (WEST);
-	else if ((plr.real_y / SIZE > y / SIZE) && (plr.real_x / SIZE >= x / SIZE))
+	else if ((plr.y > y / SIZE) && (plr.x >= x / SIZE))
 		return (SOUTH);
     y += 1;
     if (map[y / SIZE][x / SIZE] == '1')
@@ -77,9 +77,9 @@ int	south_east(t_vector plr, float *floats, char **map)
 
     x = (int)floorf(floats[0]);
     y = (int)floorf(floats[1]);
-    if ((plr.real_x / SIZE > floats[0] / SIZE) && (plr.real_y / SIZE <= floats[1] / SIZE))
+    if (plr.x > x / SIZE && plr.y <= y / SIZE)
 		return (EAST);
-	else if ((plr.real_y / SIZE > floats[1] / SIZE) && (plr.real_x / SIZE <= floats[0] / SIZE))
+	else if ((plr.y > y / SIZE) && (plr.x <= x / SIZE))
 		return (SOUTH);
     y += 1;
     if (map[y / SIZE][x / SIZE] == '1')
