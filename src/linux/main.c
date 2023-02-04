@@ -50,7 +50,7 @@ void deal_key(int key, t_cub *cub)
 		exit(0);
 	}
 	if (key == 122 || key == 113 || key == 115 || key == 100)
-		move(cub, key);
+		get_move(cub, key);
 	else if (key == 65361 || key == 65363)
 		rotate(cub, key);
 }

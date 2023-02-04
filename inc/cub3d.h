@@ -221,7 +221,7 @@ void			draw_cursor(t_cub *cub);
 void			update_data(t_cub *cub, int line, char *data);
 
 /* Move */
-void			move(t_cub *cub, int key);
+void			get_move(t_cub *cub, int key);
 
 /* Rotate */
 void			rotate(t_cub *cub, int key);

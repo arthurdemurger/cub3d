@@ -68,8 +68,8 @@ float	distance(t_cub cub, float *floats)
 	float 	dx;
 	float 	dy;
 
-	dx = cub.plr.real_x - floats[0];
-	dy = cub.plr.real_y - floats[1];
+	dx = cub.plr.real_x - floorf(floats[0]);
+	dy = cub.plr.real_y - floorf(floats[1]);
 	return (sqrt(pow(dx, 2) + pow(dy, 2)));
 }
 
