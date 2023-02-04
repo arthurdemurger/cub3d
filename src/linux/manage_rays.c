@@ -78,11 +78,18 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
+int	get_col(t_ray ray, int x, int y)
+{
+	if (ray.side == EAST || ray.side == WEST)
+		return (y % SIZE);
+	return (x % SIZE);
+}
+
 void expand_ray(t_cub *cub, t_ray *ray)
 {
 	float	rad;
 	int		i;
-	float	floats[4];
+	float	floats[2];
 	int		ints[2];
 
 	rad = ray->angle * (M_PI / 180);
@@ -97,10 +104,9 @@ void expand_ray(t_cub *cub, t_ray *ray)
 		{
 			ray->l = distance(*cub, floats);
 			ray->side = check_walls(cub, floats, ray->angle);
+			ray->col = get_col(*ray, ints[0], ints[1]);
 			break ;
 		}
-		floats[2] = floats[0];
-		floats[3] = floats[1];
 		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / MAP_DIV, round(floats[1]) / MAP_DIV, GREEN);
 		i++;
 	}

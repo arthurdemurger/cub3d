@@ -124,6 +124,10 @@ typedef struct s_text
 	char	*so;
 	char	*we;
 	char	*ea;
+	void	*north;
+	void	*east;
+	void	*south;
+	void	*west;
 	char	*f;
 	char	*c;
 }	t_text;
@@ -142,26 +146,11 @@ typedef struct s_ray
 	int			y;
 	float		real_x;
 	float		real_y;
-	float		real_x_h;
-	float		real_y_h;
-	float		real_x_v;
-	float		real_y_v;
 	float		l;
 	float		angle;
 	int			dir;
 	int			side;
-	float		l_h;
-	float		l_v;
-	float		real_l;
-	float		x1;
-	float		x2;
-	float		xa;
-	float		y1;
-	float		y2;
-	float		ya;
-	float		copy_x;
-	float		copy_y;
-	int			draw;
+	int			col;
 }	t_ray;
 
 typedef struct s_map
@@ -188,6 +177,7 @@ typedef struct s_cub
 	t_ray		rays[NB_RAYS];
 	t_img		img_map;
 	t_img		img_game;
+	t_text		txtr;
 	float		angle;
 	float		r;
 	float		plane;
@@ -195,7 +185,6 @@ typedef struct s_cub
 	void		*win_main;
 	void		*win_data;
 	void		*win_game;
-	t_text		txtr;
 }	t_cub;
 
 /*

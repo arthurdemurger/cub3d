@@ -38,8 +38,6 @@ void	get_color(t_cub *cub, t_ray ray, int col)
 		draw_col(cub, ray, col, BLUE);
 	else if (ray.side == WEST)
 		draw_col(cub, ray, col, RED);
-	else if (ray.side == 5)
-		draw_col(cub, ray, col, WHITE);
 }
 
 void	draw_game(t_cub *cub)

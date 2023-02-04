@@ -87,7 +87,7 @@ void	clean_map(t_cub *cub)
 
 void create_window_main(t_cub *cub)
 {
-	cub->win_game = mlx_new_window(cub->mlx, 1024, 768, "Cub3D - Game");
+	cub->win_game = mlx_new_window(cub->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D - Game");
 	clean_map(cub);
 	circle(cub, 1, RED);
 	draw(cub);

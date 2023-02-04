@@ -46,7 +46,14 @@ void deal_key(int key, t_cub *cub)
 	if (key == 65307)
 	{
 		mlx_destroy_window(cub->mlx, cub->win_game);
+		free (cub->txtr.north);
+		free (cub->txtr.east);
+		free (cub->txtr.south);
+		free (cub->txtr.west);
+		free (cub->img_map.img);
+		free (cub->img_game.img);
 		free (cub->mlx);
+		free_tab(cub->map.map, ft_tablen(cub->map.map));
 		exit(0);
 	}
 	if (key == 122 || key == 113 || key == 115 || key == 100)
@@ -55,9 +62,25 @@ void deal_key(int key, t_cub *cub)
 		rotate(cub, key);
 }
 
+void	init_textures(t_cub *cub, t_text *text)
+{
+	int	size;
+
+	size = SIZE * 1;
+	text->north = mlx_new_image(cub->mlx, 64, 64);
+	text->east = mlx_new_image(cub->mlx, 64, 64);
+	text->south = mlx_new_image(cub->mlx, 64, 64);
+	text->west = mlx_new_image(cub->mlx, 64, 64);
+	text->north = mlx_xpm_file_to_image(cub->mlx, "./files/textures/north_wall.xpm", &size, &size);
+	text->east = mlx_xpm_file_to_image(cub->mlx, "./files/textures/east_wall.xpm", &size, &size);
+	text->south = mlx_xpm_file_to_image(cub->mlx, "./files/textures/south_wall.xpm", &size, &size);
+	text->west = mlx_xpm_file_to_image(cub->mlx, "./files/textures/west_wall.xpm", &size, &size);
+}
+
 void	launch(t_cub *cub)
 {
 	cub->mlx = mlx_init();
+	init_textures(cub, &cub->txtr);
 	cub->img_map.img = mlx_new_image(cub->mlx, (cub->map.w * SIZE) / MAP_DIV,
 		(cub->map.h * SIZE) / MAP_DIV);
 	cub->img_map.addr = mlx_get_data_addr(cub->img_map.img,
