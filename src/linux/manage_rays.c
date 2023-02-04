@@ -25,7 +25,7 @@ int	is_corner(int x, int y)
 	return (0);
 }
 
-int	check_walls(t_cub *cub, float *floats)
+int	check_walls(t_cub *cub, float *floats, float angle)
 {
 	int	corner;
 	int	x;
@@ -40,13 +40,13 @@ int	check_walls(t_cub *cub, float *floats)
 	// 	return (5);
 	// }
 	if (corner == 1)
-		return (north_west(cub->plr, floats, cub->map.map));
+		return (north_west(cub->plr, floats, cub->map.map, angle));
 	else if (corner == 2)
-		return (north_east(cub->plr, floats, cub->map.map));
+		return (north_east(cub->plr, floats, cub->map.map, angle));
 	else if (corner == 3)
-		return (south_west(cub->plr, floats, cub->map.map));
+		return (south_west(cub->plr, floats, cub->map.map, angle));
 	else if (corner == 4)
-		return (south_east(cub->plr, floats, cub->map.map));
+		return (south_east(cub->plr, floats, cub->map.map, angle));
 	if (x % SIZE == 0)
 		return (WEST);
 	else if ((x + 1) % SIZE == 0)
@@ -96,7 +96,7 @@ void expand_ray(t_cub *cub, t_ray *ray)
 		if (cub->map.map[ints[1] / SIZE][ints[0] / SIZE] == '1')
 		{
 			ray->l = distance(*cub, floats);
-			ray->side = check_walls(cub, floats);
+			ray->side = check_walls(cub, floats, ray->angle);
 			break ;
 		}
 		floats[2] = floats[0];

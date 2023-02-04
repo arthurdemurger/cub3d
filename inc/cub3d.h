@@ -37,8 +37,8 @@
 # define WHITE 0xFFFFFF
 # define LIGHT_GREEN 0x7FFF00
 # define DARK_GREEN 0x006400
-# define FLOOR 0xCAA472
-# define CEILING 0x4F5A59
+# define FLOOR 0xBF9A08
+# define CEILING 0x797274
 
 /* Debug */
 # define ICI printf("ici\n");
@@ -235,10 +235,10 @@ void			expand_ray(t_cub *cub, t_ray *ray);
 float			angle(float a, float b);
 
 /* Corners */
-int				north_west(t_vector plr, float *floats, char **map);
-int				north_east(t_vector plr, float *floats, char **map);
-int				south_west(t_vector plr, float *floats, char **map);
-int				south_east(t_vector plr, float *floats, char **map);
+int				north_west(t_vector plr, float *floats, char **map, float angle);
+int				north_east(t_vector plr, float *floats, char **map, float angle);
+int				south_west(t_vector plr, float *floats, char **map, float angle);
+int				south_east(t_vector plr, float *floats, char **map, float angle);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
