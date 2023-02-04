@@ -63,7 +63,7 @@ void	init_draw(t_cub *cub)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
-			my_mlx_pixel_put(&cub->img_game, x, y, BLACK);
+			my_mlx_pixel_put(&cub->img_game, x, y, CEILING);
 	}
 	y = (WIN_HEIGHT / 2) - 1;
 	while (++y < WIN_HEIGHT)

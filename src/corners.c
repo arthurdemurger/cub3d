@@ -12,13 +12,6 @@
 
 #include "../inc/cub3d.h"
 
-float   absf(float n)
-{
-    if (n < 0)
-        return (-n);
-    return (n);
-}
-
 int	north_west(t_vector plr, float *floats, char **map)
 {
     int   x;

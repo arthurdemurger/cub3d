@@ -25,13 +25,6 @@ int	is_corner(int x, int y)
 	return (0);
 }
 
-float   absf2(float n)
-{
-    if (n < 0)
-        return (-n);
-    return (n);
-}
-
 int	check_walls(t_cub *cub, float *floats)
 {
 	int	corner;
@@ -83,20 +76,6 @@ float	angle(float a, float b)
 	if (c < 0)
 		c = 360 - c;
 	return (right - c);
-}
-
-int	is_wall(int x, int y, char **map, float angle)
-{
-	(void)angle;
-	if (map[y][x] == '1')
-		return (1);
-	else if (map[y + 1][x] == '1')
-		return (1);
-	else if (map[y][x + 1] == '1')
-		return (1);
-	else if (map[y + 1][x + 1] == '1')
-		return (1);
-	return (0);
 }
 
 void expand_ray(t_cub *cub, t_ray *ray)

@@ -46,7 +46,7 @@ SRC							=	src/check.c \
 SRC_LINUX					=	src/check.c \
 								src/circle.c \
 								src/corners.c \
-								src/linux/dda.c \
+								src/linux/manage_rays.c \
 								src/draw.c \
 								src/error.c \
 								src/free.c \

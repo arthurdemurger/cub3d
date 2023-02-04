@@ -38,6 +38,7 @@
 # define LIGHT_GREEN 0x7FFF00
 # define DARK_GREEN 0x006400
 # define FLOOR 0xCAA472
+# define CEILING 0x4F5A59
 
 /* Debug */
 # define ICI printf("ici\n");
