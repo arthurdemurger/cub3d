@@ -46,16 +46,16 @@ SRC							=	src/check.c \
 SRC_LINUX					=	src/check.c \
 								src/circle.c \
 								src/corners.c \
-								src/linux/manage_rays.c \
 								src/draw.c \
 								src/error.c \
 								src/free.c \
-								src/linux/main.c \
-								src/linux/moves.c \
 								src/parse.c \
 								src/update_data.c \
-								src/linux/rotate.c \
 								src/create_windows.c \
+								src/linux/main.c \
+								src/linux/manage_rays.c \
+								src/linux/moves.c \
+								src/linux/rotate.c \
 								src/gnl/get_next_line.c \
 								src/gnl/get_next_line_utils.c \
 								src/utils/parse_utils.c \

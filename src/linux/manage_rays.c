@@ -34,11 +34,6 @@ int	check_walls(t_cub *cub, float *floats, float angle)
 	x = (int)floorf(floats[0]);
 	y = (int)floorf(floats[1]);
 	corner = is_corner(x, y);
-	// if (corner != 0)
-	// {
-	// 	// printf("%f\n", absf2(floats[1] - floats[0]));
-	// 	return (5);
-	// }
 	if (corner == 1)
 		return (north_west(cub->plr, floats, cub->map.map, angle));
 	else if (corner == 2)
@@ -78,11 +73,14 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-int	get_col(t_ray ray, int x, int y)
+float	get_col(t_ray ray, int x, int y)
 {
+	float	div;
+
+	div = 256.000 / NB_RAYS;
 	if (ray.side == EAST || ray.side == WEST)
-		return (y % SIZE);
-	return (x % SIZE);
+		return ((y % SIZE) / div);
+	return ((x % SIZE) / div);
 }
 
 void expand_ray(t_cub *cub, t_ray *ray)
@@ -104,7 +102,7 @@ void expand_ray(t_cub *cub, t_ray *ray)
 		{
 			ray->l = distance(*cub, floats);
 			ray->side = check_walls(cub, floats, ray->angle);
-			ray->col = get_col(*ray, ints[0], ints[1]);
+			ray->col = get_col(*ray, round(floats[0]), round(floats[1]));
 			break ;
 		}
 		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / MAP_DIV, round(floats[1]) / MAP_DIV, GREEN);

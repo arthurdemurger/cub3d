@@ -89,30 +89,8 @@ void create_window_main(t_cub *cub)
 {
 	cub->win_game = mlx_new_window(cub->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D - Game");
 	clean_map(cub);
-	circle(cub, 1, RED);
+	circle(cub, 1, LIGHT_RED);
 	draw(cub);
 	// grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
-}
-void	create_window_data(t_cub *cub)
-{
-	char	*data;
-
-	cub->win_data = mlx_new_window(cub->mlx, 450, 165, "Cub3D - Data");
-    // mlx_string_put(cub->mlx, cub->win_data, 10, 15, WHITE, "Player position :");
-    // mlx_string_put(cub->mlx, cub->win_data, 10, 40, WHITE, "Dir last position :");
-    // mlx_string_put(cub->mlx, cub->win_data, 10, 65, WHITE, "Ray0 length :");
-    // mlx_string_put(cub->mlx, cub->win_data, 10, 90, WHITE, "Wall encountered :");
-	// mlx_string_put(cub->mlx, cub->win_data, 10, 115, WHITE, "Wall_face displayed :");
-	mlx_string_put(cub->mlx, cub->win_data, 10, 140, WHITE, "Angle :");
-	data = ft_strjoin(ft_strdup("x : "), ft_itoa(cub->plr.real_x));
-	data = ft_strjoin(data, " | y : ");
-	data = ft_strjoin(data, ft_itoa(cub->plr.real_y));
-	update_data(cub, 1, data);
-	update_data(cub, 6, ft_itoa(cub->angle));
-	data = ft_strjoin(ft_strdup("X : "), ft_itoa(cub->plr.x));
-	data = ft_strjoin(data, " | Y : ");
-	data = ft_strjoin(data, ft_itoa(cub->plr.y));
-	update_data(cub, 1, data);
-	free (data);
 }

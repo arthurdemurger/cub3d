@@ -27,7 +27,7 @@ void	draw_cursor(t_cub *cub)
 		x = -1;
 		while (++x < 4)
 		{
-			my_mlx_pixel_put(&cub->img_game, mid_x + x, mid_y + y, RED);
+			my_mlx_pixel_put(&cub->img_game, mid_x + x, mid_y + y, LIGHT_RED);
 		}
 	}
 }

@@ -33,7 +33,8 @@
 # define BLUE 0x0000CD
 # define BLACK 0x000000
 # define GREEN 0x008000
-# define RED 0xFF0000
+# define LIGHT_RED 0xFF0000
+# define DARK_RED 0xB60A0A
 # define WHITE 0xFFFFFF
 # define LIGHT_GREEN 0x7FFF00
 # define DARK_GREEN 0x006400
@@ -58,7 +59,7 @@
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "ESWN"
 # define ROT_ANGLE 10
-# define PIX_MOVE 5
+# define PIX_MOVE 40
 # define MAP_DIV 8
 # define SIZE 64
 # define SIDE 3
@@ -125,9 +126,17 @@ typedef struct s_text
 	char	*we;
 	char	*ea;
 	void	*north;
+	int		north_width;
+	int		north_height;
 	void	*east;
+	int		east_width;
+	int		east_height;
 	void	*south;
+	int		south_width;
+	int		south_height;
 	void	*west;
+	int		west_width;
+	int		west_height;
 	char	*f;
 	char	*c;
 }	t_text;
@@ -150,7 +159,7 @@ typedef struct s_ray
 	float		angle;
 	int			dir;
 	int			side;
-	int			col;
+	float		col;
 }	t_ray;
 
 typedef struct s_map
@@ -177,6 +186,7 @@ typedef struct s_cub
 	t_ray		rays[NB_RAYS];
 	t_img		img_map;
 	t_img		img_game;
+	t_img		img_col;
 	t_text		txtr;
 	float		angle;
 	float		r;

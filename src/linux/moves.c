@@ -50,26 +50,22 @@ int	is_wall_move(float *floats, t_vector *plr, char **map, float angle)
 
 void	move(t_cub *cub, t_vector *plr, float angle)
 {
-	int		i;
 	float	floats[2];
 	float	rad;
 
-	i = 0;
 	rad = angle * (M_PI / 180);
 	circle(cub, 1, WHITE);
-	while (++i <= PIX_MOVE)
+	floats[0] = plr->real_x + (PIX_MOVE * cos(rad));
+	floats[1] = plr->real_y + (PIX_MOVE * sin(rad));
+	if (cub->map.map[(int)floorf(floats[1]) / SIZE][(int)floorf(floats[0]) / SIZE] != '1')
 	{
-		floats[0] = plr->real_x + (i * cos(rad));
-		floats[1] = plr->real_y + (i * sin(rad));
-		if (is_wall_move(floats, plr, cub->map.map, angle))
-			break ;
 		plr->real_x = floats[0];
 		plr->real_y = floats[1];
 	}
 	plr->x = floats[0] / SIZE;
 	plr->y = floats[1] / SIZE;
 	draw(cub);
-	circle(cub, 1, RED);
+	circle(cub, 1, LIGHT_RED);
 }
 
 void	get_move(t_cub *cub, int key)

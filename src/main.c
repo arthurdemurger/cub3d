@@ -67,8 +67,11 @@ void	launch(t_cub *cub)
 	cub->img_game.addr = mlx_get_data_addr(cub->img_game.img,
 		&cub->img_game.bits_per_pixel, &cub->img_game.line_length,
 		&cub->img_game.endian);
+	cub->img_col.img = mlx_new_image(cub->mlx, 1, WIN_HEIGHT);
+	cub->img_col.addr = mlx_get_data_addr(cub->img_col.img,
+		&cub->img_col.bits_per_pixel, &cub->img_col.line_length,
+		&cub->img_col.endian);
 	create_window_main(cub);
-	// create_window_data(cub);
 	mlx_hook(cub->win_game, DESTROY_BUTTON, 0, (void *)ft_close, cub);
 	mlx_hook(cub->win_game, KEYPRESS, 0, (void *)deal_key, cub);
 	mlx_loop(cub->mlx);
