@@ -12,44 +12,42 @@
 
 #include "../inc/cub3d.h"
 
-void	draw_col(t_cub *cub, t_ray ray, int col, int color)
+void	draw_col(t_cub *cub, t_ray ray, int col, int color, t_img img)
 {
-	int		i;
-	float	height;
+	int				i;
+	float			height;
+	unsigned int	pix;
 
 	(void)color;
 	i = WIN_HEIGHT / 2;
 	height = (SIZE * SIZE) / floorf(ray.l);
 	height *= 25;
-	// color = cub->txtr.ea[0][0];
-	// my_mlx_pixel_put(&cub->img_game, 0, i, color);
-	my_mlx_pixel_put(&cub->img_game, col, i, color);
-	// my_mlx_pixel_put(&cub->img_game, col, i, mlx_xpm_to_image(cub->mlx, cub->txtr.ea, &cub->txtr.ea[col], &cub->txtr.ea[i]));
-	// mlx_xpm_file_to_image(cub->mlx, cub->txtr.ea, col, i);
+	pix = *(int*)img.addr + (126 * img.line_length + col * img.bits_per_pixel);
+	my_mlx_pixel_put(&cub->img_col.img, 0, i, mlx_get_color_value(cub->mlx, pix));
 	while (++i <= (WIN_HEIGHT / 2) + ((int)height / 2) && i < 768)
-		// mlx_xpm_file_to_image(cub->mlx, cub->txtr.ea, col, i);
-		my_mlx_pixel_put(&cub->img_game, col, i, color);
-		// my_mlx_pixel_put(&cub->img_game, col, i, mlx_xpm_to_image(cub->mlx, cub->txtr.ea, &cub->txtr.ea[col], &cub->txtr.ea[i]));
-		// my_mlx_pixel_put(&cub->img_game, 0, i, color);
+	{
+		pix = *(int*)img.addr + (i * img.line_length + col * img.bits_per_pixel);
+		my_mlx_pixel_put(&cub->img_col.img, 0, i, mlx_get_color_value(cub->mlx, pix));
+	}
 	i = WIN_HEIGHT / 2;
 	while (--i >= (WIN_HEIGHT / 2) - ((int)height / 2) && i >= 0)
-		// mlx_xpm_file_to_image(cub->mlx, cub->txtr.ea, col, i);
-		my_mlx_pixel_put(&cub->img_game, col, i, color);
-		// my_mlx_pixel_put(&cub->img_game, col, i, mlx_xpm_to_image(cub->mlx, cub->txtr.ea, &cub->txtr.ea[col], &cub->txtr.ea[i]));
-		// my_mlx_pixel_put(&cub->img_game, 0, i, color);
-	// mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_col.img, col, 0);
+	{
+		pix = *(int*)img.addr + (i * img.line_length + col * img.bits_per_pixel);
+		my_mlx_pixel_put(&cub->img_col.img, 0, i, mlx_get_color_value(cub->mlx, pix));
+	}
+	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_col.img, col, 0);
 }
 
 void	get_color(t_cub *cub, t_ray ray, int col)
 {
 	if (ray.side == NORTH)
-		draw_col(cub, ray, col, DARK_GREEN);
+		draw_col(cub, ray, col, DARK_GREEN, cub->txtr.north);
 	else if (ray.side == SOUTH)
-		draw_col(cub, ray, col, LIGHT_GREEN);
+		draw_col(cub, ray, col, LIGHT_GREEN, cub->txtr.south);
 	else if (ray.side == EAST)
-		draw_col(cub, ray, col, DARK_RED);
+		draw_col(cub, ray, col, DARK_RED, cub->txtr.east);
 	else if (ray.side == WEST)
-		draw_col(cub, ray, col, BLUE);
+		draw_col(cub, ray, col, BLUE, cub->txtr.west);
 }
 
 void	draw_game(t_cub *cub)

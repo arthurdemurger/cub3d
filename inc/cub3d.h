@@ -39,7 +39,7 @@
 # define LIGHT_GREEN 0x7FFF00
 # define DARK_GREEN 0x006400
 # define FLOOR 0xBF9A08
-# define CEILING 0x797274
+# define CEILING 6250534
 
 /* Debug */
 # define ICI printf("ici\n");
@@ -59,7 +59,7 @@
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "ESWN"
 # define ROT_ANGLE 10
-# define PIX_MOVE 40
+# define PIX_MOVE 30
 # define MAP_DIV 8
 # define SIZE 64
 # define SIDE 3
@@ -119,22 +119,30 @@ typedef struct s_pos
 	int	y;
 }	t_pos;
 
+typedef struct s_img
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}	t_img;
 typedef struct s_text
 {
 	char	*no;
 	char	*so;
 	char	*we;
 	char	*ea;
-	void	*north;
+	t_img	north;
 	int		north_width;
 	int		north_height;
-	void	*east;
+	t_img	east;
 	int		east_width;
 	int		east_height;
-	void	*south;
+	t_img	south;
 	int		south_width;
 	int		south_height;
-	void	*west;
+	t_img	west;
 	int		west_width;
 	int		west_height;
 	char	*f;
@@ -168,15 +176,6 @@ typedef struct s_map
 	int		w;
 	int		h;
 }	t_map;
-
-typedef struct s_img
-{
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}	t_img;
 
 typedef struct s_cub
 {

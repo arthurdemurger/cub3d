@@ -61,9 +61,9 @@ void	move(t_cub *cub, t_vector *plr, float angle)
 	{
 		plr->real_x = floats[0];
 		plr->real_y = floats[1];
+		plr->x = floats[0] / SIZE;
+		plr->y = floats[1] / SIZE;
 	}
-	plr->x = floats[0] / SIZE;
-	plr->y = floats[1] / SIZE;
 	draw(cub);
 	circle(cub, 1, LIGHT_RED);
 }
