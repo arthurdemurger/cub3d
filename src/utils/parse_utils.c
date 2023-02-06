@@ -6,11 +6,26 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 22:12:47 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/13 16:09:50 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:44:53 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
+
+int	rgb_to_hex(char *s)
+{
+	char	**tokens;
+	int		i;
+	int		rgb[3];
+
+	tokens = ft_split(s, ',');
+	if (ft_tablen(tokens) != 3)
+		return (-1);
+	i = -1;
+	while (++i < 3)
+		rgb[i] = ft_atoi(tokens[i]);
+	return ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
+}
 
 int	check_extension(char *file)
 {
@@ -26,11 +41,11 @@ int	check_extension(char *file)
 
 int	texture_done(t_cub *cub)
 {
-	if (!cub->txtr.c)
+	if (cub->txtr.c == -1)
+		return (0);
+	else if (cub->txtr.c == -1)
 		return (0);
 	else if (!cub->txtr.ea)
-		return (0);
-	else if (!cub->txtr.f)
 		return (0);
 	else if (!cub->txtr.no)
 		return (0);
@@ -52,9 +67,9 @@ void	add_texture(t_cub *cub, char **texture)
 	else if (!ft_strcmp(texture[0], "EA"))
 		cub->txtr.ea = ft_strdup(texture[1]);
 	else if (!ft_strcmp(texture[0], "F"))
-		cub->txtr.f = ft_strdup(texture[1]);
+		cub->txtr.f = rgb_to_hex(texture[1]);
 	else if (!ft_strcmp(texture[0], "C"))
-		cub->txtr.c = ft_strdup(texture[1]);
+		cub->txtr.c = rgb_to_hex(texture[1]);
 }
 
 int	is_texture(t_cub *cub, char *s)
@@ -67,9 +82,9 @@ int	is_texture(t_cub *cub, char *s)
 		return (1);
 	else if (!ft_strcmp(s, "EA") && !cub->txtr.ea)
 		return (1);
-	else if (!ft_strcmp(s, "F") && !cub->txtr.f)
+	else if (!ft_strcmp(s, "F") && cub->txtr.f == -1)
 		return (1);
-	else if (!ft_strcmp(s, "C") && !cub->txtr.c)
+	else if (!ft_strcmp(s, "C") && cub->txtr.c == -1)
 		return (1);
 	return (0);
 }

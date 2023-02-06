@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 10:56:46 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:46:27 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,18 @@ void	init_draw(t_cub *cub)
 	int	y;
 
 	y = (WIN_HEIGHT / 2) - 1;
-	while (--y > 0)
+	while (--y >= 0)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
-			my_mlx_pixel_put(&cub->img_game, x, y, CEILING);
+			my_mlx_pixel_put(&cub->img_game, x, y, cub->txtr.c);
 	}
 	y = (WIN_HEIGHT / 2) - 1;
 	while (++y < WIN_HEIGHT)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
-			my_mlx_pixel_put(&cub->img_game, x, y, FLOOR);
+			my_mlx_pixel_put(&cub->img_game, x, y, cub->txtr.f);
 	}
 }
 

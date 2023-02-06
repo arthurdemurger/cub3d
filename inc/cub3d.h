@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 10:54:58 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:25:52 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,8 @@ typedef struct s_text
 	t_img	west;
 	int		west_width;
 	int		west_height;
-	char	*f;
-	char	*c;
+	int		f;
+	int		c;
 }	t_text;
 
 typedef struct s_vector
@@ -192,6 +192,7 @@ typedef struct s_cub
 	float		plane;
 	void		*mlx;
 	void		*win_main;
+	void		*win_test;
 	void		*win_data;
 	void		*win_game;
 }	t_cub;
@@ -205,11 +206,8 @@ void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* Create Window */
 void			create_window_main(t_cub *cub);
-void			draw_square(t_cub *cub, int x, int y, int color);
 void			grid(t_cub *cub);
 void			fill_squares(t_cub *cub);
-void			create_window_data(t_cub *cub);
-void			create_window_game(t_cub *cub);
 void			clean_map(t_cub *cub);
 
 /* Draw */
@@ -224,11 +222,8 @@ void			get_move(t_cub *cub, int key);
 
 /* Rotate */
 void			rotate(t_cub *cub, int key);
-void			display_pov(t_cub *cub, int color);
 
 /* DDA */
-void			dda(t_cub *cub, t_ray *ray);
-float			real_distance(t_cub *cub, t_ray *ray);
 void			expand_ray(t_cub *cub, t_ray *ray);
 float			angle(float a, float b);
 
@@ -264,6 +259,7 @@ void			free_all(t_cub *cub);
 void			ft_error(char *s);
 
 /* Libft */
+int				ft_atoi(const char *str);
 void			ft_bzero(void *s, int n);
 char			*ft_itoa(int n);
 void			*ft_memset(void *s, int c, size_t n);

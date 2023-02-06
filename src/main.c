@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 11:00:39 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:20:18 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	init(t_cub *cub, int ac, char **av)
 		ft_error("Wrong number of arguments.");
 	else if (!check_extension(av[1]))
 		ft_error("Wrong file extension.");
-	cub->txtr.c = NULL;
 	cub->txtr.ea = NULL;
-	cub->txtr.f = NULL;
 	cub->txtr.no = NULL;
 	cub->txtr.so = NULL;
 	cub->txtr.we = NULL;
+	cub->txtr.c = -1;
+	cub->txtr.f = -1;
 }
 
 void	ft_close(t_cub *cub)
@@ -138,7 +138,7 @@ void	launch(t_cub *cub)
 		&cub->img_col.endian);
 	create_window_main(cub);
 	// mlx_hook(cub->win_game, DESTROY_BUTTON, 0, (void *)ft_close, cub);
-	mlx_key_hook(cub->win_game, (void *)deal_key, cub);
+	mlx_hook(cub->win_game, KEYPRESS, 0, (void *)deal_key, cub);
 	mlx_loop(cub->mlx);
 }
 
