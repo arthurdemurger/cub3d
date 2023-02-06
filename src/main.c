@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 14:35:20 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:37:07 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init(t_cub *cub, int ac, char **av)
 void	ft_close(t_cub *cub)
 {
 	mlx_destroy_window(cub->mlx, cub->win_game);
-	// mlx_destroy_window(cub->mlx, cub->win_test);
+	mlx_destroy_window(cub->mlx, cub->win_test);
 	mlx_destroy_image(cub->mlx, cub->txtr.north.img);
 	mlx_destroy_image(cub->mlx, cub->txtr.east.img);
 	mlx_destroy_image(cub->mlx, cub->txtr.south.img);
@@ -84,59 +84,19 @@ void	init_textures(t_cub *cub, t_text *text)
 		&text->west.endian);
 }
 
-void	find_color(void *mlx, t_img img)
-{
-	int	pix;
-	// int		i;
-	unsigned int	col;
-
-	// (void)mlx;
-	// (void)img;
-	// pix = (unsigned int)*img.addr + (125 * img.line_length + 125 * (img.bits_per_pixel / MAP_DIV));
-	pix = *(int*)img.addr + (125 * img.line_length + 125 * img.bits_per_pixel);
-	col = mlx_get_color_value(mlx, pix);
-	printf("%u\n", col);
-	// i = -1;
-	// while (++i < 24)
-	// {
-	// 	pix = img.addr + i;
-	// 	col = mlx_get_color_value(mlx, *pix);
-	// 	(void)col;
-	// 	printf("%c\n", *pix);
-	// }
-	// printf("\n");
-}
-
-// void	display_xpm(t_cub *cub, t_img *img)
+// void	display_xpm(t_cub *cub)
 // {
-// 	int	x;
-// 	int	y;
-// 	int	*pix;
-
-// 	// (void)img;
-// 	x = 0;
-// 	y = 0;
-// 	cub->win_test = mlx_new_window(cub->mlx, 253, 253, "North_wall");
-// 	while (y < 253)
-// 	{
-// 		x = 0;
-// 		while (x < 253)
-// 		{
-// 			pix = (int*)img->addr + (y * (img->line_length / 4) + x * (img->bits_per_pixel / 32));
-// 			mlx_pixel_put(cub->mlx, cub->win_test, x, y, mlx_get_color_value(cub->mlx, *pix));
-// 			// mlx_pixel_put(cub->mlx, cub->win_test, x, y, 0xFFFFFF);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
+// 	cub->img_col_test.img = mlx_new_image(cub->mlx, 300, 300);
+// 	cub->img_col_test.img = mlx_xpm_file_to_image(cub->mlx, "./files/textures/North_wall.xpm", &cub->width_test, &cub->height_test);
+// 	cub->win_test = mlx_new_window(cub->mlx, 300, 300, "Cub3D - Test");
+// 	mlx_put_image_to_window(cub->mlx, cub->win_test, cub->img_col_test.img, 0, 0);
 // }
 
 void	launch(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	init_textures(cub, &cub->txtr);
-	// find_color(cub->mlx, &cub->txtr.east);
-	// display_xpm(cub, &cub->txtr.north);
+	// display_xpm(cub);
 	cub->img_map.img = mlx_new_image(cub->mlx, (cub->map.w * SIZE) / MAP_DIV,
 		(cub->map.h * SIZE) / MAP_DIV);
 	cub->img_map.addr = mlx_get_data_addr(cub->img_map.img,

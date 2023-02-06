@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 14:34:55 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:23:40 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,13 +186,15 @@ typedef struct s_cub
 	t_img		img_map;
 	t_img		img_game;
 	t_img		img_col;
+	t_img		img_col_test;
+	int			width_test;
+	int			height_test;
 	t_text		txtr;
 	float		angle;
 	float		r;
 	float		plane;
 	void		*mlx;
 	void		*win_main;
-	void		*win_test;
 	void		*win_data;
 	void		*win_game;
 	void		*win_test;
