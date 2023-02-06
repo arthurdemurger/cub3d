@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 18:04:03 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:54:58 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define LIGHT_GREEN 0x7FFF00
 # define DARK_GREEN 0x006400
 # define FLOOR 0xBF9A08
-# define CEILING 6250534
+# define CEILING 7894900
 
 /* Debug */
 # define ICI printf("ici\n");
@@ -201,7 +201,7 @@ typedef struct s_cub
 */
 
 /* Main */
-void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* Create Window */
 void			create_window_main(t_cub *cub);

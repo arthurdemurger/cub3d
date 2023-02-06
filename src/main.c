@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 12:59:41 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:00:39 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,103 @@ void	init(t_cub *cub, int ac, char **av)
 	cub->txtr.we = NULL;
 }
 
-void	ft_close(int keycode, t_cub *cub)
+void	ft_close(t_cub *cub)
 {
-	(void)keycode;
-	(void)cub;
-	exit (0);
+	mlx_destroy_window(cub->mlx, cub->win_game);
+	mlx_destroy_image(cub->mlx, cub->txtr.north.img);
+	mlx_destroy_image(cub->mlx, cub->txtr.east.img);
+	mlx_destroy_image(cub->mlx, cub->txtr.south.img);
+	mlx_destroy_image(cub->mlx, cub->txtr.west.img);
+	mlx_destroy_image(cub->mlx, cub->img_map.img);
+	mlx_destroy_image(cub->mlx, cub->img_game.img);
+	mlx_destroy_image(cub->mlx, cub->img_col.img);
+	free (cub->mlx);
+	free_tab(cub->map.map, ft_tablen(cub->map.map));
+	exit(0);
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / MAP_DIV));
 	*(unsigned int*)dst = color;
 }
 
 void deal_key(int key, t_cub *cub)
 {
-	if (key == ESC)
-	{
-		mlx_destroy_window(cub->mlx, cub->win_game);
-		free (cub->mlx);
-		exit(0);
-	}
-	if (key == W || key == A || key == S || key == D)
-		move(cub, key);
-	else if (key == KEY_LEFT || key == KEY_RIGHT)
+	if (key == 53)
+		ft_close(cub);
+	else if (key == 13 || key == 0 || key == 1 || key == 2)
+		get_move(cub, key);
+	else if (key == 123 || key == 124)
 		rotate(cub, key);
 }
+
+void	init_textures(t_cub *cub, t_text *text)
+{
+	text->north.img = mlx_new_image(cub->mlx, 253, 253);
+	text->east.img = mlx_new_image(cub->mlx, 253, 253);
+	text->south.img = mlx_new_image(cub->mlx, 253, 253);
+	text->west.img = mlx_new_image(cub->mlx, 253, 253);
+	text->north.img = mlx_xpm_file_to_image(cub->mlx, "./files/textures/North_wall.xpm", &text->north_width, &text->north_height);
+	text->east.img = mlx_xpm_file_to_image(cub->mlx, "./files/textures/East_wall.xpm", &text->east_width, &text->east_height);
+	text->south.img = mlx_xpm_file_to_image(cub->mlx, "./files/textures/South_wall.xpm", &text->south_width, &text->south_height);
+	text->west.img = mlx_xpm_file_to_image(cub->mlx, "./files/textures/West_wall.xpm", &text->west_width, &text->west_height);
+	text->north.addr = mlx_get_data_addr(text->north.img,
+		&text->north.bits_per_pixel, &text->north.line_length,
+		&text->north.endian);
+	text->east.addr = mlx_get_data_addr(text->east.img,
+		&text->east.bits_per_pixel, &text->east.line_length,
+		&text->east.endian);
+	text->south.addr = mlx_get_data_addr(text->south.img,
+		&text->south.bits_per_pixel, &text->south.line_length,
+		&text->south.endian);
+	text->west.addr = mlx_get_data_addr(text->west.img,
+		&text->west.bits_per_pixel, &text->west.line_length,
+		&text->west.endian);
+}
+
+void	find_color(void *mlx, t_img *img)
+{
+	int	*pix;
+	// int		i;
+	unsigned int	col;
+
+	// (void)mlx;
+	// (void)img;
+	// pix = (unsigned int)*img.addr + (125 * img.line_length + 125 * (img.bits_per_pixel / MAP_DIV));
+	pix = (int*)img->addr + (125 * img->line_length + 125 * img->bits_per_pixel);
+	col = mlx_get_color_value(mlx, *pix);
+	printf("%u\n", col);
+	// i = -1;
+	// while (++i < 24)
+	// {
+	// 	pix = img.addr + i;
+	// 	col = mlx_get_color_value(mlx, *pix);
+	// 	(void)col;
+	// 	printf("%c\n", *pix);
+	// }
+	// printf("\n");
+}
+
+// void	display_xpm(t_cub *cub, t_img *img)
+// {
+// 	int	x;
+// 	int	y;
+// 	int	pix;
+
+// 	mlx_new_window(cub->mlx, 253, 253, "North_wall");
+
+// }
 
 void	launch(t_cub *cub)
 {
 	cub->mlx = mlx_init();
+	// mlx_do_key_autorepeaton(cub->mlx);
+	init_textures(cub, &cub->txtr);
+	// find_color(cub->mlx, &cub->txtr.east);
+	// display_xpm(cub, &cub->txtr->north);
 	cub->img_map.img = mlx_new_image(cub->mlx, (cub->map.w * SIZE) / MAP_DIV,
 		(cub->map.h * SIZE) / MAP_DIV);
 	cub->img_map.addr = mlx_get_data_addr(cub->img_map.img,
@@ -72,8 +137,8 @@ void	launch(t_cub *cub)
 		&cub->img_col.bits_per_pixel, &cub->img_col.line_length,
 		&cub->img_col.endian);
 	create_window_main(cub);
-	mlx_hook(cub->win_game, DESTROY_BUTTON, 0, (void *)ft_close, cub);
-	mlx_hook(cub->win_game, KEYPRESS, 0, (void *)deal_key, cub);
+	// mlx_hook(cub->win_game, DESTROY_BUTTON, 0, (void *)ft_close, cub);
+	mlx_key_hook(cub->win_game, (void *)deal_key, cub);
 	mlx_loop(cub->mlx);
 }
 

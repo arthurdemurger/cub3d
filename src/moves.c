@@ -6,112 +6,80 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/01/27 12:57:22 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:30:08 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	move_up(t_cub *cub)
+float	abs_angle(float angle)
 {
-	int		i;
-	t_ray	pos;
-
-	i = 1;
-	circle(cub, 1, WHITE);
-	while (i <= PIX_MOVE)
-	{
-		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, cub->angle);
-		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
-			break ;
-		cub->plr.real_x = pos.real_x;
-		cub->plr.real_y = pos.real_y;
-		cub->plr.x = pos.real_x / SIZE;
-		cub->plr.y = pos.real_y / SIZE;
-		i++;
-	}
-	draw(cub);
-	circle(cub, 1, RED);
+	if (angle >= 0)
+		return (angle);
+	return (360 + angle);
 }
 
-void	move_right(t_cub *cub)
+int	is_wall_move(float *floats, t_vector *plr, char **map, float angle)
 {
-	int		i;
-	t_ray	pos;
-
-	i = 1;
-	circle(cub, 1, WHITE);
-	while (i <= PIX_MOVE)
+	if (map[(int)floorf(floats[1]) / SIZE][(int)floorf(floats[0] / SIZE)] == '1')
 	{
-		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, add_angle(cub->angle, 90));
-		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
-			break ;
-		cub->plr.real_x = pos.real_x;
-		cub->plr.real_y = pos.real_y;
-		cub->plr.x = pos.real_x / SIZE;
-		cub->plr.y = pos.real_y / SIZE;
-		i++;
+		if (angle >= 315 && angle < 45)
+		{
+			plr->real_x = floats[0] - 10;
+			plr->real_y = floats[1];
+		}
+		else if (angle >= 45 && angle < 135)
+		{
+			plr->real_x = floats[0];
+			plr->real_y = floats[1] - 10;
+		}
+		else if (angle >= 135 && angle < 225)
+		{
+			plr->real_x = floats[0] + 10;
+			plr->real_y = floats[1];
+		}
+		else if (angle >= 225 && angle < 315)
+		{
+			plr->real_x = floats[0];
+			plr->real_y = floats[1] + 10;
+		}
+		return (1);
 	}
-	draw(cub);
-	circle(cub, 1, RED);
+	return (0);
 }
 
-void	move_down(t_cub *cub)
+void	move(t_cub *cub, t_vector *plr, float angle)
 {
-int		i;
-	t_ray	pos;
+	float	floats[2];
+	float	rad;
 
-	i = 1;
+	rad = angle * (M_PI / 180);
 	circle(cub, 1, WHITE);
-	while (i <= PIX_MOVE)
+	floats[0] = plr->real_x + (PIX_MOVE * cos(rad));
+	floats[1] = plr->real_y + (PIX_MOVE * sin(rad));
+	if (cub->map.map[(int)floorf(floats[1]) / SIZE][(int)floorf(floats[0]) / SIZE] != '1')
 	{
-		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, add_angle(cub->angle, 180));
-		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
-			break ;
-		cub->plr.real_x = pos.real_x;
-		cub->plr.real_y = pos.real_y;
-		cub->plr.x = pos.real_x / SIZE;
-		cub->plr.y = pos.real_y / SIZE;
-		i++;
+		plr->real_x = floats[0];
+		plr->real_y = floats[1];
+		plr->x = floats[0] / SIZE;
+		plr->y = floats[1] / SIZE;
 	}
 	draw(cub);
-	circle(cub, 1, RED);
+	circle(cub, 1, LIGHT_RED);
 }
 
-void	move_left(t_cub *cub)
-{
-	int		i;
-	t_ray	pos;
-
-	i = 1;
-	circle(cub, 1, WHITE);
-	while (i <= PIX_MOVE)
-	{
-		pos = intersection(cub->plr.real_x, cub->plr.real_y, i, min_angle(cub->angle, 90));
-		if (cub->map.map[pos.real_y / SIZE][pos.real_x / SIZE] == '1')
-			break ;
-		cub->plr.real_x = pos.real_x;
-		cub->plr.real_y = pos.real_y;
-		cub->plr.x = pos.real_x / SIZE;
-		cub->plr.y = pos.real_y / SIZE;
-		i++;
-	}
-	draw(cub);
-	circle(cub, 1, RED);
-}
-
-void	move(t_cub *cub, int key)
+void	get_move(t_cub *cub, int key)
 {
 	clean_map(cub);
-	if (key == W)
-		move_up(cub);
-	else if (key == A)
-		move_left(cub);
-	else if (key == S)
-		move_down(cub);
-	else if (key == D)
-		move_right(cub);
-	grid(cub);
+	if (key == 13)
+		move(cub, &cub->plr, cub->angle);
+	else if (key == 0)
+		move(cub, &cub->plr, abs_angle(cub->angle - 90));
+	else if (key == 1)
+		move(cub, &cub->plr, abs_angle(cub->angle - 180));
+	else if (key == 2)
+		move(cub, &cub->plr, abs_angle(cub->angle - 270));
+	// grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
 	// printf("%d | %d\n", cub->plr.real_x / SIZE, cub->plr.real_y / SIZE);
 }
