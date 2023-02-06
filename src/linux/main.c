@@ -18,9 +18,9 @@ void	init(t_cub *cub, int ac, char **av)
 		ft_error("Wrong number of arguments.");
 	else if (!check_extension(av[1]))
 		ft_error("Wrong file extension.");
-	cub->txtr.c = NULL;
+	// cub->txtr.c = NULL;
 	cub->txtr.ea = NULL;
-	cub->txtr.f = NULL;
+	// cub->txtr.f = NULL;
 	cub->txtr.no = NULL;
 	cub->txtr.so = NULL;
 	cub->txtr.we = NULL;

@@ -49,11 +49,11 @@ SRC_LINUX					=	src/check.c \
 								src/draw.c \
 								src/error.c \
 								src/free.c \
+								src/manage_rays.c \
 								src/parse.c \
 								src/update_data.c \
 								src/create_windows.c \
 								src/linux/main.c \
-								src/linux/manage_rays.c \
 								src/linux/moves.c \
 								src/linux/rotate.c \
 								src/gnl/get_next_line.c \
@@ -72,6 +72,7 @@ SRC_LINUX					=	src/check.c \
 								src/libft/lst/ft_lstnew.c \
 								src/libft/lst/ft_lstput.c \
 								src/libft/lst/ft_lstsize.c \
+								src/libft/ft_atoi.c \
 								src/libft/ft_bzero.c \
 								src/libft/ft_itoa.c \
 								src/libft/ft_memset.c \
