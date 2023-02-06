@@ -14,8 +14,9 @@
 
 void	draw_col(t_cub *cub, t_ray ray, int col, t_img *img, int color)
 {
-	int		ints[3];
+	int		ints[2];
 	float	height;
+	float	line;
 	int		*pix;
 	float	multi;
 
@@ -29,12 +30,12 @@ void	draw_col(t_cub *cub, t_ray ray, int col, t_img *img, int color)
 	multi = 256.000 / height;
 	ints[0] = (768.000 - (int)floorf(height)) / 2;
 	ints[1] = ints[0];
-	ints[2] = 0;
+	line = 0;
 	while (++ints[1] < (768.000 - ints[0]))
 	{
-		pix = (int*)img->addr + ((int)floorf(ints[2] / multi) * (img->line_length / 4) + (int)floorf(ray.col) * (img->bits_per_pixel / 32));
+		pix = (int*)img->addr + ((int)floorf(line / multi) * (img->line_length / 4) + (int)floorf(ray.col) * (img->bits_per_pixel / 32));
 		my_mlx_pixel_put(&cub->img_col, 0, ints[1], mlx_get_color_value(cub->mlx, *pix));
-		ints[2]++;
+		line += 1.000;
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_col.img, col, 0);
 }
