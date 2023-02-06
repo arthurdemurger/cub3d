@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 10:56:46 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:33:40 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,48 @@
 
 void	draw_col(t_cub *cub, t_ray ray, int col, int color, t_img *img)
 {
-	int				i;
-	float			height;
-	int				*pix;
+	int		i;
+	float	height;
+	int		*pix;
+	float	multi;
+	float	bg;
 
 	(void)color;
-	(void)img;
-	i = WIN_HEIGHT / 2;
+	(void)multi;
 	height = (SIZE * SIZE) / floorf(ray.l);
 	height *= 25;
-	pix = (int*)img->addr + (126 * img->line_length + 126 * img->bits_per_pixel);
-	// color = mlx_get_color_value(cub->mlx, *pix);
-	my_mlx_pixel_put(&cub->img_game, col, i, color);
-	// my_mlx_pixel_put(&cub->img_game, 0, i, mlx_get_color_value(cub->mlx, pix));
-	while (++i <= (WIN_HEIGHT / 2) + ((int)height / 2) && i < 768)
+	multi = height / 256.000;
+	bg = (768.000 - height) / 2;
+	i = WIN_HEIGHT / 2;
+	pix = (int*)img->addr + ((i / multi) * (img->line_length / 4) + (int)floorf(ray.col) * (img->bits_per_pixel / 32));
+	// my_mlx_pixel_put(&cub->img_game, col, i, mlx_get_color_value(cub->mlx, *pix));
+	my_mlx_pixel_put(&cub->img_col, 0, i, mlx_get_color_value(cub->mlx, *pix));
+	while (++i < 768)
+	// while (++i <= (WIN_HEIGHT / 2) + ((int)height / 2) && i < 768)
 	{
-		// pix = *(int*)img.addr + (i * img.line_length + col * img.bits_per_pixel);
-		my_mlx_pixel_put(&cub->img_game, col, i, color);
-		// my_mlx_pixel_put(&cub->img_col, col, i, mlx_get_color_value(cub->mlx, pix));
+		if (i < (768.000 - bg))
+		{
+			pix = (int*)img->addr + ((i / multi) * (img->line_length / 4) + (int)floorf(ray.col) * (img->bits_per_pixel / 32));
+			my_mlx_pixel_put(&cub->img_col, 0, i, mlx_get_color_value(cub->mlx, *pix));
+		}
+		// my_mlx_pixel_put(&cub->img_game, col, i, color);
+		else
+			my_mlx_pixel_put(&cub->img_col, 0, i, FLOOR);
 	}
 	i = WIN_HEIGHT / 2;
-	while (--i >= (WIN_HEIGHT / 2) - ((int)height / 2) && i >= 0)
+	while (--i >= 0)
+	// while (--i >= (WIN_HEIGHT / 2) - ((int)height / 2) && i >= 0)
 	{
-		// pix = *(int*)img.addr + (i * img.line_length + col * img.bits_per_pixel);
-		my_mlx_pixel_put(&cub->img_game, col, i, color);
-		// my_mlx_pixel_put(&cub->img_col, col, i, mlx_get_color_value(cub->mlx, pix));
+		if (i > bg)
+		{
+			pix = (int*)img->addr + ((i / multi) * (img->line_length / 4) + (int)floorf(ray.col) * (img->bits_per_pixel / 32));
+			my_mlx_pixel_put(&cub->img_col, 0, i, mlx_get_color_value(cub->mlx, *pix));
+		}
+		// my_mlx_pixel_put(&cub->img_game, col, i, color);
+		else
+			my_mlx_pixel_put(&cub->img_col, 0, i, CEILING);
 	}
-	// mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_col.img, col, 0);
+	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_col.img, col, 0);
 }
 
 void	get_color(t_cub *cub, t_ray ray, int col)
@@ -63,7 +78,7 @@ void	draw_game(t_cub *cub)
 	while (++i < NB_RAYS)
 		get_color(cub, cub->rays[i], i);
 	// draw_cursor(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_game.img, 0, 0);
+	// mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_game.img, 0, 0);
 }
 
 void	init_draw(t_cub *cub)
@@ -72,7 +87,7 @@ void	init_draw(t_cub *cub)
 	int	y;
 
 	y = (WIN_HEIGHT / 2) - 1;
-	while (--y > 0)
+	while (--y >= 0)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)

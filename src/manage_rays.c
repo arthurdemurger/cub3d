@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   magane_rays.c                                      :+:      :+:    :+:   */
+/*   manage_rays.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 10:19:55 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:38:12 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,15 @@ float	angle(float a, float b)
 	return (right - c);
 }
 
-float	get_col(t_ray ray, int x, int y)
+int	get_col(t_ray ray, float x, float y)
 {
-	float	div;
+	float	pos;
 
-	div = 256.000 / NB_RAYS;
-	if (ray.side == EAST || ray.side == WEST)
-		return ((y % SIZE) / div);
-	return ((x % SIZE) / div);
+	if (ray.side == WEST || ray.side == EAST)
+		pos = y - (floorf(floorf(y) / SIZE) * SIZE);
+	else
+		pos = x - (floorf(floorf(x) / SIZE) * SIZE);
+	return (pos * 4);
 }
 
 void expand_ray(t_cub *cub, t_ray *ray)
@@ -102,10 +103,11 @@ void expand_ray(t_cub *cub, t_ray *ray)
 		{
 			ray->l = distance(*cub, floats);
 			ray->side = check_walls(cub, floats, ray->angle);
-			ray->col = get_col(*ray, round(floats[0]), round(floats[1]));
+			ray->col = get_col(*ray, floats[0], floats[1]);
 			break ;
 		}
 		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / MAP_DIV, round(floats[1]) / MAP_DIV, GREEN);
 		i++;
 	}
+	// printf("%d\n", (int)floorf(ray->col));
 }

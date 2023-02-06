@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 10:54:58 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:24:40 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ typedef struct s_cub
 	void		*win_main;
 	void		*win_data;
 	void		*win_game;
+	void		*win_test;
 }	t_cub;
 
 /*
