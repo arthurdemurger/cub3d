@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/01/26 11:09:32 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:20:42 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_lst	*parse_texture(t_cub *cub, t_lst *lst)
 	t_lst	*tmp;
 
 	tmp = lst;
-	while (!texture_done(cub) && tmp)
+	while (tmp && !texture_done(cub))
 	{
 		if (!ft_strcmp(tmp->content, "\n"))
 		{

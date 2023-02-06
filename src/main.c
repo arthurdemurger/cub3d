@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 11:53:45 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:35:20 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	init(t_cub *cub, int ac, char **av)
 		ft_error("Wrong number of arguments.");
 	else if (!check_extension(av[1]))
 		ft_error("Wrong file extension.");
-	cub->txtr.c = NULL;
 	cub->txtr.ea = NULL;
-	cub->txtr.f = NULL;
 	cub->txtr.no = NULL;
 	cub->txtr.so = NULL;
 	cub->txtr.we = NULL;
+	cub->txtr.c = -1;
+	cub->txtr.f = -1;
 }
 
 void	ft_close(t_cub *cub)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
+#    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 11:16:48 by ademurge          #+#    #+#              #
-#    Updated: 2023/01/24 16:18:15 by gponcele         ###   ########.fr        #
+#    Updated: 2023/02/06 12:25:31 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ NAME						=	libft.a
 
 # Files
 
-SRC							=	ft_bzero.c \
+SRC							=	ft_atoi.c \
+								ft_bzero.c \
 								ft_fl_min.c \
 								ft_itoa.c \
 								ft_memset.c \

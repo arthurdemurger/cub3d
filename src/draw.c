@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 14:33:40 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:35:02 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,14 @@ void	init_draw(t_cub *cub)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
-			my_mlx_pixel_put(&cub->img_game, x, y, CEILING);
+			my_mlx_pixel_put(&cub->img_game, x, y, cub->txtr.c);
 	}
 	y = (WIN_HEIGHT / 2) - 1;
 	while (++y < WIN_HEIGHT)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
-			my_mlx_pixel_put(&cub->img_game, x, y, FLOOR);
+			my_mlx_pixel_put(&cub->img_game, x, y, cub->txtr.f);
 	}
 }
 
