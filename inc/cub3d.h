@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 11:09:58 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:09:30 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define WHITE 0xFFFFFF
 # define LIGHT_GREEN 0x7FFF00
 # define DARK_GREEN 0x006400
-# define FLOOR 0xBF9A08
-# define CEILING 7894900
+# define FLOOR 0x2E1F02
+# define CEILING 0
 
 /* Debug */
 # define ICI printf("ici\n");
