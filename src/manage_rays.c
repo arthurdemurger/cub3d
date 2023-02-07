@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 12:45:08 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:24:17 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	expand_ray(t_cub *cub, t_ray *ray)
 			break ;
 		}
 		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / MAP_DIV,
-			round(floats[1]) / MAP_DIV, GREEN);
+			round(floats[1]) / MAP_DIV, 0x5C5A54);
 		i++;
 	}
 }

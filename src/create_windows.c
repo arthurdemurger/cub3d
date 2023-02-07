@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_windows.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 11:49:19 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:50:13 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	fill_squares(t_cub *cub, int x, int y)
 					while (copy.x < ((x * (SIZE / MAP_DIV)) + (SIZE / MAP_DIV)))
 					{
 						my_mlx_pixel_put(&cub->img_map, copy.x, copy.y,
-							BLUE);
+							0x6E4B07);
 						copy.x++;
 					}
 					copy.y++;
@@ -70,13 +70,13 @@ void	clean_map(t_cub *cub)
 
 	x = 0;
 	y = 0;
-	while (x < ((SIZE * cub->map.w)) / MAP_DIV
-		|| y < ((SIZE * cub->map.h)) / MAP_DIV)
+	while (x < ((SIZE * cub->map.w) / MAP_DIV) + 6
+		|| y < ((SIZE * cub->map.h) / MAP_DIV) + 6) 
 	{
 		x = 0;
-		while (x < ((SIZE * cub->map.w)) / MAP_DIV)
+		while (x < (SIZE * cub->map.w) / MAP_DIV + 6)
 		{
-			my_mlx_pixel_put(&cub->img_map, x, y, WHITE);
+			my_mlx_pixel_put(&cub->img_map, x, y, 0xABABAB);
 			x++;
 		}
 		y++;
@@ -91,5 +91,4 @@ void	create_window_main(t_cub *cub)
 	clean_map(cub);
 	circle(cub, 1, LIGHT_RED);
 	draw(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
 }

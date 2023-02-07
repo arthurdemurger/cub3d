@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_launch.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:04:44 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 12:32:50 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:50:44 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,11 @@ void	init(t_cub *cub, int ac, char **av)
 	cub->txtr.we = NULL;
 	cub->txtr.c = -1;
 	cub->txtr.f = -1;
+	cub->display_map = 0;
 }
 
-void	init_textures(t_cub *cub, t_text *text)
+void	get_textures_addr(t_text *text)
 {
-	text->north.img = mlx_new_image(cub->mlx, 256, 256);
-	text->east.img = mlx_new_image(cub->mlx, 256, 256);
-	text->south.img = mlx_new_image(cub->mlx, 256, 256);
-	text->west.img = mlx_new_image(cub->mlx, 256, 256);
-	text->north.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.no,
-			&text->north_width, &text->north_height);
-	text->east.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.ea,
-			&text->east_width, &text->east_height);
-	text->south.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.so,
-			&text->south_width, &text->south_height);
-	text->west.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.we,
-			&text->west_width, &text->west_height);
 	text->north.addr = mlx_get_data_addr(text->north.img,
 			&text->north.bits_per_pixel, &text->north.line_length,
 			&text->north.endian);
@@ -54,29 +43,52 @@ void	init_textures(t_cub *cub, t_text *text)
 			&text->west.endian);
 }
 
-void	deal_key(int key, t_cub *cub)
+void	init_textures(t_cub *cub, t_text *text)
 {
-	if (key == 53)
-		ft_close(cub);
-	else if (key == 13 || key == 0 || key == 1 || key == 2)
-		get_move(cub, key);
-	else if (key == 123 || key == 124)
-		rotate(cub, key);
+	text->north.img = mlx_new_image(cub->mlx, 256, 256);
+	text->east.img = mlx_new_image(cub->mlx, 256, 256);
+	text->south.img = mlx_new_image(cub->mlx, 256, 256);
+	text->west.img = mlx_new_image(cub->mlx, 256, 256);
+	text->north.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.no,
+			&text->north_width, &text->north_height);
+	if (!text->north.img)
+		ft_error("Invalid XPM file");
+	text->east.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.ea,
+			&text->east_width, &text->east_height);
+	if (!text->east.img)
+		ft_error("Invalid XPM file");
+	text->south.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.so,
+			&text->south_width, &text->south_height);
+	if (!text->south.img)
+		ft_error("Invalid XPM file");
+	text->west.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.we,
+			&text->west_width, &text->west_height);
+	if (!text->west.img)
+		ft_error("Invalid XPM file");
+	get_textures_addr(text);
+}
+
+void	init_map_title(t_cub *cub)
+{
+	cub->map_title.img = mlx_new_image(cub->mlx, 359, 86);
+	cub->map_title.img = mlx_xpm_file_to_image(cub->mlx,
+			"./files/textures/Map_title.xpm",
+			&cub->map_title_w, &cub->map_title_h);
+	cub->map_title.addr = mlx_get_data_addr(cub->map_title.img,
+			&cub->map_title.bits_per_pixel, &cub->map_title.line_length,
+			&cub->map_title.endian);
 }
 
 void	launch(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	init_textures(cub, &cub->txtr);
+	init_map_title(cub);
 	cub->img_map.img = mlx_new_image(cub->mlx, (cub->map.w * SIZE) / MAP_DIV,
 			(cub->map.h * SIZE) / MAP_DIV);
 	cub->img_map.addr = mlx_get_data_addr(cub->img_map.img,
 			&cub->img_map.bits_per_pixel, &cub->img_map.line_length,
 			&cub->img_map.endian);
-	cub->img_game.img = mlx_new_image(cub->mlx, WIN_WIDTH, WIN_HEIGHT);
-	cub->img_game.addr = mlx_get_data_addr(cub->img_game.img,
-			&cub->img_game.bits_per_pixel, &cub->img_game.line_length,
-			&cub->img_game.endian);
 	cub->img_col.img = mlx_new_image(cub->mlx, 1, WIN_HEIGHT);
 	cub->img_col.addr = mlx_get_data_addr(cub->img_col.img,
 			&cub->img_col.bits_per_pixel, &cub->img_col.line_length,

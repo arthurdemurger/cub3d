@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 12:42:03 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:31:38 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,6 @@ void	draw_game(t_cub *cub)
 
 void	init_draw(t_cub *cub)
 {
-	int	x;
-	int	y;
-
-	y = (WIN_HEIGHT / 2) - 1;
-	while (--y >= 0)
-	{
-		x = -1;
-		while (++x < WIN_WIDTH)
-			my_mlx_pixel_put(&cub->img_game, x, y, cub->txtr.c);
-	}
-	y = (WIN_HEIGHT / 2) - 1;
-	while (++y < WIN_HEIGHT)
-	{
-		x = -1;
-		while (++x < WIN_WIDTH)
-			my_mlx_pixel_put(&cub->img_game, x, y, cub->txtr.f);
-	}
 	cub->rays[MID_RAY] = intersection(cub->plr.real_x, cub->plr.real_y,
 			cub->r, cub->angle);
 	cub->rays[MID_RAY].angle = cub->angle;

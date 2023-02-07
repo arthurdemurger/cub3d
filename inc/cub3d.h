@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 12:52:01 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:11:39 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@
 # define KEY_LEFT 123
 # define KEY_DOWN 125
 # define KEY_RIGHT 124
+# define TAB 48
 
 /* Keyboard*/
 # define DESTROY_BUTTON 17
@@ -170,9 +171,9 @@ typedef struct s_ray
 
 typedef struct s_map
 {
-	char	**map;
-	int		w;
-	int		h;
+	char		**map;
+	int			w;
+	int			h;
 }	t_map;
 
 typedef struct s_cub
@@ -184,18 +185,18 @@ typedef struct s_cub
 	t_img		img_map;
 	t_img		img_game;
 	t_img		img_col;
-	t_img		img_col_test;
+	t_img		map_title;
+	int			map_title_w;
+	int			map_title_h;
 	int			width_test;
 	int			height_test;
+	int			display_map;
 	t_text		txtr;
 	float		angle;
 	float		r;
 	float		plane;
 	void		*mlx;
-	void		*win_main;
-	void		*win_data;
 	void		*win_game;
-	void		*win_test;
 }	t_cub;
 
 /*
@@ -210,6 +211,9 @@ void			create_window_main(t_cub *cub);
 void			grid(t_cub *cub);
 void			fill_squares(t_cub *cub, int x, int y);
 void			clean_map(t_cub *cub);
+
+/* Display Map */
+void			display_map(t_cub *cub, int a);
 
 /* Draw */
 void			draw(t_cub *cub);

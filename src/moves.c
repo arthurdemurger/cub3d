@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 12:24:45 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:41:48 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,13 @@ float	abs_angle(float angle)
 	return (360 + angle);
 }
 
-void	is_wall_move2(t_vector *plr, float x, float y)
-{
-	plr->real_x = x;
-	plr->real_y = y;
-}
-
-int	is_wall_move(float *floats, t_vector *plr, char **map, float angle)
-{
-	if (map[(int)floorf(floats[1]) / SIZE]
-		[(int)floorf(floats[0] / SIZE)] == '1')
-	{
-		if (angle >= 315 && angle < 45)
-			is_wall_move2(plr, floats[0] - 10, floats[1]);
-		else if (angle >= 45 && angle < 135)
-			is_wall_move2(plr, floats[0], floats[1] - 10);
-		else if (angle >= 135 && angle < 225)
-			is_wall_move2(plr, floats[0] + 10, floats[1]);
-		else if (angle >= 225 && angle < 315)
-			is_wall_move2(plr, floats[0], floats[1] + 10);
-		return (1);
-	}
-	return (0);
-}
-
 void	move(t_cub *cub, t_vector *plr, float angle)
 {
 	float	floats[2];
 	float	rad;
 
 	rad = angle * (M_PI / 180);
-	circle(cub, 1, WHITE);
+	circle(cub, 1, 0xABABAB);
 	floats[0] = plr->real_x + (PIX_MOVE * cos(rad));
 	floats[1] = plr->real_y + (PIX_MOVE * sin(rad));
 	if (cub->map.map[(int)floorf(floats[1]) / SIZE]
@@ -67,13 +43,32 @@ void	move(t_cub *cub, t_vector *plr, float angle)
 void	get_move(t_cub *cub, int key)
 {
 	clean_map(cub);
-	if (key == 13)
+	if (key == W)
 		move(cub, &cub->plr, cub->angle);
-	else if (key == 0)
+	else if (key == A)
 		move(cub, &cub->plr, abs_angle(cub->angle - 90));
-	else if (key == 1)
+	else if (key == S)
 		move(cub, &cub->plr, abs_angle(cub->angle - 180));
-	else if (key == 2)
+	else if (key == D)
 		move(cub, &cub->plr, abs_angle(cub->angle - 270));
-	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
+}
+
+void	deal_key(int key, t_cub *cub)
+{
+	if (key == ESC)
+		ft_close(cub);
+	if (key == TAB)
+	{
+		if (cub->display_map == 0)
+			display_map(cub, 1);
+		else
+			display_map(cub, 0);
+	}
+	if (cub->display_map == 0)
+	{
+		if (key == W || key == A || key == S || key == D)
+			get_move(cub, key);
+		else if (key == KEY_LEFT || key == KEY_RIGHT)
+			rotate(cub, key);
+	}
 }

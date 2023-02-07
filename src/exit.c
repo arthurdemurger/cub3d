@@ -20,7 +20,6 @@ void	ft_close(t_cub *cub)
 	mlx_destroy_image(cub->mlx, cub->txtr.south.img);
 	mlx_destroy_image(cub->mlx, cub->txtr.west.img);
 	mlx_destroy_image(cub->mlx, cub->img_map.img);
-	mlx_destroy_image(cub->mlx, cub->img_game.img);
 	mlx_destroy_image(cub->mlx, cub->img_col.img);
 	free (cub->mlx);
 	free_tab(cub->map.map, ft_tablen(cub->map.map));
