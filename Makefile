@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
+#    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/02/06 10:20:07 by gponcele         ###   ########.fr        #
+#    Updated: 2023/02/07 12:20:25 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,12 @@ SRC							=	src/check.c \
 								src/corners.c \
 								src/manage_rays.c \
 								src/draw.c \
-								src/error.c \
+								src/exit.c \
 								src/free.c \
+								src/init_launch.c \
 								src/main.c \
 								src/moves.c \
 								src/parse.c \
-								src/update_data.c \
 								src/rotate.c \
 								src/create_windows.c \
 								src/gnl/get_next_line.c \

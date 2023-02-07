@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 11:09:58 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:35:30 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@
 # define WHITE 0xFFFFFF
 # define LIGHT_GREEN 0x7FFF00
 # define DARK_GREEN 0x006400
-# define FLOOR 0xBF9A08
-# define CEILING 7894900
 
 /* Debug */
 # define ICI printf("ici\n");
@@ -59,7 +57,7 @@
 # define MAP_CHAR "01NSEW \n"
 # define POS_CHAR "ESWN"
 # define ROT_ANGLE 10
-# define PIX_MOVE 40
+# define PIX_MOVE 30
 # define MAP_DIV 8
 # define SIZE 64
 # define SIDE 3
@@ -210,12 +208,22 @@ void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 /* Create Window */
 void			create_window_main(t_cub *cub);
 void			grid(t_cub *cub);
-void			fill_squares(t_cub *cub);
+void			fill_squares(t_cub *cub, int x, int y);
 void			clean_map(t_cub *cub);
 
 /* Draw */
 void			draw(t_cub *cub);
 void			draw_cursor(t_cub *cub);
+void			draw_col(t_cub *cub, t_ray ray, int col, t_img *img);
+void			get_color(t_cub *cub, t_ray ray, int col);
+float			distance(t_cub cub, float *floats);
+float			angle(float a, float b);
+
+
+/* Init & Launch */
+void			init(t_cub *cub, int ac, char **av);
+void			launch(t_cub *cub);
+void			deal_key(int key, t_cub *cub);
 
 /* Update */
 void			update_data(t_cub *cub, int line, char *data);
@@ -231,10 +239,14 @@ void			expand_ray(t_cub *cub, t_ray *ray);
 float			angle(float a, float b);
 
 /* Corners */
-int				north_west(t_vector plr, float *floats, char **map, float angle);
-int				north_east(t_vector plr, float *floats, char **map, float angle);
-int				south_west(t_vector plr, float *floats, char **map, float angle);
-int				south_east(t_vector plr, float *floats, char **map, float angle);
+int				north_west(t_vector plr, float *floats, char **map,
+					float angle);
+int				north_east(t_vector plr, float *floats, char **map,
+					float angle);
+int				south_west(t_vector plr, float *floats, char **map,
+					float angle);
+int				south_east(t_vector plr, float *floats, char **map,
+					float angle);
 
 /* Circle */
 void			circle(t_cub *cub, int r, int color);
@@ -250,16 +262,13 @@ t_lst			*parse_texture(t_cub *cub, t_lst *lst);
 int				texture_done(t_cub *cub);
 int				check_map(t_cub *cub, char **map);
 
-/* Utils */
-float			add_angle(float a, float b);
-float			min_angle(float a, float b);
-
 /* Free */
 void			*free_tab(char **tab, int len);
 void			free_all(t_cub *cub);
 
-/* Error management */
+/* Exit management */
 void			ft_error(char *s);
+void			ft_close(t_cub *cub);
 
 /* Libft */
 int				ft_atoi(const char *str);

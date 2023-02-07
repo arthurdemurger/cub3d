@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 10:29:52 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:19:12 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ void	rotate_right(t_cub *cub)
 
 void	rotate(t_cub *cub, int key)
 {
-    clean_map(cub);
+	clean_map(cub);
 	if (key == 123)
 		rotate_left(cub);
 	else if (key == 124)
 		rotate_right(cub);
-	// grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
 }

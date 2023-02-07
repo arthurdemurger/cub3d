@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 11:13:06 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:24:45 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,25 @@ float	abs_angle(float angle)
 	return (360 + angle);
 }
 
+void	is_wall_move2(t_vector *plr, float x, float y)
+{
+	plr->real_x = x;
+	plr->real_y = y;
+}
+
 int	is_wall_move(float *floats, t_vector *plr, char **map, float angle)
 {
-	if (map[(int)floorf(floats[1]) / SIZE][(int)floorf(floats[0] / SIZE)] == '1')
+	if (map[(int)floorf(floats[1]) / SIZE]
+		[(int)floorf(floats[0] / SIZE)] == '1')
 	{
 		if (angle >= 315 && angle < 45)
-		{
-			plr->real_x = floats[0] - 10;
-			plr->real_y = floats[1];
-		}
+			is_wall_move2(plr, floats[0] - 10, floats[1]);
 		else if (angle >= 45 && angle < 135)
-		{
-			plr->real_x = floats[0];
-			plr->real_y = floats[1] - 10;
-		}
+			is_wall_move2(plr, floats[0], floats[1] - 10);
 		else if (angle >= 135 && angle < 225)
-		{
-			plr->real_x = floats[0] + 10;
-			plr->real_y = floats[1];
-		}
+			is_wall_move2(plr, floats[0] + 10, floats[1]);
 		else if (angle >= 225 && angle < 315)
-		{
-			plr->real_x = floats[0];
-			plr->real_y = floats[1] + 10;
-		}
+			is_wall_move2(plr, floats[0], floats[1] + 10);
 		return (1);
 	}
 	return (0);
@@ -57,7 +52,8 @@ void	move(t_cub *cub, t_vector *plr, float angle)
 	circle(cub, 1, WHITE);
 	floats[0] = plr->real_x + (PIX_MOVE * cos(rad));
 	floats[1] = plr->real_y + (PIX_MOVE * sin(rad));
-	if (cub->map.map[(int)floorf(floats[1]) / SIZE][(int)floorf(floats[0]) / SIZE] != '1')
+	if (cub->map.map[(int)floorf(floats[1]) / SIZE]
+		[(int)floorf(floats[0]) / SIZE] != '1')
 	{
 		plr->real_x = floats[0];
 		plr->real_y = floats[1];
@@ -79,7 +75,5 @@ void	get_move(t_cub *cub, int key)
 		move(cub, &cub->plr, abs_angle(cub->angle - 180));
 	else if (key == 2)
 		move(cub, &cub->plr, abs_angle(cub->angle - 270));
-	// grid(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
-	// printf("%d | %d\n", cub->plr.real_x / SIZE, cub->plr.real_y / SIZE);
 }
