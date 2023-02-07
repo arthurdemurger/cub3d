@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:29:28 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 13:31:53 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:37:21 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,28 @@ void	*free_tab(char **tab, int len)
 	return (NULL);
 }
 
+void	destroy_mlx(t_cub *cub)
+{
+	if (cub->win_game)
+		mlx_destroy_window(cub->mlx, cub->win_game);
+	if (cub->txtr.north.img)
+		mlx_destroy_image(cub->mlx, cub->txtr.north.img);
+	if (cub->txtr.east.img)
+		mlx_destroy_image(cub->mlx, cub->txtr.east.img);
+	if (cub->txtr.south.img)
+		mlx_destroy_image(cub->mlx, cub->txtr.south.img);
+	if (cub->txtr.west.img)
+		mlx_destroy_image(cub->mlx, cub->txtr.west.img);
+	if (cub->img_map.img)
+		mlx_destroy_image(cub->mlx, cub->img_map.img);
+	if (cub->img_col.img)
+		mlx_destroy_image(cub->mlx, cub->img_col.img);
+	if (cub->mlx)
+		free(cub->mlx);
+}
+
 void	free_all(t_cub *cub)
 {
-	mlx_destroy_window(cub->mlx, cub->win_game);
-	mlx_destroy_image(cub->mlx, cub->txtr.north.img);
-	mlx_destroy_image(cub->mlx, cub->txtr.east.img);
-	mlx_destroy_image(cub->mlx, cub->txtr.south.img);
-	mlx_destroy_image(cub->mlx, cub->txtr.west.img);
-	mlx_destroy_image(cub->mlx, cub->img_map.img);
-	mlx_destroy_image(cub->mlx, cub->img_game.img);
-	mlx_destroy_image(cub->mlx, cub->img_col.img);
-	free(cub->mlx);
 	if (cub->txtr.no)
 		free(cub->txtr.no);
 	if (cub->txtr.so)
@@ -46,4 +57,5 @@ void	free_all(t_cub *cub)
 		free(cub->txtr.ea);
 	if (cub->map.map)
 		free_tab(cub->map.map, ft_tablen(cub->map.map));
+	ft_lstclear(cub->map.lst);
 }

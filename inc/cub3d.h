@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 14:53:04 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:38:56 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_ray
 
 typedef struct s_map
 {
+	t_lst		*lst;
 	char		**map;
 	int			w;
 	int			h;
@@ -270,7 +271,7 @@ void			*free_tab(char **tab, int len);
 void			free_all(t_cub *cub);
 
 /* Exit management */
-void			ft_error(char *s);
+void			ft_error(t_cub *cub, char *s);
 void			ft_close(t_cub *cub);
 
 /* Libft */
