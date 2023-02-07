@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:04:44 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 15:40:56 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:57:00 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,19 @@ void	init_textures(t_cub *cub, t_text *text)
 	text->north.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.no,
 			&text->north_width, &text->north_height);
 	if (!text->north.img)
-		ft_error(cub, "Invalid '.xpm' file");
+		ft_error(cub, "Invalid texture file");
 	text->east.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.ea,
 			&text->east_width, &text->east_height);
 	if (!text->east.img)
-		ft_error(cub, "Invalid '.xpm' file");
+		ft_error(cub, "Invalid texture file");
 	text->south.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.so,
 			&text->south_width, &text->south_height);
 	if (!text->south.img)
-		ft_error(cub, "Invalid '.xpm' file");
+		ft_error(cub, "Invalid texture file");
 	text->west.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.we,
 			&text->west_width, &text->west_height);
 	if (!text->west.img)
-		ft_error(cub, "Invalid '.xpm' file");
+		ft_error(cub, "Invalid texture file");
 	get_textures_addr(text);
 }
 
