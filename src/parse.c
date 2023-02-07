@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/02/07 15:33:18 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:02:44 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	texture_done(t_cub *cub)
 {
 	if (cub->txtr.c == -1)
 		return (0);
-	else if (cub->txtr.c == -1)
+	else if (cub->txtr.f == -1)
 		return (0);
 	else if (!cub->txtr.ea)
 		return (0);
