@@ -15,7 +15,6 @@
 void	ft_close(t_cub *cub)
 {
 	free_all(cub);
-	LEAKS
 	exit(EXIT_SUCCESS);
 }
 
