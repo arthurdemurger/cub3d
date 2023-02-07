@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 22:12:47 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 13:34:19 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:39:19 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	rgb_to_hex(char *s)
 	return ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
 }
 
-int	check_extension(char *file)
+int	check_extension(char *file, char *extension)
 {
 	char	*ext;
 
 	if (file[0] == '.')
 		return (0);
 	ext = ft_strchr(file, '.');
-	if (!ext || ft_strcmp(ext, ".cub"))
+	if (!ext || ft_strcmp(ext, extension))
 		return (0);
 	return (1);
 }

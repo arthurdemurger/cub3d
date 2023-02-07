@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 12:52:01 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:39:25 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,7 @@ t_ray			intersection(int cx, int cy, float r, float angle);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
-int				check_extension(char *file);
+int				check_extension(char *file, char *extension);
 int				is_map_char(char *s);
 int				is_texture(t_cub *cub, char *s);
 void			parse(t_cub *cub, char *file);
