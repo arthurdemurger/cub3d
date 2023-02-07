@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 14:53:04 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:01:55 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,15 @@ typedef struct s_cub
 	t_img		map_title;
 	int			map_title_w;
 	int			map_title_h;
+	t_img		torch;
+	int			torch_w;
+	int			torch_h;
+	t_img		sword;
+	int			sword_w;
+	int			sword_h;
+	t_img		hud;
+	int			hud_w;
+	int			hud_h;
 	int			width_test;
 	int			height_test;
 	int			display_map;

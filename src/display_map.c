@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 13:40:59 by gponcele          #+#    #+#             */
-/*   Updated: 2023/02/07 14:52:23 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:20:54 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,50 @@ void	draw_game_darker(t_cub *cub)
 		get_color_darker(cub, cub->rays[i], i);
 }
 
+void	draw_map_edge(t_cub *cub, int x, int y, int cy)
+{
+	int	cx;
+
+	while (++cy < y)
+	{
+		cx = x - 4;
+		while (++cx < x + (((cub->map.w * SIZE) / MAP_DIV) + 3))
+			mlx_pixel_put(cub->mlx, cub->win_game, cx, cy, 0x8E8E8E);
+	}
+	cy--;
+	while (++cy < (y + ((cub->map.h * SIZE) / MAP_DIV)) - 1)
+	{
+		cx = x - 4;
+		while (++cx < x)
+			mlx_pixel_put(cub->mlx, cub->win_game, cx, cy, 0x8E8E8E);
+		cx = x + ((cub->map.w * SIZE) / MAP_DIV) + 3;
+		while (--cx >= x + ((cub->map.w * SIZE) / MAP_DIV))
+			mlx_pixel_put(cub->mlx, cub->win_game, cx, cy, 0x8E8E8E);
+	}
+	cy--;
+	while (++cy < (y + ((cub->map.h * SIZE) / MAP_DIV)) + 3)
+	{
+		cx = x - 4;
+		while (++cx < x + (((cub->map.w * SIZE) / MAP_DIV) + 3))
+			mlx_pixel_put(cub->mlx, cub->win_game, cx, cy, 0x8E8E8E);
+	}
+}
+
 void	display_map(t_cub *cub, int a)
 {
 	int	x;
 	int	y;
-	int	x_edge;
-	int	y_edge;
 
 	if (a == 1)
 	{
 		draw_game_darker(cub);
 		x = (1024.000 / 2) - (((cub->map.w * SIZE) / MAP_DIV) / 2);
 		y = (768.000 / 2) - (((cub->map.h * SIZE) / MAP_DIV) / 2);
-		x_edge = x - 3;
-		y_edge = y - 3;
-		
 		mlx_put_image_to_window(cub->mlx, cub->win_game,
 			cub->map_title.img, 332, y - 150);
 		mlx_put_image_to_window(cub->mlx,
 			cub->win_game, cub->img_map.img, x, y);
+		draw_map_edge(cub, x, y, y - 4);
 	}
 	else
 		draw(cub);

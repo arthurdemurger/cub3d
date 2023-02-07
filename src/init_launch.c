@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:04:44 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 14:53:17 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:02:34 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_textures(t_cub *cub, t_text *text)
 	get_textures_addr(text);
 }
 
-void	init_map_title(t_cub *cub)
+void	init_others(t_cub *cub)
 {
 	cub->map_title.img = mlx_new_image(cub->mlx, 359, 86);
 	cub->map_title.img = mlx_xpm_file_to_image(cub->mlx,
@@ -77,13 +77,34 @@ void	init_map_title(t_cub *cub)
 	cub->map_title.addr = mlx_get_data_addr(cub->map_title.img,
 			&cub->map_title.bits_per_pixel, &cub->map_title.line_length,
 			&cub->map_title.endian);
+	cub->torch.img = mlx_new_image(cub->mlx, 359, 276);
+	cub->torch.img = mlx_xpm_file_to_image(cub->mlx,
+			"./files/textures/Torch.xpm",
+			&cub->torch_w, &cub->torch_h);
+	cub->torch.addr = mlx_get_data_addr(cub->torch.img,
+			&cub->torch.bits_per_pixel, &cub->torch.line_length,
+			&cub->torch.endian);
+	cub->sword.img = mlx_new_image(cub->mlx, 382, 319);
+	cub->sword.img = mlx_xpm_file_to_image(cub->mlx,
+			"./files/textures/Sword.xpm",
+			&cub->sword_w, &cub->sword_h);
+	cub->sword.addr = mlx_get_data_addr(cub->sword.img,
+			&cub->sword.bits_per_pixel, &cub->sword.line_length,
+			&cub->sword.endian);
+	cub->hud.img = mlx_new_image(cub->mlx, 1024, 768);
+	cub->hud.img = mlx_xpm_file_to_image(cub->mlx,
+			"./files/textures/HUD.xpm",
+			&cub->hud_w, &cub->hud_h);
+	cub->hud.addr = mlx_get_data_addr(cub->hud.img,
+			&cub->hud.bits_per_pixel, &cub->hud.line_length,
+			&cub->hud.endian);
 }
 
 void	launch(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	init_textures(cub, &cub->txtr);
-	init_map_title(cub);
+	init_others(cub);
 	cub->img_map.img = mlx_new_image(cub->mlx, (cub->map.w * SIZE) / MAP_DIV,
 			(cub->map.h * SIZE) / MAP_DIV);
 	cub->img_map.addr = mlx_get_data_addr(cub->img_map.img,
