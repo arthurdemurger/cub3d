@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 14:11:39 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:53:04 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ t_ray			intersection(int cx, int cy, float r, float angle);
 
 /* Parse */
 void			add_texture(t_cub *cub, char **texture);
-int				check_extension(char *file);
+int				check_extension(char *file, char *extension);
 int				is_map_char(char *s);
 int				is_texture(t_cub *cub, char *s);
 void			parse(t_cub *cub, char *file);

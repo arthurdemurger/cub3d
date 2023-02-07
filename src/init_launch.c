@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:04:44 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 14:50:44 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:53:17 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init(t_cub *cub, int ac, char **av)
 {
 	if (ac != 2)
 		ft_error("Wrong number of arguments.");
-	else if (!check_extension(av[1]))
+	else if (!check_extension(av[1], ".cub"))
 		ft_error("Wrong file extension.");
 	cub->txtr.ea = NULL;
 	cub->txtr.no = NULL;
