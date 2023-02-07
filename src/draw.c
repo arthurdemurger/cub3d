@@ -6,13 +6,13 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 11:08:16 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:36:19 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_col(t_cub *cub, t_ray ray, int col, t_img *img, int color)
+void	draw_col(t_cub *cub, t_ray ray, int col, t_img *img)
 {
 	int		ints[2];
 	float	height;
@@ -20,36 +20,42 @@ void	draw_col(t_cub *cub, t_ray ray, int col, t_img *img, int color)
 	int		*pix;
 	float	multi;
 
-	(void)color;
-	ints[0] = -1;
-	while (++ints[0] < WIN_HEIGHT / 2)
-		my_mlx_pixel_put(&cub->img_col, 0, ints[0], CEILING);
-	while (++ints[0] < 768)
-		my_mlx_pixel_put(&cub->img_col, 0, ints[0], FLOOR);
 	height = ((SIZE * SIZE) / floorf(ray.l)) * 25;
 	multi = height / 256.000;
 	ints[0] = (768.000 - (int)floorf(height)) / 2;
 	ints[1] = ints[0];
+	if (ints[1] < 0)
+		ints[1] = 0;
 	line = 0;
-	while (++ints[1] < (768.000 - ints[0]))
+	if (height > 768)
+		line += (height - 768.000) / 2;
+	while (ints[1] < (768.000 - ints[0]) && ints[1] < 768)
 	{
 		pix = (int*)img->addr + ((int)floorf(line / multi) * (img->line_length / 4) + (int)floorf(ray.col) * (img->bits_per_pixel / 32));
 		my_mlx_pixel_put(&cub->img_col, 0, ints[1], mlx_get_color_value(cub->mlx, *pix));
 		line += 1.000;
+		ints[1]++;
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_col.img, col, 0);
 }
 
 void	get_color(t_cub *cub, t_ray ray, int col)
 {
+	int	i;
+
+	i = -1;
+	while (++i < WIN_HEIGHT / 2)
+		my_mlx_pixel_put(&cub->img_col, 0, i, CEILING);
+	while (++i < 768)
+		my_mlx_pixel_put(&cub->img_col, 0, i, FLOOR);
 	if (ray.side == NORTH)
-		draw_col(cub, ray, col, &cub->txtr.north, BLUE);
+		draw_col(cub, ray, col, &cub->txtr.north);
 	else if (ray.side == SOUTH)
-		draw_col(cub, ray, col, &cub->txtr.south, DARK_GREEN);
+		draw_col(cub, ray, col, &cub->txtr.south);
 	else if (ray.side == EAST)
-		draw_col(cub, ray, col, &cub->txtr.east, DARK_RED);
+		draw_col(cub, ray, col, &cub->txtr.east);
 	else if (ray.side == WEST)
-		draw_col(cub, ray, col, &cub->txtr.west, BLACK);
+		draw_col(cub, ray, col, &cub->txtr.west);
 }
 
 void	draw_game(t_cub *cub)
