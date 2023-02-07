@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 22:12:47 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 12:44:53 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:42:55 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,6 @@ int	check_extension(char *file)
 		return (0);
 	ext = ft_strchr(file, '.');
 	if (!ext || ft_strcmp(ext, ".cub"))
-		return (0);
-	return (1);
-}
-
-int	texture_done(t_cub *cub)
-{
-	if (cub->txtr.c == -1)
-		return (0);
-	else if (cub->txtr.c == -1)
-		return (0);
-	else if (!cub->txtr.ea)
-		return (0);
-	else if (!cub->txtr.no)
-		return (0);
-	else if (!cub->txtr.so)
-		return (0);
-	else if (!cub->txtr.we)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 12:40:24 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:42:38 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,6 @@ int	check_walls(t_cub *cub, float *floats, float angle)
 	else if (y % SIZE == 0)
 		return (NORTH);
 	return (SOUTH);
-}
-
-float	distance(t_cub cub, float *floats)
-{
-	float 	dx;
-	float 	dy;
-
-	dx = cub.plr.real_x - floorf(floats[0]);
-	dy = cub.plr.real_y - floorf(floats[1]);
-	return (sqrt(pow(dx, 2) + pow(dy, 2)));
-}
-
-float	angle(float a, float b)
-{
-	float	c;
-	float	right;
-
-	right = 90;
-	c = (atan(a / b)) * (180 / M_PI);
-	if (c < 0)
-		c = 360 - c;
-	return (right - c);
 }
 
 int	get_col(t_ray ray, float x, float y)
@@ -121,7 +99,8 @@ void expand_ray(t_cub *cub, t_ray *ray)
 			ray->col = get_col(*ray, floats[0], floats[1]);
 			break ;
 		}
-		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / MAP_DIV, round(floats[1]) / MAP_DIV, GREEN);
+		my_mlx_pixel_put(&cub->img_map, round(floats[0]) / MAP_DIV,
+			round(floats[1]) / MAP_DIV, GREEN);
 		i++;
 	}
 }
