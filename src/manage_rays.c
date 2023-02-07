@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 12:42:38 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:45:08 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,24 @@ int	is_wall(int *ints, char **map, float angle)
 {
 	if (map[ints[1] / SIZE][ints[0] / SIZE] == '1')
 		return (1);
-	else if (angle > 180 && angle < 270 && map[ints[1] / SIZE][(ints[0] + 1) / SIZE] && map[(ints[1] + 1) / SIZE][ints[0] / SIZE] == '1')
+	else if (angle > 180 && angle < 270
+		&& map[ints[1] / SIZE][(ints[0] + 1) / SIZE]
+		&& map[(ints[1] + 1) / SIZE][ints[0] / SIZE] == '1')
 		return (1);
-	else if (angle > 270 && map[ints[1] / SIZE][(ints[0] - 1) / SIZE] && map[(ints[1] + 1) / SIZE][ints[0] / SIZE] == '1')
+	else if (angle > 270 && map[ints[1] / SIZE][(ints[0] - 1) / SIZE]
+		&& map[(ints[1] + 1) / SIZE][ints[0] / SIZE] == '1')
 		return (1);
-	else if (angle > 90 && angle < 180 && map[ints[1] / SIZE][(ints[0] + 1) / SIZE] && map[(ints[1] - 1) / SIZE][ints[0] / SIZE] == '1')
+	else if (angle > 90 && angle < 180
+		&& map[ints[1] / SIZE][(ints[0] + 1) / SIZE]
+		&& map[(ints[1] - 1) / SIZE][ints[0] / SIZE] == '1')
 		return (1);
-	else if (angle < 90 && map[ints[1] / SIZE][(ints[0] - 1) / SIZE] && map[(ints[1] - 1) / SIZE][ints[0] / SIZE] == '1')
+	else if (angle < 90 && map[ints[1] / SIZE][(ints[0] - 1) / SIZE]
+		&& map[(ints[1] - 1) / SIZE][ints[0] / SIZE] == '1')
 		return (1);
 	return (0);
 }
 
-void expand_ray(t_cub *cub, t_ray *ray)
+void	expand_ray(t_cub *cub, t_ray *ray)
 {
 	float	rad;
 	int		i;

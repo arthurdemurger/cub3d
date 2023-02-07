@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 12:36:52 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:52:01 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,6 @@ void			draw_col(t_cub *cub, t_ray ray, int col, t_img *img);
 void			get_color(t_cub *cub, t_ray ray, int col);
 float			distance(t_cub cub, float *floats);
 float			angle(float a, float b);
-
 
 /* Init & Launch */
 void			init(t_cub *cub, int ac, char **av);
