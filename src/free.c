@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:29:28 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 12:23:32 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:31:53 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ void	*free_tab(char **tab, int len)
 
 void	free_all(t_cub *cub)
 {
+	mlx_destroy_window(cub->mlx, cub->win_game);
+	mlx_destroy_image(cub->mlx, cub->txtr.north.img);
+	mlx_destroy_image(cub->mlx, cub->txtr.east.img);
+	mlx_destroy_image(cub->mlx, cub->txtr.south.img);
+	mlx_destroy_image(cub->mlx, cub->txtr.west.img);
+	mlx_destroy_image(cub->mlx, cub->img_map.img);
+	mlx_destroy_image(cub->mlx, cub->img_game.img);
+	mlx_destroy_image(cub->mlx, cub->img_col.img);
+	free(cub->mlx);
 	if (cub->txtr.no)
 		free(cub->txtr.no);
 	if (cub->txtr.so)

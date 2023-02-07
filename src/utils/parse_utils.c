@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 22:12:47 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 11:42:55 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:34:19 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	rgb_to_hex(char *s)
 	i = -1;
 	while (++i < 3)
 		rgb[i] = ft_atoi(tokens[i]);
+	free_tab(tokens, ft_tablen(tokens));
 	return ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
 }
 
