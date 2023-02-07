@@ -6,7 +6,7 @@
 #    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/02/07 12:49:49 by gponcele         ###   ########.fr        #
+#    Updated: 2023/02/07 12:54:12 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC_LINUX					=	src/check.c \
 								src/parse.c \
 								src/update_data.c \
 								src/create_windows.c \
+								src/linux/init_launch.c \
 								src/linux/moves.c \
 								src/linux/rotate.c \
 								src/gnl/get_next_line.c \
