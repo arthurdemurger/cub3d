@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:29:28 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 16:07:39 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:09:29 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ void	destroy_mlx(t_cub *cub)
 		mlx_destroy_image(cub->mlx, cub->img_map.img);
 	if (cub->img_col.img)
 		mlx_destroy_image(cub->mlx, cub->img_col.img);
+	if (cub->torch.img)
+		mlx_destroy_image(cub->mlx, cub->torch.img);
+	if (cub->sword.img)
+		mlx_destroy_image(cub->mlx, cub->sword.img);
+	if (cub->hud.img)
+		mlx_destroy_image(cub->mlx, cub->hud.img);
 	if (cub->mlx)
 		free(cub->mlx);
 }
@@ -58,4 +64,5 @@ void	free_all(t_cub *cub)
 	if (cub->map.map)
 		free_tab(cub->map.map, ft_tablen(cub->map.map));
 	ft_lstclear(cub->map.lst);
+	destroy_mlx(cub);
 }
