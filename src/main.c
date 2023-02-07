@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 16:37:07 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:05:11 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init(t_cub *cub, int ac, char **av)
 void	ft_close(t_cub *cub)
 {
 	mlx_destroy_window(cub->mlx, cub->win_game);
-	mlx_destroy_window(cub->mlx, cub->win_test);
+	// mlx_destroy_window(cub->mlx, cub->win_test);
 	mlx_destroy_image(cub->mlx, cub->txtr.north.img);
 	mlx_destroy_image(cub->mlx, cub->txtr.east.img);
 	mlx_destroy_image(cub->mlx, cub->txtr.south.img);

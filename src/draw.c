@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 16:57:08 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:08:16 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_col(t_cub *cub, t_ray ray, int col, t_img *img, int color)
 	while (++ints[0] < 768)
 		my_mlx_pixel_put(&cub->img_col, 0, ints[0], FLOOR);
 	height = ((SIZE * SIZE) / floorf(ray.l)) * 25;
-	multi = 256.000 / height;
+	multi = height / 256.000;
 	ints[0] = (768.000 - (int)floorf(height)) / 2;
 	ints[1] = ints[0];
 	line = 0;
