@@ -22,9 +22,10 @@ void	ft_close(t_cub *cub)
 	mlx_destroy_image(cub->mlx, cub->img_map.img);
 	mlx_destroy_image(cub->mlx, cub->img_game.img);
 	mlx_destroy_image(cub->mlx, cub->img_col.img);
-	free (cub->mlx);
+	free(cub->mlx);
 	free_tab(cub->map.map, ft_tablen(cub->map.map));
-	exit(0);
+	LEAKS
+	exit(EXIT_SUCCESS);
 }
 
 void	ft_error(char *s)
