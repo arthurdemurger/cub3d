@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_windows.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 14:50:13 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:39:50 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	fill_squares(t_cub *cub, int x, int y)
 		x = -1;
 		while (cub->map.map[y][++x])
 		{
-			if (cub->map.map[y][x] == '1')
+			if (cub->map.map[y][x] == '1' || cub->map.map[y][x] == ' ')
 			{
 				copy.y = y * (SIZE / MAP_DIV);
 				while (copy.y < ((y * (SIZE / MAP_DIV)) + (SIZE / MAP_DIV))
@@ -71,7 +71,7 @@ void	clean_map(t_cub *cub)
 	x = 0;
 	y = 0;
 	while (x < ((SIZE * cub->map.w) / MAP_DIV) + 6
-		|| y < ((SIZE * cub->map.h) / MAP_DIV) + 6) 
+		|| y < ((SIZE * cub->map.h) / MAP_DIV) + 6)
 	{
 		x = 0;
 		while (x < (SIZE * cub->map.w) / MAP_DIV + 6)

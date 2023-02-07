@@ -18,9 +18,10 @@ void	ft_close(t_cub *cub)
 	exit(EXIT_SUCCESS);
 }
 
-void	ft_error(char *s)
+void	ft_error(t_cub *cub, char *s)
 {
 	ft_putendl_fd("Error", STDERR_FILENO);
 	ft_putendl_fd(s, STDERR_FILENO);
+	free_all(cub);
 	exit(EXIT_FAILURE);
 }

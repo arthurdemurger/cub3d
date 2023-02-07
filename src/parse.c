@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:13:06 by gponcele          #+#    #+#             */
-/*   Updated: 2023/02/07 11:43:02 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:02:44 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	texture_done(t_cub *cub)
 {
 	if (cub->txtr.c == -1)
 		return (0);
-	else if (cub->txtr.c == -1)
+	else if (cub->txtr.f == -1)
 		return (0);
 	else if (!cub->txtr.ea)
 		return (0);
@@ -73,14 +73,14 @@ t_lst	*parse_texture(t_cub *cub, t_lst *lst)
 		if (ft_tablen(split) != 2 || !is_texture(cub, split[0]))
 		{
 			free_tab(split, ft_tablen(split));
-			return (NULL);
+			ft_error(cub, "Wrong or missing information for textures");
 		}
 		add_texture(cub, split);
 		free_tab(split, ft_tablen(split));
 		tmp = tmp->next;
 	}
 	if (!texture_done(cub))
-		return (NULL);
+		ft_error(cub, "Wrong or missing information for textures");
 	return (tmp);
 }
 
@@ -92,10 +92,12 @@ char	**parse_map(t_cub *cub, t_lst *lst)
 	while (lst && !ft_strcmp(lst->content, "\n"))
 		lst = lst->next;
 	tmp = lst;
+	if (!tmp)
+		ft_error(cub, "No map input");
 	while (tmp)
 	{
 		if (!is_map_char(tmp->content) || !ft_strcmp(tmp->content, "\n"))
-			return (NULL);
+			ft_error(cub, "Wrong map");
 		trim = ft_strtrim(tmp->content, "\n");
 		free(tmp->content);
 		tmp->content = trim;
@@ -107,22 +109,15 @@ char	**parse_map(t_cub *cub, t_lst *lst)
 void	parse(t_cub *cub, char *file)
 {
 	int		fd;
-	t_lst	*list;
 	t_lst	*map;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		ft_error("Cannot open the file.");
-	list = read_file(fd);
-	map = parse_texture(cub, list);
-	if (!map)
-		ft_error("Wrong or missing information for textures");
+		ft_error(cub, "Cannot open the file.");
+	cub->map.lst = read_file(fd);
+	map = parse_texture(cub, cub->map.lst);
 	cub->map.map = parse_map(cub, map);
-	if (!cub->map.map)
-		ft_error("Not a valid map.");
-	if (!check_map(cub, cub->map.map))
-		ft_error("The map must be surrounded by walls.");
-	ft_lstclear(list);
+	check_map(cub, cub->map.map);
 	cub->r = SIZE;
 	cub->plane = (cub->r * ZOOM) / 2;
 }

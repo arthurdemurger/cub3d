@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 16:01:55 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:07:03 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_ray
 
 typedef struct s_map
 {
+	t_lst		*lst;
 	char		**map;
 	int			w;
 	int			h;
@@ -279,7 +280,7 @@ void			*free_tab(char **tab, int len);
 void			free_all(t_cub *cub);
 
 /* Exit management */
-void			ft_error(char *s);
+void			ft_error(t_cub *cub, char *s);
 void			ft_close(t_cub *cub);
 
 /* Libft */

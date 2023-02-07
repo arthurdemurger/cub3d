@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:04:44 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 16:02:34 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:07:43 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	init(t_cub *cub, int ac, char **av)
 {
 	if (ac != 2)
-		ft_error("Wrong number of arguments.");
+		ft_error(cub, "Wrong number of arguments.");
 	else if (!check_extension(av[1], ".cub"))
-		ft_error("Wrong file extension.");
+		ft_error(cub, "Wrong file extension.");
 	cub->txtr.ea = NULL;
 	cub->txtr.no = NULL;
 	cub->txtr.so = NULL;
@@ -52,19 +52,19 @@ void	init_textures(t_cub *cub, t_text *text)
 	text->north.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.no,
 			&text->north_width, &text->north_height);
 	if (!text->north.img)
-		ft_error("Invalid XPM file");
+		ft_error(cub, "Invalid texture file");
 	text->east.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.ea,
 			&text->east_width, &text->east_height);
 	if (!text->east.img)
-		ft_error("Invalid XPM file");
+		ft_error(cub, "Invalid texture file");
 	text->south.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.so,
 			&text->south_width, &text->south_height);
 	if (!text->south.img)
-		ft_error("Invalid XPM file");
+		ft_error(cub, "Invalid texture file");
 	text->west.img = mlx_xpm_file_to_image(cub->mlx, cub->txtr.we,
 			&text->west_width, &text->west_height);
 	if (!text->west.img)
-		ft_error("Invalid XPM file");
+		ft_error(cub, "Invalid texture file");
 	get_textures_addr(text);
 }
 
