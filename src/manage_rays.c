@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 11:30:52 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:40:24 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,21 @@ int	get_col(t_ray ray, float x, float y)
 	return (pos * 4);
 }
 
+int	is_wall(int *ints, char **map, float angle)
+{
+	if (map[ints[1] / SIZE][ints[0] / SIZE] == '1')
+		return (1);
+	else if (angle > 180 && angle < 270 && map[ints[1] / SIZE][(ints[0] + 1) / SIZE] && map[(ints[1] + 1) / SIZE][ints[0] / SIZE] == '1')
+		return (1);
+	else if (angle > 270 && map[ints[1] / SIZE][(ints[0] - 1) / SIZE] && map[(ints[1] + 1) / SIZE][ints[0] / SIZE] == '1')
+		return (1);
+	else if (angle > 90 && angle < 180 && map[ints[1] / SIZE][(ints[0] + 1) / SIZE] && map[(ints[1] - 1) / SIZE][ints[0] / SIZE] == '1')
+		return (1);
+	else if (angle < 90 && map[ints[1] / SIZE][(ints[0] - 1) / SIZE] && map[(ints[1] - 1) / SIZE][ints[0] / SIZE] == '1')
+		return (1);
+	return (0);
+}
+
 void expand_ray(t_cub *cub, t_ray *ray)
 {
 	float	rad;
@@ -99,7 +114,7 @@ void expand_ray(t_cub *cub, t_ray *ray)
 		floats[1] = cub->plr.real_y + (i * sin(rad));
 		ints[0] = (int)floorf(floats[0]);
 		ints[1] = (int)floorf(floats[1]);
-		if (cub->map.map[ints[1] / SIZE][ints[0] / SIZE] == '1')
+		if (is_wall(ints, cub->map.map, ray->angle))
 		{
 			ray->l = distance(*cub, floats);
 			ray->side = check_walls(cub, floats, ray->angle);

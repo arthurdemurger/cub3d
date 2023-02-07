@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 11:19:24 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:33:45 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void deal_key(int key, t_cub *cub)
 
 void	init_textures(t_cub *cub, t_text *text)
 {
-	text->north.img = mlx_new_image(cub->mlx, 253, 253);
-	text->east.img = mlx_new_image(cub->mlx, 253, 253);
-	text->south.img = mlx_new_image(cub->mlx, 253, 253);
-	text->west.img = mlx_new_image(cub->mlx, 253, 253);
+	text->north.img = mlx_new_image(cub->mlx, 256, 256);
+	text->east.img = mlx_new_image(cub->mlx, 256, 256);
+	text->south.img = mlx_new_image(cub->mlx, 256, 256);
+	text->west.img = mlx_new_image(cub->mlx, 256, 256);
 	text->north.img = mlx_xpm_file_to_image(cub->mlx, "./files/textures/North_wall.xpm", &text->north_width, &text->north_height);
 	text->east.img = mlx_xpm_file_to_image(cub->mlx, "./files/textures/East_wall.xpm", &text->east_width, &text->east_height);
 	text->south.img = mlx_xpm_file_to_image(cub->mlx, "./files/textures/South_wall.xpm", &text->south_width, &text->south_height);
