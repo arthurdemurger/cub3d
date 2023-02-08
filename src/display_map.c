@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 13:40:59 by gponcele          #+#    #+#             */
-/*   Updated: 2023/02/08 12:03:32 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/08 12:21:05 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ void	display_map(t_cub *cub, int a)
 		y = (768.000 / 2) - (((cub->map.h * SIZE) / MAP_DIV) / 2);
 		mlx_put_image_to_window(cub->mlx,
 			cub->win_game, cub->scroll.img, 225, 165);
-		// mlx_put_image_to_window(cub->mlx, cub->win_game,
-		// 	cub->map_title.img, 332, y - 150);
+		mlx_put_image_to_window(cub->mlx, cub->win_game,
+			cub->map_title.img, 160, 40);
 		mlx_put_image_to_window(cub->mlx,
 			cub->win_game, cub->img_map.img, x, y);
 		// draw_map_edge(cub, x, y, y - 4);

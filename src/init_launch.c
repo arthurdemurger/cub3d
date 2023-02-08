@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:04:44 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/08 11:27:20 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/08 12:19:02 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	init_others(t_cub *cub)
 {
 	cub->map_title.img = mlx_new_image(cub->mlx, 359, 86);
 	cub->map_title.img = mlx_xpm_file_to_image(cub->mlx,
-			"./files/textures/Map_title.xpm",
+			"./files/textures/Map_title2.xpm",
 			&cub->map_title_w, &cub->map_title_h);
 	cub->map_title.addr = mlx_get_data_addr(cub->map_title.img,
 			&cub->map_title.bits_per_pixel, &cub->map_title.line_length,
