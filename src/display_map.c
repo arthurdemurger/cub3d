@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 13:40:59 by gponcele          #+#    #+#             */
-/*   Updated: 2023/02/07 15:20:54 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/08 12:03:32 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	get_color_darker(t_cub *cub, t_ray ray, int col)
 
 	i = -1;
 	while (++i < WIN_HEIGHT / 2)
-		my_mlx_pixel_put(&cub->img_col, 0, i, cub->txtr.c);
+		my_mlx_pixel_put(&cub->img_col, 0, i, (cub->txtr.c >> 1) & 8355711);
 	while (++i < 768)
-		my_mlx_pixel_put(&cub->img_col, 0, i, cub->txtr.f);
+		my_mlx_pixel_put(&cub->img_col, 0, i, (cub->txtr.f >> 1) & 8355711);
 	if (ray.side == NORTH)
 		draw_col_darker(cub, ray, col, &cub->txtr.north);
 	else if (ray.side == SOUTH)
@@ -106,13 +106,16 @@ void	display_map(t_cub *cub, int a)
 	if (a == 1)
 	{
 		draw_game_darker(cub);
+		// grid(cub);
 		x = (1024.000 / 2) - (((cub->map.w * SIZE) / MAP_DIV) / 2);
 		y = (768.000 / 2) - (((cub->map.h * SIZE) / MAP_DIV) / 2);
-		mlx_put_image_to_window(cub->mlx, cub->win_game,
-			cub->map_title.img, 332, y - 150);
+		mlx_put_image_to_window(cub->mlx,
+			cub->win_game, cub->scroll.img, 225, 165);
+		// mlx_put_image_to_window(cub->mlx, cub->win_game,
+		// 	cub->map_title.img, 332, y - 150);
 		mlx_put_image_to_window(cub->mlx,
 			cub->win_game, cub->img_map.img, x, y);
-		draw_map_edge(cub, x, y, y - 4);
+		// draw_map_edge(cub, x, y, y - 4);
 	}
 	else
 		draw(cub);

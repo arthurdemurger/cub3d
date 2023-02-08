@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 16:07:03 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:21:07 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,9 @@ typedef struct s_cub
 	t_img		hud;
 	int			hud_w;
 	int			hud_h;
+	t_img		scroll;
+	int			scroll_w;
+	int			scroll_h;
 	int			width_test;
 	int			height_test;
 	int			display_map;

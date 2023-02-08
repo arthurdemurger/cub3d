@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_windows.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 15:39:50 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:55:48 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	fill_squares(t_cub *cub, int x, int y)
 		x = -1;
 		while (cub->map.map[y][++x])
 		{
-			if (cub->map.map[y][x] == '1' || cub->map.map[y][x] == ' ')
+			if (cub->map.map[y][x] == '1')
 			{
 				copy.y = y * (SIZE / MAP_DIV);
 				while (copy.y < ((y * (SIZE / MAP_DIV)) + (SIZE / MAP_DIV))
@@ -31,7 +31,7 @@ void	fill_squares(t_cub *cub, int x, int y)
 					while (copy.x < ((x * (SIZE / MAP_DIV)) + (SIZE / MAP_DIV)))
 					{
 						my_mlx_pixel_put(&cub->img_map, copy.x, copy.y,
-							0x6E4B07);
+							0x1C1B1B);
 						copy.x++;
 					}
 					copy.y++;
@@ -76,7 +76,7 @@ void	clean_map(t_cub *cub)
 		x = 0;
 		while (x < (SIZE * cub->map.w) / MAP_DIV + 6)
 		{
-			my_mlx_pixel_put(&cub->img_map, x, y, 0xABABAB);
+			my_mlx_pixel_put(&cub->img_map, x, y, 0xf3ddc1);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 14:41:48 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:51:22 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	move(t_cub *cub, t_vector *plr, float angle)
 	float	rad;
 
 	rad = angle * (M_PI / 180);
-	circle(cub, 1, 0xABABAB);
+	circle(cub, 1, 0xf3ddc1);
 	floats[0] = plr->real_x + (PIX_MOVE * cos(rad));
 	floats[1] = plr->real_y + (PIX_MOVE * sin(rad));
 	if (cub->map.map[(int)floorf(floats[1]) / SIZE]
