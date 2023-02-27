@@ -6,7 +6,7 @@
 #    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/02/07 13:48:46 by gponcele         ###   ########.fr        #
+#    Updated: 2023/02/27 11:47:42 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,12 @@ RESET		= $(shell tput -Txterm sgr0)
 # Name of the executable
 NAME						=	cub3d
 
+NAME_BONUS					=	cub3d_bonus
+
 # Files
 SRC							=	src/check.c \
 								src/circle.c \
 								src/corners.c \
-								src/display_map.c \
 								src/draw.c \
 								src/exit.c \
 								src/free.c \
@@ -39,6 +40,25 @@ SRC							=	src/check.c \
 								src/parse.c \
 								src/rotate.c \
 								src/create_windows.c \
+								src/gnl/get_next_line.c \
+								src/gnl/get_next_line_utils.c \
+								src/utils/draw_utils.c \
+								src/utils/parse_utils.c
+
+SRC_BONUS					=	src/check.c \
+								src/corners.c \
+								src/draw.c \
+								src/exit.c \
+								src/free.c \
+								src/main.c \
+								src/parse.c \
+								src/bonus/circle_bonus.c \
+								src/bonus/create_windows_bonus.c \
+								src/bonus/display_map.c \
+								src/bonus/init_launch_bonus.c \
+								src/bonus/manage_rays_bonus.c \
+								src/bonus/moves_bonus.c \
+								src/bonus/rotate_bonus.c \
 								src/gnl/get_next_line.c \
 								src/gnl/get_next_line_utils.c \
 								src/utils/draw_utils.c \
@@ -99,6 +119,8 @@ INC							=	-I ./inc/.
 
 OBJS						=	$(SRC:.c=.o)
 
+OBJS_BONUS					=	$(SRC_BONUS:.c=.o)
+
 # Flags
 CFLAGS						=	-Wall -Wextra -Werror
 
@@ -113,6 +135,8 @@ LMLX_MAC					=	-lmlx -framework OpenGL -framework AppKit
 # Rules
 all: 		libft $(NAME)
 
+bonus:		libft $(NAME_BONUS)
+
 %o:				%c
 				@$(CC) ${CFLAGS} -I./includes -c $< -o ${<:.c=.o}
 
@@ -124,16 +148,20 @@ $(NAME): $(OBJS)
 					@$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) $(LMLX_MAC) -o $(NAME)
 					@echo "$(GREEN)********** Compiled. $(RESET)"
 
+$(NAME_BONUS): $(OBJS_BONUS)
+					@$(CC) $(CFLAGS) $(INC) $(OBJS_BONUS) $(LIBFT) $(LMLX_MAC) -o $(NAME_BONUS)
+					@echo "$(GREEN)********** Compiled. $(RESET)"
+
 libft:
 					@make -C ./src/libft
 
 clean:
-					@$(RM) $(OBJS)
+					@$(RM) $(OBJS) $(OBJS_BONUS)
 					@make clean -C ./src/libft
 					@echo "$(PURPLE)********* Objects removed. $(RESET)"
 
 fclean: clean
-			@$(RM) $(NAME)
+			@$(RM) $(NAME) $(NAME_BONUS)
 			@$(RM) $(LIBFT)
 			@echo "$(LIGHTPURPLE)********* Executable removed. $(RESET)"
 

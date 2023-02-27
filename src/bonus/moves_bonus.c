@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/27 11:32:37 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:51:03 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 float	abs_angle(float angle)
 {
@@ -35,8 +35,8 @@ void	move(t_cub *cub, t_vector *plr, float angle)
 		plr->real_y = floats[1];
 		plr->x = floats[0] / SIZE;
 		plr->y = floats[1] / SIZE;
-		draw(cub);
 	}
+	draw(cub);
 	circle(cub, 1, LIGHT_RED);
 }
 

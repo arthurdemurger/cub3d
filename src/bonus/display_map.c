@@ -6,11 +6,11 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 13:40:59 by gponcele          #+#    #+#             */
-/*   Updated: 2023/02/08 12:21:05 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:49:31 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	draw_col_darker(t_cub *cub, t_ray ray, int col, t_img *img)
 {
@@ -106,7 +106,6 @@ void	display_map(t_cub *cub, int a)
 	if (a == 1)
 	{
 		draw_game_darker(cub);
-		// grid(cub);
 		x = (1024.000 / 2) - (((cub->map.w * SIZE) / MAP_DIV) / 2);
 		y = (768.000 / 2) - (((cub->map.h * SIZE) / MAP_DIV) / 2);
 		mlx_put_image_to_window(cub->mlx,
@@ -115,7 +114,6 @@ void	display_map(t_cub *cub, int a)
 			cub->map_title.img, 160, 40);
 		mlx_put_image_to_window(cub->mlx,
 			cub->win_game, cub->img_map.img, x, y);
-		// draw_map_edge(cub, x, y, y - 4);
 	}
 	else
 		draw(cub);

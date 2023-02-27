@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_launch.c                                      :+:      :+:    :+:   */
+/*   init_launch_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:04:44 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/27 11:44:48 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:49:34 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	init(t_cub *cub, int ac, char **av)
 {
@@ -24,6 +24,7 @@ void	init(t_cub *cub, int ac, char **av)
 	cub->txtr.we = NULL;
 	cub->txtr.c = -1;
 	cub->txtr.f = -1;
+	cub->display_map = 0;
 }
 
 void	get_textures_addr(t_text *text)
@@ -67,10 +68,34 @@ void	init_textures(t_cub *cub, t_text *text)
 	get_textures_addr(text);
 }
 
+void	init_others(t_cub *cub)
+{
+	cub->map_title.img = mlx_new_image(cub->mlx, 359, 86);
+	cub->map_title.img = mlx_xpm_file_to_image(cub->mlx,
+			"./files/textures/Map_title2.xpm",
+			&cub->map_title_w, &cub->map_title_h);
+	cub->map_title.addr = mlx_get_data_addr(cub->map_title.img,
+			&cub->map_title.bits_per_pixel, &cub->map_title.line_length,
+			&cub->map_title.endian);
+	cub->scroll.img = mlx_new_image(cub->mlx, 360, 361);
+	cub->scroll.img = mlx_xpm_file_to_image(cub->mlx,
+			"./files/textures/Scroll.xpm",
+			&cub->scroll_w, &cub->scroll_h);
+	cub->scroll.addr = mlx_get_data_addr(cub->scroll.img,
+			&cub->scroll.bits_per_pixel, &cub->scroll.line_length,
+			&cub->scroll.endian);
+}
+
 void	launch(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	init_textures(cub, &cub->txtr);
+	init_others(cub);
+	cub->img_map.img = mlx_new_image(cub->mlx, (cub->map.w * SIZE) / MAP_DIV,
+			(cub->map.h * SIZE) / MAP_DIV);
+	cub->img_map.addr = mlx_get_data_addr(cub->img_map.img,
+			&cub->img_map.bits_per_pixel, &cub->img_map.line_length,
+			&cub->img_map.endian);
 	cub->img_col.img = mlx_new_image(cub->mlx, 1, WIN_HEIGHT);
 	cub->img_col.addr = mlx_get_data_addr(cub->img_col.img,
 			&cub->img_col.bits_per_pixel, &cub->img_col.line_length,

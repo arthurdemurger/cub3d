@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   rotate_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/27 11:33:16 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:49:44 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ void	rotate_right(t_cub *cub)
 void	rotate(t_cub *cub, int key)
 {
 	clean_map(cub);
-	if (key == 65361)
+	if (key == KEY_LEFT)
 		rotate_left(cub);
-	else if (key == 65363)
+	else if (key == KEY_RIGHT)
 		rotate_right(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win_game, cub->img_map.img, 0, 0);
 }

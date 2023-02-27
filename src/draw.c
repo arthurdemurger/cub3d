@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 16:05:22 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:33:50 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ void	draw_game(t_cub *cub)
 	i = -1;
 	while (++i < NB_RAYS)
 		get_color(cub, cub->rays[i], i);
-	// mlx_put_image_to_window(cub->mlx, cub->win_game, cub->torch.img, 80, 520);
-	// mlx_put_image_to_window(cub->mlx, cub->win_game, cub->sword.img, 700, 520);
-	// mlx_put_image_to_window(cub->mlx, cub->win_game, cub->hud.img, 0, 0);
 }
 
 void	init_draw(t_cub *cub)

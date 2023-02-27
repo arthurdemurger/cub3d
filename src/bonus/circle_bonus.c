@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   circle.c                                           :+:      :+:    :+:   */
+/*   circle_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/27 11:46:25 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:49:23 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	circle(t_cub *cub, int r, int color)
 {
@@ -19,13 +19,13 @@ void	circle(t_cub *cub, int r, int color)
 	int			y;
 	float		angle;
 
-	(void)color;
 	angle = 0;
 	while (angle <= 360)
 	{
 		rad = angle * (M_PI / 180);
 		x = (cub->plr.real_x / MAP_DIV) + r * cos(rad);
 		y = (cub->plr.real_y / MAP_DIV) + r * sin(rad);
+		my_mlx_pixel_put(&cub->img_map, x, y, color);
 		angle += 0.1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/08 11:21:07 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:34:26 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@
 # define WHITE 0xFFFFFF
 # define LIGHT_GREEN 0x7FFF00
 # define DARK_GREEN 0x006400
-
-/* Debug */
-# define ICI printf("ici\n");
-# define LEAKS system("leaks cub3d");
 
 /* Directions */
 # define NO 1
@@ -88,19 +84,6 @@
 # define KEY_RIGHT 124
 # define TAB 48
 
-/* Keyboard*/
-# define DESTROY_BUTTON 17
-# define ESC 53
-# define KEYPRESS 2
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define KEY_UP 126
-# define KEY_LEFT 123
-# define KEY_DOWN 125
-# define KEY_RIGHT 124
-
 /*
 ** Structures
 */
@@ -144,6 +127,9 @@ typedef struct s_text
 	t_img	west;
 	int		west_width;
 	int		west_height;
+	t_img	floor;
+	int		floor_width;
+	int		floor_height;
 	int		f;
 	int		c;
 }	t_text;

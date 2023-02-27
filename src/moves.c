@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:29:17 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/08 11:51:22 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:48:19 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ void	move(t_cub *cub, t_vector *plr, float angle)
 		plr->real_y = floats[1];
 		plr->x = floats[0] / SIZE;
 		plr->y = floats[1] / SIZE;
+		draw(cub);
 	}
-	draw(cub);
 	circle(cub, 1, LIGHT_RED);
 }
 
 void	get_move(t_cub *cub, int key)
 {
-	clean_map(cub);
 	if (key == W)
 		move(cub, &cub->plr, cub->angle);
 	else if (key == A)
@@ -57,18 +56,8 @@ void	deal_key(int key, t_cub *cub)
 {
 	if (key == ESC)
 		ft_close(cub);
-	if (key == TAB)
-	{
-		if (cub->display_map == 0)
-			display_map(cub, 1);
-		else
-			display_map(cub, 0);
-	}
-	if (cub->display_map == 0)
-	{
-		if (key == W || key == A || key == S || key == D)
-			get_move(cub, key);
-		else if (key == KEY_LEFT || key == KEY_RIGHT)
-			rotate(cub, key);
-	}
+	else if (key == W || key == A || key == S || key == D)
+		get_move(cub, key);
+	else if (key == KEY_LEFT || key == KEY_RIGHT)
+		rotate(cub, key);
 }
