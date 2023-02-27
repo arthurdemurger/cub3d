@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:24:27 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/06 12:25:18 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:31:04 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9' && ++size)
 		sum = sum * 10 + str[i++] - 48;
+	if (str[i])
+		return (-1);
 	return (return_atoi(sum, sign, size));
 }

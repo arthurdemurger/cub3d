@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 11:31:20 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/27 11:34:26 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:28:36 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,7 @@ void			ft_close(t_cub *cub);
 /* Libft */
 int				ft_atoi(const char *str);
 void			ft_bzero(void *s, int n);
+int				ft_ch_in_str(char *s, char c);
 char			*ft_itoa(int n);
 void			*ft_memset(void *s, int c, size_t n);
 void			ft_putendl_fd(char *s, int fd);

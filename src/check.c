@@ -6,7 +6,7 @@
 /*   By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:23:58 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/07 15:32:34 by ademurge         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:15:49 by ademurge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ int	check_map(t_cub *cub, char **map)
 		}
 	}
 	if (!pos || pos > 1)
-		ft_error(cub, "No player in the map");
+		ft_error(cub, "There must be one player on the map.");
 	return (1);
 }

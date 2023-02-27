@@ -6,7 +6,7 @@
 #    By: ademurge <ademurge@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 11:16:48 by ademurge          #+#    #+#              #
-#    Updated: 2023/02/06 12:25:31 by ademurge         ###   ########.fr        #
+#    Updated: 2023/02/27 14:28:59 by ademurge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ NAME						=	libft.a
 
 SRC							=	ft_atoi.c \
 								ft_bzero.c \
+								ft_ch_in_str.c \
 								ft_fl_min.c \
 								ft_itoa.c \
 								ft_memset.c \
