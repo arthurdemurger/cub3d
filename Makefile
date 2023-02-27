@@ -6,7 +6,7 @@
 #    By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:29:10 by ademurge          #+#    #+#              #
-#    Updated: 2023/02/27 11:55:08 by gponcele         ###   ########.fr        #
+#    Updated: 2023/02/27 11:56:40 by gponcele         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,9 +133,9 @@ LMLX_LINUX					=	-lmlx -lXext -lX11
 LMLX_MAC					=	-lmlx -framework OpenGL -framework AppKit
 
 # Rules
-all: 		libft $(NAME) clean
+all: 		libft $(NAME)
 
-bonus:		libft $(NAME_BONUS) clean
+bonus:		libft $(NAME_BONUS)
 
 %o:				%c
 				@$(CC) ${CFLAGS} -I./includes -c $< -o ${<:.c=.o}
