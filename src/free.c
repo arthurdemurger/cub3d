@@ -6,7 +6,7 @@
 /*   By: gponcele <gponcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:29:28 by ademurge          #+#    #+#             */
-/*   Updated: 2023/02/27 11:34:09 by gponcele         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:01:29 by gponcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	free_all(t_cub *cub)
 		free(cub->txtr.ea);
 	if (cub->map.map)
 		free_tab(cub->map.map, ft_tablen(cub->map.map));
-	ft_lstclear(cub->map.lst);
+	if (cub->map.lst)
+		ft_lstclear(cub->map.lst);
 }
